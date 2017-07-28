@@ -120,6 +120,7 @@ public class Application {
 
     private void process(final InputStream input, OutputStream output) throws Exception {
         try {
+              tool = new FormatConverterTool();
             DataModelLif dataModelLif = new DataModelLif(input);
             if (dataModelLif.isValid()) {
                 tool.convertModel(dataModelLif);
