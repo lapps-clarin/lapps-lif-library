@@ -1,0 +1,43 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package de.tuebingen.uni.sfs.lapps.library.json;
+
+import de.tuebingen.uni.sfs.lapps.library.json.JsonProcessor;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import de.tuebingen.uni.sfs.lapps.library.vocabulary.Vocabularies;
+import org.lappsgrid.serialization.Serializer;
+import org.lappsgrid.serialization.lif.Container;
+/**
+ *
+ * @author felahi
+ */
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class LifDocument  {
+
+    //"payload"
+    private String discriminator;
+
+    @JsonProperty(Vocabularies.LIF.Document.PAYLOAD_KEY_JSON)
+    private Container container;
+
+    public LifDocument() {
+
+    }
+
+    public LifDocument(String discriminator, JsonProcessor jsonObject) {
+        this.discriminator = discriminator;
+        this.container = Serializer.parse(jsonObject.getJsonString(), Container.class);
+    }
+
+    public String getDiscriminator() {
+        return discriminator;
+    }
+
+    public Container getContainer() {
+        return container;
+    }
+}

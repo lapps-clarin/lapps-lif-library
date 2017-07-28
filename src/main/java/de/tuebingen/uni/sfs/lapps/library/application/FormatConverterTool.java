@@ -1,0 +1,54 @@
+package de.tuebingen.uni.sfs.lapps.library.application;
+
+import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationLayerFinder;
+import de.tuebingen.uni.sfs.lapps.library.model.DataModelLif;
+import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class FormatConverterTool {
+
+    private DataModelLif givenDataModel = null;
+    private String LANG_EN = "en";
+    private String text = null;
+    private List<String> layers = new ArrayList<String>();
+
+    public FormatConverterTool() throws VocabularyMappingException {
+    }
+
+    public void convertModel(DataModelLif lifDataModel) throws Exception {
+        givenDataModel = lifDataModel;
+        try {
+            findAnnotationLayers();
+        } catch (VocabularyMappingException conExp) {
+            Logger.getLogger(FormatConverterTool.class.getName()).log(Level.SEVERE, null, conExp);
+        } catch (Exception vocExp) {
+            Logger.getLogger(FormatConverterTool.class.getName()).log(Level.SEVERE, null, vocExp);
+        }
+    }
+
+    protected void findAnnotationLayers() throws VocabularyMappingException, Exception {
+        for (Integer layerIndex : givenDataModel.getSortedLayer()) {
+            AnnotationLayerFinder lifLayer = givenDataModel.getIndexAnnotationLayer(layerIndex);
+            layers.add(lifLayer.getLayer());
+        }
+    }
+
+    public String getLanguage() {
+        if (givenDataModel.getLanguage() != null) {
+            return givenDataModel.getLanguage();
+        }
+        return LANG_EN;
+    }
+
+    public String getText() {
+        return givenDataModel.getText();
+    }
+
+    public List<String> getLayers() {
+        return layers;
+    }
+
+}
