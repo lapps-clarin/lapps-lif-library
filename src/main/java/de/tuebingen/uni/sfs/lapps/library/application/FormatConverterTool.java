@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.lappsgrid.discriminator.Discriminators;
 
-public class FormatConverterTool {
+public class FormatConverterTool implements FindAnnotationLayers {
 
     private DataModelLif givenDataModel = null;
     private String LANG_EN = "en";
@@ -49,6 +50,67 @@ public class FormatConverterTool {
 
     public List<String> getLayers() {
         return layers;
+    }
+
+    @Override
+    public boolean isLanguage() {
+        return true;
+    }
+
+    @Override
+    public boolean isTextLayer() {
+        if (givenDataModel.getText() != null) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isTokenLayer() {
+        if (layers.contains(Discriminators.Uri.TOKEN)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isPosLayer() {
+        if (layers.contains(Discriminators.Uri.POS)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isLemmaLayer() {
+        if (layers.contains(Discriminators.Uri.LEMMA)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isDependencyLayer() {
+        if (layers.contains(Discriminators.Uri.DEPENDENCY)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isConstituentLayer() {
+        if (layers.contains(Discriminators.Uri.CONSTITUENT)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isSenetenceLayer() {
+        if (layers.contains(Discriminators.Uri.SENTENCE)) {
+            return true;
+        }
+        return false;
     }
 
 }

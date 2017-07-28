@@ -152,9 +152,27 @@ public class Application {
     }
 
     private void display() {
-        System.out.println("language:"+tool.getLanguage());
-        System.out.println("text:"+tool.getText());
-        System.out.println("layer:"+tool.getLayers().toString());
+        if (tool.isTextLayer()) {
+            System.out.println("Text layer exists:" + tool.getText());
+        }
+        if (tool.isTokenLayer()) {
+            System.out.println("Token layer exists:" + tool.getLayers().toString());
+        }
+         if (tool.isPosLayer()) {
+            System.out.println("POS layer exists:" + tool.getLayers().toString());
+        }
+          if (tool.isLemmaLayer()) {
+            System.out.println("Lemma layer exists:" + tool.getLayers().toString());
+        }
+          if (tool.isConstituentLayer()) {
+            System.out.println("Constituent layer exists:" + tool.getLayers().toString());
+        }
+          if (tool.isDependencyLayer()) {
+            System.out.println("Dependency layer exists:" + tool.getLayers().toString());
+        }
+
+        System.out.println("text:" + tool.getText());
+        System.out.println("layer:" + tool.getLayers().toString());
     }
 
 }
