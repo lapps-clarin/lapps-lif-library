@@ -24,7 +24,7 @@ import java.util.logging.Logger;
 public class Application {
 
     private FormatConverterTool tool;
-    private String baseDir = "/Users/felahi/repository/LIFLibrary/src/main/resources/data/";
+    private String baseDir = "/Users/felahi/repository/lapps-library/src/main/resources/data/";
     private String workingDir = baseDir + "working/";
     private String textlayerDir = workingDir + "textlayer/";
     private String tokenlayerDir = workingDir + "tokenlayer/";
