@@ -38,9 +38,9 @@ public class FormatConverterTool implements FindAnnotationLayers {
     }
 
     public String getLanguage() {
-        if (givenDataModel.getLanguage() != null) {
+        /*if (givenDataModel.getLanguage() != null) {
             return givenDataModel.getLanguage();
-        }
+        }*/
         return LANG_EN;
     }
 

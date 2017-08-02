@@ -1,10 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>clarind</groupId>
+    <groupId>de.tuebingen.uni.sfs.clarind</groupId>
     <artifactId>lapps-lif-library</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <url>https://weblicht.sfs.uni-tuebingen.de/</url>
+    <inceptionYear>2017</inceptionYear>
+    
+     <scm>
+        <url>https://elahi@weblicht.sfs.uni-tuebingen.de/gitlab/lapps/lapps-lif-library.git</url>
+        <connection>scm:git:ssh://elahi@weblicht.sfs.uni-tuebingen.de:29418/lapps/lapps-lif-library.git</connection>
+        <developerConnection>scm:git:ssh://elahi@weblicht.sfs.uni-tuebingen.de:29418/lapps/lapps-lif-library.git</developerConnection>
+      <tag>HEAD</tag>
+     </scm>
+     
+     <distributionManagement>
+        <repository>
+            <id>sfs-clarind-nexus</id>
+            <name>Internal Releases</name>
+            <url>http://t.weblicht.sfs.uni-tuebingen.de/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>sfs-clarind-nexus-snapshot</id>
+            <name>Snapshot Releases</name>
+            <url>http://t.weblicht.sfs.uni-tuebingen.de/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+    
+    <repositories>
+        <repository>
+            <id>sfs-clarind</id>
+            <url>http://dspin.sfs.uni-tuebingen.de/maven/</url>
+        </repository>
+        <repository>
+            <id>sfs-clarind-nexus</id>
+            <name>Internal Releases</name>
+            <url>http://t.weblicht.sfs.uni-tuebingen.de/nexus/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>sfs-clarind-nexus-snapshots</id>
+            <name>Internal Snapshots</name>
+            <url>http://t.weblicht.sfs.uni-tuebingen.de/nexus/content/repositories/snapshots</url>
+        </repository>
+        <repository>
+            <id>clarin</id>
+            <url>http://catalog.clarin.eu/ds/nexus/content/repositories/Clarin/</url>
+        </repository>
+    </repositories>
+
+
+    
     <dependencies>
         <dependency>
             <groupId>org.lappsgrid</groupId>
