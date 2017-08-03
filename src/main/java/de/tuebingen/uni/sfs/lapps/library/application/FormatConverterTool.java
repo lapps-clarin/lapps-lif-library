@@ -35,6 +35,9 @@ public class FormatConverterTool implements FindAnnotationLayers {
             AnnotationLayerFinder lifLayer = givenDataModel.getIndexAnnotationLayer(layerIndex);
             layers.add(lifLayer.getLayer());
         }
+        if (layers.contains(Discriminators.Uri.POS)) {
+            layers.add(Discriminators.Uri.TOKEN);
+        }
     }
 
     public String getLanguage() {
@@ -108,6 +111,15 @@ public class FormatConverterTool implements FindAnnotationLayers {
     @Override
     public boolean isSenetenceLayer() {
         if (layers.contains(Discriminators.Uri.SENTENCE)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isTokenPosLayer() {
+        if (layers.contains(Discriminators.Uri.POS)) {
+            layers.add(Discriminators.Uri.TOKEN);
             return true;
         }
         return false;

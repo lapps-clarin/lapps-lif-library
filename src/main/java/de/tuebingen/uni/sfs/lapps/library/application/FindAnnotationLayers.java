@@ -27,4 +27,6 @@ public interface FindAnnotationLayers {
 
     public boolean isConstituentLayer();
 
+    public boolean isTokenPosLayer();
+
 }
