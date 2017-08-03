@@ -14,7 +14,7 @@ import org.lappsgrid.serialization.lif.Annotation;
  *
  * @author felahi
  */
-public class LifAnnotationInterpreter implements Comparable<LifAnnotationInterpreter> {
+public class AnnotationInterpreter implements Comparable<AnnotationInterpreter> {
 
     private long start = 0;
     private long end = 0;
@@ -22,10 +22,10 @@ public class LifAnnotationInterpreter implements Comparable<LifAnnotationInterpr
     private String url = null;
     private String label = null;
     private Map<Object, Object> features = new HashMap<Object, Object>();
-    public static Map<String, LifAnnotationInterpreter> elementIdMapper = new HashMap<String, LifAnnotationInterpreter>();
-    private LifTokenPosLemma lifToken = null;
+    public static Map<String, AnnotationInterpreter> elementIdMapper = new HashMap<String, AnnotationInterpreter>();
+    private TokenPosLemma lifToken = null;
 
-    public LifAnnotationInterpreter(Annotation annotation) {
+    public AnnotationInterpreter(Annotation annotation) {
         if (annotation.getStart() != null) {
             this.start = annotation.getStart();
         }
@@ -42,7 +42,7 @@ public class LifAnnotationInterpreter implements Comparable<LifAnnotationInterpr
         elementIdMapper.put(annotation.getId(), this);
     }
 
-    public int compareTo(LifAnnotationInterpreter o) {
+    public int compareTo(AnnotationInterpreter o) {
         if (start == o.start) {
             return 0;
         } else if (start > o.start) {

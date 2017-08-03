@@ -14,9 +14,9 @@ import org.lappsgrid.discriminator.Discriminators;
  *
  * @author felahi
  */
-public class Vocabularies {
+public class LifVocabularies {
 
-    private Vocabularies() {
+    private LifVocabularies() {
     }
 
     public static class GeneralParameters {

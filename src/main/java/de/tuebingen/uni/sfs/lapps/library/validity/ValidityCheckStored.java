@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.validity;
 
-import de.tuebingen.uni.sfs.lapps.library.vocabulary.Vocabularies;
+import de.tuebingen.uni.sfs.lapps.library.vocabulary.LifVocabularies;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheck;
 import de.tuebingen.uni.sfs.lapps.library.json.JsonProcessor;
@@ -22,7 +22,7 @@ import org.lappsgrid.serialization.lif.View;
  *
  * @author felahi
  */
-public class LifValidityCheck implements ValidityCheck {
+public class ValidityCheckStored implements ValidityCheck {
 
     //document validity error messages...
     public static final String MESSAGE_INVALID_JSON = "LIF ERROR: No Json key/value found!!";
@@ -42,15 +42,15 @@ public class LifValidityCheck implements ValidityCheck {
     private List<View> views = new ArrayList<View>();
     private Annotation annotation = null;
 
-    public LifValidityCheck() {
+    public ValidityCheckStored() {
 
     }
 
-    public LifValidityCheck(JsonProcessor jsonObject) {
+    public ValidityCheckStored(JsonProcessor jsonObject) {
         this.jsonObject = jsonObject;
     }
 
-    public LifValidityCheck(Annotation annotation) {
+    public ValidityCheckStored(Annotation annotation) {
         this.annotation = annotation;
     }
 
@@ -69,8 +69,8 @@ public class LifValidityCheck implements ValidityCheck {
 
     public boolean isDocumentStructureValid() throws LifException {
         Set<String> annotationSet = jsonObject.getJsonMap().keySet();
-        if (annotationSet.contains(Vocabularies.LIF.Document.PAYLOAD_KEY_JSON)
-                && annotationSet.contains(Vocabularies.LIF.Document.DISCRIMINATOR_KEY_JSON)) {
+        if (annotationSet.contains(LifVocabularies.LIF.Document.PAYLOAD_KEY_JSON)
+                && annotationSet.contains(LifVocabularies.LIF.Document.DISCRIMINATOR_KEY_JSON)) {
             return true;
         } else {
             throw new LifException(MESSAGE_INVALID_LIF_DOCUMENT);
@@ -82,7 +82,7 @@ public class LifValidityCheck implements ValidityCheck {
         LinkedHashMap linkedHashMap = null;
 
         for (String key : jsonObject.getJsonMap().keySet()) {
-            if (key.contains(Vocabularies.LIF.Document.PAYLOAD_KEY_JSON)) {
+            if (key.contains(LifVocabularies.LIF.Document.PAYLOAD_KEY_JSON)) {
                 Object payLoadContent = jsonObject.getJsonMap().get(key);
                 if (payLoadContent instanceof LinkedHashMap) {
                     linkedHashMap = (LinkedHashMap) jsonObject.getJsonMap().get(key);
@@ -104,13 +104,13 @@ public class LifValidityCheck implements ValidityCheck {
     }
 
     private boolean topLevelAnnotationCheck(Set<String> annotationSet) throws LifException {
-        if (!annotationSet.contains(Vocabularies.LIF.Document.LifDocumentTopLevel.CONTEXT_KEY_LIF)) {
+        if (!annotationSet.contains(LifVocabularies.LIF.Document.LifDocumentTopLevel.CONTEXT_KEY_LIF)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_CONTEXT_MISSING);
-        } else if (!annotationSet.contains(Vocabularies.LIF.Document.LifDocumentTopLevel.METADATA_KEY_LIF)) {
+        } else if (!annotationSet.contains(LifVocabularies.LIF.Document.LifDocumentTopLevel.METADATA_KEY_LIF)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_METADATA_MISSING);
-        } else if (!annotationSet.contains(Vocabularies.LIF.Document.LifDocumentTopLevel.VIEWS_KEY_LIF)) {
+        } else if (!annotationSet.contains(LifVocabularies.LIF.Document.LifDocumentTopLevel.VIEWS_KEY_LIF)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_VIEWS_MISSING);
-        } else if (!annotationSet.contains(Vocabularies.LIF.Document.LifDocumentTopLevel.TEXT_KEY_LIF)) {
+        } else if (!annotationSet.contains(LifVocabularies.LIF.Document.LifDocumentTopLevel.TEXT_KEY_LIF)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_TEXT_MISSING);
         } else {
             return true;

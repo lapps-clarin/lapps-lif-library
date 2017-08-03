@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  *
  * @author felahi
  */
-public class Application {
+public class LibraryApplication {
 
     private FormatConverterTool tool;
     private String baseDir = "/Users/felahi/repository/lapps-lif-library/src/main/resources/data/";
@@ -47,7 +47,7 @@ public class Application {
     private static final String TEMP_FILE_PREFIX = "ne-output-temp";
     private static final String TEMP_FILE_SUFFIX = ".xml";
 
-    public Application() throws Exception {
+    public LibraryApplication() throws Exception {
         try {
             tool = new FormatConverterTool();
         } catch (Exception ex) {
@@ -63,7 +63,7 @@ public class Application {
             System.out.println("PATH_TO_INPUT PATH_TO_OUTPUT");
             return;
         }*/
-        Application mainTest = new Application();
+        LibraryApplication mainTest = new LibraryApplication();
         mainTest.conversionSeclection();
     }
 
@@ -130,22 +130,22 @@ public class Application {
             }
 
         } catch (LifException exlIF) {
-            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, exlIF);
+            Logger.getLogger(LibraryApplication.class.getName()).log(Level.SEVERE, null, exlIF);
         } catch (Exception ex) {
-            Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LibraryApplication.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (input != null) {
                 try {
                     input.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LibraryApplication.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (output != null) {
                 try {
                     output.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(Application.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LibraryApplication.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

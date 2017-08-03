@@ -7,11 +7,11 @@ package de.tuebingen.uni.sfs.lapps.library.model;
 
 import de.tuebingen.uni.sfs.lapps.library.json.LifDocumentFinder;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModel;
-import de.tuebingen.uni.sfs.lapps.library.annotation.LifAnnotationLayersStored;
-import de.tuebingen.uni.sfs.lapps.library.annotation.LifAnnotationInterpreter;
-import de.tuebingen.uni.sfs.lapps.library.validity.LifValidityCheck;
+import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationLayersStored;
+import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheckStored;
 import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationLayerFinder;
-import de.tuebingen.uni.sfs.lapps.library.vocabulary.Vocabularies;
+import de.tuebingen.uni.sfs.lapps.library.vocabulary.LifVocabularies;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -35,13 +35,13 @@ import org.lappsgrid.serialization.lif.View;
  */
 public class DataModelLif extends DataModel {
 
-    private Map<Integer, List<LifAnnotationInterpreter>> annotationLayerData = new HashMap<Integer, List<LifAnnotationInterpreter>>();
+    private Map<Integer, List<AnnotationInterpreter>> annotationLayerData = new HashMap<Integer, List<AnnotationInterpreter>>();
     private Map<Integer, AnnotationLayerFinder> indexAnnotationLayer = new HashMap<Integer, AnnotationLayerFinder>();
     private Vector<Integer> sortedLayer = new Vector<Integer>();
     public Container lifContainer = null;
     private String fileString = null;
     private boolean modelValidity = false;
-    private LifValidityCheck lifValidityCheck = new LifValidityCheck();
+    private ValidityCheckStored lifValidityCheck = new ValidityCheckStored();
 
     public DataModelLif(InputStream input) throws LifException, IOException {
         this.inputDataProcessing(input);
@@ -50,7 +50,7 @@ public class DataModelLif extends DataModel {
     @Override
     public void inputDataProcessing(InputStream is) {
         try {
-            fileString = IOUtils.toString(is, Vocabularies.GeneralParameters.UNICODE);
+            fileString = IOUtils.toString(is, LifVocabularies.GeneralParameters.UNICODE);
             LifDocumentFinder lifContainerFinder = lifContainerFinder = new LifDocumentFinder(fileString);
             lifContainer = lifContainerFinder.getMascDocument().getContainer();
             extractAndSortViews();
@@ -91,8 +91,8 @@ public class DataModelLif extends DataModel {
 
         for (View view : views) {
             if (!ignoreViewsIndex.contains(index)) {
-                LifAnnotationLayersStored lifLayer = new LifAnnotationLayersStored(view.getMetadata());
-                List<LifAnnotationInterpreter> lifCharOffsetObjectList = lifLayer.processAnnotations(view.getAnnotations());
+                AnnotationLayersStored lifLayer = new AnnotationLayersStored(view.getMetadata());
+                List<AnnotationInterpreter> lifCharOffsetObjectList = lifLayer.processAnnotations(view.getAnnotations());
                 if(!lifLayer.isLayerValid()){
                      throw new LifException("The annotation layer is not valid!!"); 
                 }
@@ -109,7 +109,7 @@ public class DataModelLif extends DataModel {
         Set<Integer> ignoreIndexSet = new HashSet<Integer>();
         for (Integer index = 0; index < views.size(); index++) {
             View view = views.get(index);
-            LifAnnotationLayersStored lifLayer = new LifAnnotationLayersStored(view.getMetadata());
+            AnnotationLayersStored lifLayer = new AnnotationLayersStored(view.getMetadata());
             if (annotationLayersToConsider.containsKey(lifLayer.getLayer())) {
                 Integer ignoreIndex = annotationLayersToConsider.get(lifLayer.getLayer());
                 ignoreIndexSet.add(ignoreIndex);
@@ -127,11 +127,11 @@ public class DataModelLif extends DataModel {
         return true;
     }
 
-    public Map<Integer, List<LifAnnotationInterpreter>> getAnnotationLayerData() {
+    public Map<Integer, List<AnnotationInterpreter>> getAnnotationLayerData() {
         return annotationLayerData;
     }
 
-    public List<LifAnnotationInterpreter> getAnnotationLayerData(Integer index) {
+    public List<AnnotationInterpreter> getAnnotationLayerData(Integer index) {
         return annotationLayerData.get(index);
     }
 

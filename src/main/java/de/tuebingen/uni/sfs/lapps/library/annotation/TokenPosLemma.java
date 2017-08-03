@@ -9,7 +9,7 @@ package de.tuebingen.uni.sfs.lapps.library.annotation;
  *
  * @author felahi
  */
-public interface LifTokenPosLemma {
+public interface TokenPosLemma {
 
     public String getWord();
 

@@ -8,7 +8,7 @@ package de.tuebingen.uni.sfs.lapps.library.json;
 import de.tuebingen.uni.sfs.lapps.library.json.JsonProcessor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import de.tuebingen.uni.sfs.lapps.library.vocabulary.Vocabularies;
+import de.tuebingen.uni.sfs.lapps.library.vocabulary.LifVocabularies;
 import org.lappsgrid.serialization.Serializer;
 import org.lappsgrid.serialization.lif.Container;
 /**
@@ -21,7 +21,7 @@ public class LifDocument  {
     //"payload"
     private String discriminator;
 
-    @JsonProperty(Vocabularies.LIF.Document.PAYLOAD_KEY_JSON)
+    @JsonProperty(LifVocabularies.LIF.Document.PAYLOAD_KEY_JSON)
     private Container container;
 
     public LifDocument() {

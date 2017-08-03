@@ -15,11 +15,11 @@ import static org.lappsgrid.vocabulary.Features.Token.WORD;
  *
  * @author felahi
  */
-public class LifTokenPosLemmaStored implements LifTokenPosLemma {
+public class TokenPosLemmaStored implements TokenPosLemma {
 
     private Map<Object, Object> features = new HashMap<Object, Object>();
 
-    public LifTokenPosLemmaStored(Map<Object, Object> features) {
+    public TokenPosLemmaStored(Map<Object, Object> features) {
         if(features.containsKey(WORD)||features.containsKey(POS)||features.containsKey(LEMMA))
          this.setFeatures(features);
     }
