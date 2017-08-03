@@ -16,11 +16,11 @@ import java.io.IOException;
  *
  * @author felahi
  */
-public class LifDocumentFinder {
+public class LIFProfilerFinder {
 
-    private LifDocument mascDocument = new LifDocument();
+    private LIFProfiler mascDocument = new LIFProfiler();
 
-    public LifDocumentFinder(String jsonString) throws LifException, IOException {
+    public LIFProfilerFinder(String jsonString) throws LifException, IOException {
         JsonProcessor jsonObject = new JsonProcessor(jsonString);
         if (jsonObject.isInputValid()) {
             jsonToLifObjectMapping(jsonObject);
@@ -34,12 +34,12 @@ public class LifDocumentFinder {
         ValidityCheck lifDocumentValidityCheck = new ValidityCheckStored(jsonObject);
         ObjectMapper mapper = new ObjectMapper();
         if (lifDocumentValidityCheck.isValid()) {
-            mascDocument = mapper.readValue(jsonObject.getJsonString(), LifDocument.class);
+            mascDocument = mapper.readValue(jsonObject.getJsonString(), LIFProfiler.class);
         }
 
     }
 
-    public LifDocument getMascDocument() {
+    public LIFProfiler getMascDocument() {
         return mascDocument;
     }
 

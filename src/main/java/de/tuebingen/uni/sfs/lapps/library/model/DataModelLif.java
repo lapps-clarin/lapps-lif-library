@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.model;
 
-import de.tuebingen.uni.sfs.lapps.library.json.LifDocumentFinder;
+import de.tuebingen.uni.sfs.lapps.library.json.LIFProfilerFinder;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModel;
 import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationLayersStored;
 import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationInterpreter;
@@ -51,7 +51,7 @@ public class DataModelLif extends DataModel {
     public void inputDataProcessing(InputStream is) {
         try {
             fileString = IOUtils.toString(is, LifVocabularies.GeneralParameters.UNICODE);
-            LifDocumentFinder lifContainerFinder = lifContainerFinder = new LifDocumentFinder(fileString);
+            LIFProfilerFinder lifContainerFinder = lifContainerFinder = new LIFProfilerFinder(fileString);
             lifContainer = lifContainerFinder.getMascDocument().getContainer();
             extractAndSortViews();
             modelValidity = true;
