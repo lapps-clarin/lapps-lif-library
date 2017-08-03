@@ -9,7 +9,7 @@ package de.tuebingen.uni.sfs.lapps.library.application;
  *
  * @author felahi
  */
-public interface FindAnnotationLayers {
+public interface AnnotationLayers {
 
     public boolean isLanguage();
 

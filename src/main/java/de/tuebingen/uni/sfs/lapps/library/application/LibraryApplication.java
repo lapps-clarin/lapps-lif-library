@@ -23,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class LibraryApplication {
 
-    private FormatConverterTool tool;
+    private AnnotationLayersStored tool;
     private String baseDir = "/Users/felahi/repository/lapps-lif-library/src/main/resources/data/";
     private String workingDir = baseDir + "working/";
     private String textlayerDir = workingDir + "textlayer/";
@@ -49,7 +49,7 @@ public class LibraryApplication {
 
     public LibraryApplication() throws Exception {
         try {
-            tool = new FormatConverterTool();
+            tool = new AnnotationLayersStored();
         } catch (Exception ex) {
             throw new Exception("conversion is not working well");
         }
@@ -120,7 +120,7 @@ public class LibraryApplication {
 
     private void process(final InputStream input, OutputStream output) throws Exception {
         try {
-              tool = new FormatConverterTool();
+              tool = new AnnotationLayersStored();
             DataModelLif dataModelLif = new DataModelLif(input);
             if (dataModelLif.isValid()) {
                 tool.convertModel(dataModelLif);

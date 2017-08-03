@@ -9,14 +9,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lappsgrid.discriminator.Discriminators;
 
-public class FormatConverterTool implements FindAnnotationLayers {
+public class AnnotationLayersStored implements AnnotationLayers {
 
     private DataModelLif givenDataModel = null;
     private String LANG_EN = "en";
     private String text = null;
     private List<String> layers = new ArrayList<String>();
 
-    public FormatConverterTool() throws VocabularyMappingException {
+    public AnnotationLayersStored() throws VocabularyMappingException {
     }
 
     public void convertModel(DataModelLif lifDataModel) throws Exception {
@@ -24,9 +24,9 @@ public class FormatConverterTool implements FindAnnotationLayers {
         try {
             findAnnotationLayers();
         } catch (VocabularyMappingException conExp) {
-            Logger.getLogger(FormatConverterTool.class.getName()).log(Level.SEVERE, null, conExp);
+            Logger.getLogger(AnnotationLayersStored.class.getName()).log(Level.SEVERE, null, conExp);
         } catch (Exception vocExp) {
-            Logger.getLogger(FormatConverterTool.class.getName()).log(Level.SEVERE, null, vocExp);
+            Logger.getLogger(AnnotationLayersStored.class.getName()).log(Level.SEVERE, null, vocExp);
         }
     }
 
