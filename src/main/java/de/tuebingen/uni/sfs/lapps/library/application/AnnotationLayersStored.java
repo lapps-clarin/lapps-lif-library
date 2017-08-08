@@ -18,6 +18,10 @@ public class AnnotationLayersStored implements AnnotationLayers {
 
     public AnnotationLayersStored() throws VocabularyMappingException {
     }
+    
+    public AnnotationLayersStored(DataModelLif lifDataModel) throws VocabularyMappingException, Exception {
+        this.convertModel(lifDataModel);
+    }
 
     public void convertModel(DataModelLif lifDataModel) throws Exception {
         givenDataModel = lifDataModel;
