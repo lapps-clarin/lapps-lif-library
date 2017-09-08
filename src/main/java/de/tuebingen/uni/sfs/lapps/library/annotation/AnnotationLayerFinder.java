@@ -7,6 +7,7 @@ package de.tuebingen.uni.sfs.lapps.library.annotation;
 
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
 
+
 /**
  *
  * @author This interface finds the annotation layer from a file

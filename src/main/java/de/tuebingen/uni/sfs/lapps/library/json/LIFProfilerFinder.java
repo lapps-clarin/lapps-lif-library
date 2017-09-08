@@ -6,10 +6,10 @@
 package de.tuebingen.uni.sfs.lapps.library.json;
 
 import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheckStored;
-import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheck;
 import de.tuebingen.uni.sfs.lapps.library.json.JsonProcessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import java.io.IOException;
 
 /**

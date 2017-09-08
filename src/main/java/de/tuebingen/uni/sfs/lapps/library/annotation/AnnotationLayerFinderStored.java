@@ -7,9 +7,9 @@ package de.tuebingen.uni.sfs.lapps.library.annotation;
 
 import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheckStored;
+import de.tuebingen.uni.sfs.lapps.library.checker.DuplicateChecker;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
-import de.tuebingen.uni.sfs.lapps.library.utils.DuplicateChecker;
 import java.util.ArrayList;
 import java.util.HashMap;
 

@@ -5,8 +5,8 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.validity;
 
-import de.tuebingen.uni.sfs.lapps.library.vocabulary.LifVocabularies;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
+import de.tuebingen.uni.sfs.lapps.library.vocabulary.LifVocabularies;
 import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheck;
 import de.tuebingen.uni.sfs.lapps.library.json.JsonProcessor;
 import java.util.ArrayList;

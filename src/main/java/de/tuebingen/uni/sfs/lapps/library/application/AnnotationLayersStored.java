@@ -1,8 +1,8 @@
 package de.tuebingen.uni.sfs.lapps.library.application;
 
 import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationLayerFinder;
-import de.tuebingen.uni.sfs.lapps.library.model.DataModelLif;
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
+import de.tuebingen.uni.sfs.lapps.library.model.DataModelLif;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;

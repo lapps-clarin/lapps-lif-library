@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.utils;
+package de.tuebingen.uni.sfs.lapps.library.checker;
 
 import java.io.IOException;
 

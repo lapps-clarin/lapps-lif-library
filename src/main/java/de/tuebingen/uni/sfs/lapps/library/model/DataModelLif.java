@@ -11,8 +11,8 @@ import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationLayerFinderStored
 import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheckStored;
 import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationLayerFinder;
-import de.tuebingen.uni.sfs.lapps.library.vocabulary.LifVocabularies;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
+import de.tuebingen.uni.sfs.lapps.library.vocabulary.LifVocabularies;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
