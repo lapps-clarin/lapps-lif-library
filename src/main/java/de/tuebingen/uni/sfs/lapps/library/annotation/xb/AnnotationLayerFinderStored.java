@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.annotation;
+package de.tuebingen.uni.sfs.lapps.library.annotation.xb;
 
-import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.library.annotation.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheckStored;
 import de.tuebingen.uni.sfs.lapps.library.checker.DuplicateChecker;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
@@ -20,6 +20,7 @@ import java.util.Set;
 import org.lappsgrid.discriminator.Discriminators;
 import org.lappsgrid.serialization.lif.Annotation;
 import org.lappsgrid.vocabulary.Metadata;
+
 /**
  *
  * @author felahi the function
@@ -51,9 +52,9 @@ public class AnnotationLayerFinderStored implements AnnotationLayerFinder {
             }
         }
         if (metadataInfoInLayers.size() == 1) {
-            setLayerFromSingleUrl();
+            getLayerFromSingleUrl();
         } else if (metadataInfoInLayers.size() > 1) {
-            setLayerFromMultipleUrls();
+            getLayerFromMultipleUrls();
         }
     }
 
@@ -87,16 +88,35 @@ public class AnnotationLayerFinderStored implements AnnotationLayerFinder {
         return annotationInterpreterList;
     }
 
-    private void setLayerFromSingleUrl() {
+    /*private void getLayerFromSingleUrl() {
         this.lifLayer = metadataInfoInLayers.iterator().next();
     }
 
-    private void setLayerFromMultipleUrls() {
+    private void getLayerFromMultipleUrls() {
         for (String url : metadataInfoInLayers) {
             if (url.equalsIgnoreCase(Discriminators.Uri.DEPENDENCY_STRUCTURE)) {
                 this.lifLayer = Discriminators.Uri.DEPENDENCY_STRUCTURE;
             } else if (url.equalsIgnoreCase(Discriminators.Uri.PHRASE_STRUCTURE)) {
                 this.lifLayer = Discriminators.Uri.PHRASE_STRUCTURE;
+            } else if (url.equalsIgnoreCase(Discriminators.Uri.COREF)) {
+                this.lifLayer = Discriminators.Uri.COREF;
+            }
+        }
+    }*/
+    @Override
+    public void getLayerFromSingleUrl() {
+        this.lifLayer = metadataInfoInLayers.iterator().next();
+    }
+
+    @Override
+    public void getLayerFromMultipleUrls() {
+        for (String url : metadataInfoInLayers) {
+            if (url.equalsIgnoreCase(Discriminators.Uri.DEPENDENCY_STRUCTURE)) {
+                this.lifLayer = Discriminators.Uri.DEPENDENCY_STRUCTURE;
+            } else if (url.equalsIgnoreCase(Discriminators.Uri.PHRASE_STRUCTURE)) {
+                this.lifLayer = Discriminators.Uri.PHRASE_STRUCTURE;
+            } else if (url.equalsIgnoreCase(Discriminators.Uri.COREF)) {
+                this.lifLayer = Discriminators.Uri.COREF;
             }
         }
     }

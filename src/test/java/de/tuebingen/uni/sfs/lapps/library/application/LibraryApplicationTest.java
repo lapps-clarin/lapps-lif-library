@@ -5,6 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.application;
 
+import de.tuebingen.uni.sfs.lapps.library.annotation.xb.AnnotationLayersStored;
 import de.tuebingen.uni.sfs.lapps.library.utils.ProcessLifDataModel;
 import java.io.File;
 import org.junit.Assert;
@@ -118,19 +119,19 @@ public class LibraryApplicationTest {
 
     }
 
-    @Ignore
+    @Test
     public void testCorferenceLayer() throws Exception {
         File inputFile = getFile(CORFERENCE_EXAMPLE);
         if (inputFile.getName().contains(FILE_LIF)) {
             AnnotationLayersStored tool = ProcessLifDataModel.fileProcessing(inputFile);
-            if (tool.isCorferenceResolver()) {
-                Assert.assertEquals(tool.isCorferenceResolver(), true);
+            if (tool.isCorferenceLayer()) {
+                Assert.assertEquals(tool.isCorferenceLayer(), true);
                 System.out.println("CorferenceLayer exists:" + tool.getLayers().toString());
             }
         }
 
     }
-
+   
     public File getFile(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();
         return new File(classLoader.getResource(fileName).getFile());

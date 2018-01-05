@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.annotation;
+package de.tuebingen.uni.sfs.lapps.library.annotation.xb;
 
+import de.tuebingen.uni.sfs.lapps.library.annotation.api.TokenPosLemma;
 import java.util.HashMap;
 import java.util.Map;
 import org.lappsgrid.serialization.lif.Annotation;

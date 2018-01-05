@@ -1,6 +1,7 @@
-package de.tuebingen.uni.sfs.lapps.library.application;
+package de.tuebingen.uni.sfs.lapps.library.annotation.xb;
 
-import de.tuebingen.uni.sfs.lapps.library.annotation.AnnotationLayerFinder;
+import de.tuebingen.uni.sfs.lapps.library.annotation.api.AnnotationLayers;
+import de.tuebingen.uni.sfs.lapps.library.annotation.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModelLif;
 import java.util.ArrayList;
@@ -130,10 +131,8 @@ public class AnnotationLayersStored implements AnnotationLayers {
     }
 
     @Override
-    public boolean isCorferenceResolver() {
-        if (layers.contains(Discriminators.Uri.COREF)
-                && layers.contains(Discriminators.Uri.MARKABLE)
-                && layers.contains(Discriminators.Uri.TOKEN)) {
+    public boolean isCorferenceLayer() {
+        if (layers.contains(Discriminators.Uri.COREF)) {
             return true;
         }
         return false;
@@ -142,6 +141,14 @@ public class AnnotationLayersStored implements AnnotationLayers {
     @Override
     public boolean isNamedEntityLayer() {
         if (layers.contains(Discriminators.Uri.NE)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isChunkLayer() {
+        if (layers.contains(Discriminators.Uri.CHUNK)) {
             return true;
         }
         return false;

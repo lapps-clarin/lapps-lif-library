@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.annotation;
+package de.tuebingen.uni.sfs.lapps.library.annotation.api;
 
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
-
 
 /**
  *
@@ -27,5 +26,9 @@ public interface AnnotationLayerFinder {
     public String getTagSetName(String tool) throws VocabularyMappingException;
 
     public String getVocabularies(String tool, String key) throws VocabularyMappingException;
+
+    public void getLayerFromSingleUrl();
+
+    public void getLayerFromMultipleUrls();
 
 }

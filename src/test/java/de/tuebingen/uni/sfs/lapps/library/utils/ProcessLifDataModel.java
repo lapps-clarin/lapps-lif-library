@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.utils;
 
-import de.tuebingen.uni.sfs.lapps.library.application.AnnotationLayersStored;
+import de.tuebingen.uni.sfs.lapps.library.annotation.xb.AnnotationLayersStored;
 import de.tuebingen.uni.sfs.lapps.library.application.LibraryApplicationTest;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModelLif;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.application;
+package de.tuebingen.uni.sfs.lapps.library.annotation.api;
 
 /**
  *
@@ -31,6 +31,8 @@ public interface AnnotationLayers {
 
     public boolean isTokenPosLayer();
     
-    public boolean isCorferenceResolver();
+    public boolean isCorferenceLayer();
+    
+     public boolean isChunkLayer();
 
 }
