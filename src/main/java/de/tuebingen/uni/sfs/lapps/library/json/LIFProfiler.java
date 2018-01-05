@@ -5,10 +5,9 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.json;
 
-import de.tuebingen.uni.sfs.lapps.library.json.JsonProcessor;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import de.tuebingen.uni.sfs.lapps.library.vocabulary.LifVocabularies;
+import de.tuebingen.uni.sfs.lapps.library.constants.LifVocabularies;
 import org.lappsgrid.serialization.Serializer;
 import org.lappsgrid.serialization.lif.Container;
 /**

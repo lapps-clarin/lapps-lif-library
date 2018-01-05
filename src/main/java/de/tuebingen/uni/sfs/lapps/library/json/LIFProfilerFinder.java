@@ -5,12 +5,12 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.json;
 
-import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheckStored;
-import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheck;
+import de.tuebingen.uni.sfs.lapps.library.utils.xb.ValidityCheckerStored;
 import de.tuebingen.uni.sfs.lapps.library.json.JsonProcessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import java.io.IOException;
+import de.tuebingen.uni.sfs.lapps.library.utils.api.ValidityChecker;
 
 /**
  *
@@ -25,13 +25,13 @@ public class LIFProfilerFinder {
         if (jsonObject.isInputValid()) {
             jsonToLifObjectMapping(jsonObject);
         } else {
-            throw new LifException(ValidityCheckStored.INVALID_JSON_FILE);
+            throw new LifException(ValidityCheckerStored.INVALID_JSON_FILE);
         }
 
     }
 
     private void jsonToLifObjectMapping(JsonProcessor jsonObject) throws LifException, IOException {
-        ValidityCheck lifDocumentValidityCheck = new ValidityCheckStored(jsonObject);
+        ValidityChecker lifDocumentValidityCheck = new ValidityCheckerStored(jsonObject);
         ObjectMapper mapper = new ObjectMapper();
         if (lifDocumentValidityCheck.isValid()) {
             mascDocument = mapper.readValue(jsonObject.getJsonString(), LIFProfiler.class);

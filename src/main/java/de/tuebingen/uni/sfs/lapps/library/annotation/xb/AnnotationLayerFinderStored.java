@@ -6,8 +6,8 @@
 package de.tuebingen.uni.sfs.lapps.library.annotation.xb;
 
 import de.tuebingen.uni.sfs.lapps.library.annotation.api.AnnotationLayerFinder;
-import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheckStored;
-import de.tuebingen.uni.sfs.lapps.library.checker.DuplicateChecker;
+import de.tuebingen.uni.sfs.lapps.library.utils.xb.ValidityCheckerStored;
+import de.tuebingen.uni.sfs.lapps.library.utils.xb.DuplicateChecker;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
 import java.util.ArrayList;
@@ -130,7 +130,7 @@ public class AnnotationLayerFinderStored implements AnnotationLayerFinder {
     }
 
     public boolean isLayerValid() throws LifException {
-        ValidityCheckStored lifValidityCheck = new ValidityCheckStored();
+        ValidityCheckerStored lifValidityCheck = new ValidityCheckerStored();
         return lifValidityCheck.isMetadataLayerValid(this.lifLayer, this.metadataInfoInLayers, this.annotationInfoInLayers);
     }
 

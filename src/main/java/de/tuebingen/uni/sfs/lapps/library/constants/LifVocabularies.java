@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.vocabulary;
+package de.tuebingen.uni.sfs.lapps.library.constants;
 
 import java.util.Arrays;
 import java.util.HashSet;

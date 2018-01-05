@@ -3,11 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.validity;
+package de.tuebingen.uni.sfs.lapps.library.utils.xb;
 
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
-import de.tuebingen.uni.sfs.lapps.library.vocabulary.LifVocabularies;
-import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheck;
+import de.tuebingen.uni.sfs.lapps.library.constants.LifVocabularies;
 import de.tuebingen.uni.sfs.lapps.library.json.JsonProcessor;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -17,12 +16,13 @@ import java.util.Set;
 import org.lappsgrid.discriminator.Discriminators;
 import org.lappsgrid.serialization.lif.Annotation;
 import org.lappsgrid.serialization.lif.View;
+import de.tuebingen.uni.sfs.lapps.library.utils.api.ValidityChecker;
 
 /**
  *
  * @author felahi
  */
-public class ValidityCheckStored implements ValidityCheck {
+public class ValidityCheckerStored implements ValidityChecker {
 
     //document validity error messages...
     public static final String MESSAGE_INVALID_JSON = "LIF ERROR: No Json key/value found!!";
@@ -42,15 +42,15 @@ public class ValidityCheckStored implements ValidityCheck {
     private List<View> views = new ArrayList<View>();
     private Annotation annotation = null;
 
-    public ValidityCheckStored() {
+    public ValidityCheckerStored() {
 
     }
 
-    public ValidityCheckStored(JsonProcessor jsonObject) {
+    public ValidityCheckerStored(JsonProcessor jsonObject) {
         this.jsonObject = jsonObject;
     }
 
-    public ValidityCheckStored(Annotation annotation) {
+    public ValidityCheckerStored(Annotation annotation) {
         this.annotation = annotation;
     }
 

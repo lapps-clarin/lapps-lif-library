@@ -9,10 +9,10 @@ import de.tuebingen.uni.sfs.lapps.library.json.LIFProfilerFinder;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModel;
 import de.tuebingen.uni.sfs.lapps.library.annotation.xb.AnnotationLayerFinderStored;
 import de.tuebingen.uni.sfs.lapps.library.annotation.xb.AnnotationInterpreter;
-import de.tuebingen.uni.sfs.lapps.library.validity.ValidityCheckStored;
+import de.tuebingen.uni.sfs.lapps.library.utils.xb.ValidityCheckerStored;
 import de.tuebingen.uni.sfs.lapps.library.annotation.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
-import de.tuebingen.uni.sfs.lapps.library.vocabulary.LifVocabularies;
+import de.tuebingen.uni.sfs.lapps.library.constants.LifVocabularies;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -41,7 +41,7 @@ public class DataModelLif extends DataModel {
     public Container lifContainer = null;
     private String fileString = null;
     private boolean modelValidity = false;
-    private ValidityCheckStored lifValidityCheck = new ValidityCheckStored();
+    private ValidityCheckerStored lifValidityCheck = new ValidityCheckerStored();
 
     public DataModelLif(InputStream input) throws LifException, IOException {
         this.inputDataProcessing(input);
