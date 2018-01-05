@@ -22,6 +22,8 @@ public interface AnnotationLayers {
     public boolean isPosLayer();
 
     public boolean isLemmaLayer();
+    
+    public boolean isNamedEntityLayer();
 
     public boolean isDependencyLayer();
 

@@ -139,4 +139,12 @@ public class AnnotationLayersStored implements AnnotationLayers {
         return false;
     }
 
+    @Override
+    public boolean isNamedEntityLayer() {
+        if (layers.contains(Discriminators.Uri.NE)) {
+            return true;
+        }
+        return false;
+    }
+
 }
