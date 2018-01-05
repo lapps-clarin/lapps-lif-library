@@ -18,7 +18,7 @@ public class AnnotationLayersStored implements AnnotationLayers {
 
     public AnnotationLayersStored() throws VocabularyMappingException {
     }
-    
+
     public AnnotationLayersStored(DataModelLif lifDataModel) throws VocabularyMappingException, Exception {
         this.convertModel(lifDataModel);
     }
@@ -124,6 +124,16 @@ public class AnnotationLayersStored implements AnnotationLayers {
     public boolean isTokenPosLayer() {
         if (layers.contains(Discriminators.Uri.POS)) {
             layers.add(Discriminators.Uri.TOKEN);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isCorferenceResolver() {
+        if (layers.contains(Discriminators.Uri.COREF)
+                && layers.contains(Discriminators.Uri.MARKABLE)
+                && layers.contains(Discriminators.Uri.TOKEN)) {
             return true;
         }
         return false;

@@ -16,72 +16,54 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.junit.Assert;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 /**
  *
  * @author felahi
  */
-public class LibraryApplication {
+public class LibraryApplicationTest {
 
     private AnnotationLayersStored tool;
-    private String baseDir = "/Users/felahi/repository/lapps-lif-library/src/main/resources/data/";
-    private String workingDir = baseDir + "working/";
-    private String textlayerDir = workingDir + "textlayer/";
-    private String tokenlayerDir = workingDir + "tokenlayer/";
-    private String poslayerDir = workingDir + "poslayer/";
-    private String sentenceDir = workingDir + "senetenceLayer/";
-    private String nameEntityDir = workingDir + "nameEntityLayer/";
-    private String constituentParserDir = workingDir + "constituentParser/";
-    //private String dir[] = {tokenlayerDir, poslayerDir, sentenceDir, nameEntityDir,constituentParserDir};
-    private String dir[] = {baseDir};
-    private String File_Type = "json";
-
-    //private String dir[] = {tokenlayerDir,poslayerDir,sentenceDir,nameEntityDir};
-    //private String args[]={"/Users/felahi/repository/converter/service-lapps-converter/src/main/resources/TestInput/", "/Users/felahi/repository/converter/service-lapps-converter/src/main/resources/"};
-    ///Users/felahi/repository/LifToTcfConverter/src/main/resources/input/ /Users/felahi/repository/LifToTcfConverter/src/main/resources/ tcf
-    ///Users/felahi/repository/service-lapps-converter/src/main/resources/inputTest/
-    //Users/felahi/repository/service-lapps-converter/src/main/resources/outputTest/
-    private static final String TEXT_TCF_XML = "text/tcf+xml";
-    private static final String TEXT_LIF_JSON = "text/lif+json";
-    private static final String FALL_BACK_MESSAGE = "Data processing failed";
+    private String CORFERENCE_EXAMPLE = "data/lif-corferenceLayer.json";
+    private String CONTSTITUENT_EXAMPLE = "data/lif-constituentLayer.json";
+    private String DEPENDENCY_EXAMPLE = "data/lif-dependencyLayer.json";
+    private String MULTILAYER_EXAMPLE = "data/lif-multipleLayers.json";
+    private String NAMEENTITY_EXAMPLE = "data/lif-nameEntittyLayer.json";
+    private String SENTENCE_EXAMPLE = "data/lif-sentenceLayer.json";
+    private String TEXT_EXAMPLE = "data/lif-textLayer.json";
+    private String TOKEN_EXAMPLE = "data/lif-tokenLayer.json";
+    private String[] EXAMPLES = {TEXT_EXAMPLE,
+        TOKEN_EXAMPLE,
+        SENTENCE_EXAMPLE,
+        NAMEENTITY_EXAMPLE,
+        MULTILAYER_EXAMPLE,
+        DEPENDENCY_EXAMPLE,
+        CONTSTITUENT_EXAMPLE,
+        CORFERENCE_EXAMPLE};
+    private String FILE_LIF = "json";
     private static final String TEMP_FILE_PREFIX = "ne-output-temp";
     private static final String TEMP_FILE_SUFFIX = ".xml";
 
-    public LibraryApplication() throws Exception {
-        try {
-            tool = new AnnotationLayersStored();
-        } catch (Exception ex) {
-            throw new Exception("conversion is not working well");
-        }
-
+    public LibraryApplicationTest() {
     }
 
-    public static void main(String[] args) throws java.io.IOException, Exception {
-
-        /*if (args.length != 2) {
-            System.out.println("Provide args:");
-            System.out.println("PATH_TO_INPUT PATH_TO_OUTPUT");
-            return;
-        }*/
-        LibraryApplication mainTest = new LibraryApplication();
-        mainTest.conversionSeclection();
-    }
-
-    public void conversionSeclection() throws IOException, Exception {
-
-        for (int i = 0; i < dir.length; i++) {
-            File inputDirectory = new File(dir[i]);
-            File[] fileList = inputDirectory.listFiles();
-            System.out.println("dir " + dir[i]);
-
-            for (File inputFile : fileList) {
-                System.out.println("++++++++++++++++++++++++++++++" + inputFile.getName() + "++++++++++++++++++++++++++++++++++++++");
-                if (inputFile.getName().contains(File_Type)) {
-                    condersionFileProcessing(inputFile);
-                }
+    /**
+     * Test of main method, of class LibraryApplication.
+     */
+    @Test
+    public void testMain() throws Exception {
+        System.out.println("main");
+        LibraryApplicationTest mainTest = new LibraryApplicationTest();
+        for (int i = 0; i < EXAMPLES.length; i++) {
+            File inputFile = mainTest.getFile(EXAMPLES[i]);
+            System.out.println("++++++++++++++++++++++++++++++" + inputFile.getName() + "++++++++++++++++++++++++++++++++++++++");
+            if (inputFile.getName().contains(FILE_LIF)) {
+                condersionFileProcessing(inputFile);
             }
         }
-
     }
 
     public void condersionFileProcessing(File inputFile) throws IOException, Exception {
@@ -120,7 +102,7 @@ public class LibraryApplication {
 
     private void process(final InputStream input, OutputStream output) throws Exception {
         try {
-              tool = new AnnotationLayersStored();
+            tool = new AnnotationLayersStored();
             DataModelLif dataModelLif = new DataModelLif(input);
             if (dataModelLif.isValid()) {
                 tool.convertModel(dataModelLif);
@@ -130,22 +112,22 @@ public class LibraryApplication {
             }
 
         } catch (LifException exlIF) {
-            Logger.getLogger(LibraryApplication.class.getName()).log(Level.SEVERE, null, exlIF);
+            Logger.getLogger(LibraryApplicationTest.class.getName()).log(Level.SEVERE, null, exlIF);
         } catch (Exception ex) {
-            Logger.getLogger(LibraryApplication.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LibraryApplicationTest.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (input != null) {
                 try {
                     input.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(LibraryApplication.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LibraryApplicationTest.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (output != null) {
                 try {
                     output.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(LibraryApplication.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(LibraryApplicationTest.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -154,26 +136,39 @@ public class LibraryApplication {
 
     private void display() {
         if (tool.isTextLayer()) {
+            Assert.assertEquals(tool.isTextLayer(), true);
             System.out.println("Text layer exists:" + tool.getText());
         }
         if (tool.isTokenLayer()) {
+            Assert.assertEquals(tool.isTokenLayer(), true);
             System.out.println("Token layer exists:" + tool.getLayers().toString());
         }
-         if (tool.isPosLayer()) {
+        if (tool.isPosLayer()) {
+             Assert.assertEquals(tool.isPosLayer(), true);
             System.out.println("POS layer exists:" + tool.getLayers().toString());
         }
-          if (tool.isLemmaLayer()) {
+        if (tool.isLemmaLayer()) {
+            Assert.assertEquals(tool.isLemmaLayer(), true);
             System.out.println("Lemma layer exists:" + tool.getLayers().toString());
         }
-          if (tool.isConstituentLayer()) {
+        if (tool.isConstituentLayer()) {
+            Assert.assertEquals(tool.isConstituentLayer(), true);
             System.out.println("Constituent layer exists:" + tool.getLayers().toString());
         }
-          if (tool.isDependencyLayer()) {
+        if (tool.isDependencyLayer()) {
+            Assert.assertEquals(tool.isDependencyLayer(), true);
             System.out.println("Dependency layer exists:" + tool.getLayers().toString());
         }
+        if (tool.isCorferenceResolver()) {
+            Assert.assertEquals(tool.isCorferenceResolver(), true);
+            System.out.println("CorferenceResolver exists:" + tool.getLayers().toString());
+        }
 
-        System.out.println("text:" + tool.getText());
-        System.out.println("layer:" + tool.getLayers().toString());
+    }
+
+    private File getFile(String fileName) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        return new File(classLoader.getResource(fileName).getFile());
     }
 
 }

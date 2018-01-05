@@ -28,5 +28,7 @@ public interface AnnotationLayers {
     public boolean isConstituentLayer();
 
     public boolean isTokenPosLayer();
+    
+    public boolean isCorferenceResolver();
 
 }
