@@ -7,7 +7,7 @@ package de.tuebingen.uni.sfs.lapps.library.utils.xb;
 
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.constants.LifVocabularies;
-import de.tuebingen.uni.sfs.lapps.library.json.JsonProcessor;
+import de.tuebingen.uni.sfs.lapps.library.profile.JsonProcessor;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
