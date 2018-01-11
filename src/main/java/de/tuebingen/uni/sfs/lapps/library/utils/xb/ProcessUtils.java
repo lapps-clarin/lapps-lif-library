@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.utils;
+package de.tuebingen.uni.sfs.lapps.library.utils.xb;
 
 import de.tuebingen.uni.sfs.lapps.library.annotation.xb.AnnotationLayersStored;
-import de.tuebingen.uni.sfs.lapps.library.application.LibraryApplicationTest;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModelLif;
 import java.io.BufferedOutputStream;
@@ -21,10 +20,10 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Mohammad Fazleh Elahi
+ * @author felahi
  */
-public class ProcessLifDataModel {
-
+public class ProcessUtils {
+    
     private static final String TEMP_FILE_PREFIX = "ne-output-temp";
     private static final String TEMP_FILE_SUFFIX = ".xml";
 
@@ -73,26 +72,26 @@ public class ProcessLifDataModel {
             }
 
         } catch (LifException exlIF) {
-            Logger.getLogger(LibraryApplicationTest.class.getName()).log(Level.SEVERE, null, exlIF);
+            Logger.getLogger(ProcessUtils.class.getName()).log(Level.SEVERE, null, exlIF);
         } catch (Exception ex) {
-            Logger.getLogger(LibraryApplicationTest.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProcessUtils.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (input != null) {
                 try {
                     input.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(LibraryApplicationTest.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ProcessUtils.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             if (output != null) {
                 try {
                     output.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(LibraryApplicationTest.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ProcessUtils.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
         return tool;
     }
-
+    
 }

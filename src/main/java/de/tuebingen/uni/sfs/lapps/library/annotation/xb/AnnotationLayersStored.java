@@ -52,6 +52,10 @@ public class AnnotationLayersStored implements AnnotationLayers {
         return LANG_EN;
     }
 
+    public DataModelLif getGivenDataModel() {
+        return givenDataModel;
+    }
+
     public String getText() {
         return givenDataModel.getText();
     }
