@@ -33,7 +33,7 @@ public class LibraryApplicationTest {
     public LibraryApplicationTest() {
     }
 
-    @Ignore
+    @Test
     public void testTextLayer() throws Exception {
         File inputFile = new File(classLoader.getResource(TEXT_EXAMPLE).getFile());
         if (inputFile.getName().contains(FILE_LIF)) {
@@ -45,7 +45,7 @@ public class LibraryApplicationTest {
         }
     }
 
-    @Ignore
+    @Test
     public void testTokenLayer() throws Exception {
         File inputFile = new File(classLoader.getResource(TOKEN_EXAMPLE).getFile());
         if (inputFile.getName().contains(FILE_LIF)) {
@@ -58,7 +58,7 @@ public class LibraryApplicationTest {
 
     }
 
-    @Ignore
+    @Test
     public void testPosLayer() throws Exception {
 
         File inputFile = new File(classLoader.getResource(POS_EXAMPLE).getFile());
@@ -71,7 +71,7 @@ public class LibraryApplicationTest {
         }
     }
 
-    @Ignore
+    @Test
     public void testSentenceLayer() throws Exception {
         File inputFile = new File(classLoader.getResource(SENTENCE_EXAMPLE).getFile());
         if (inputFile.getName().contains(FILE_LIF)) {
@@ -83,7 +83,7 @@ public class LibraryApplicationTest {
         }
     }
 
-    @Ignore
+    @Test
     public void testNamedEntirtyLayer() throws Exception {
         File inputFile = new File(classLoader.getResource(NAMEENTITY_EXAMPLE).getFile());
         if (inputFile.getName().contains(FILE_LIF)) {
@@ -121,7 +121,7 @@ public class LibraryApplicationTest {
 
     }
 
-    @Ignore
+    @Test
     public void testCorferenceLayer() throws Exception {
         File inputFile = new File(classLoader.getResource(CORFERENCE_EXAMPLE).getFile());
         if (inputFile.getName().contains(FILE_LIF)) {
@@ -129,7 +129,7 @@ public class LibraryApplicationTest {
             if (tool.isCorferenceLayer()) {
                 Assert.assertEquals(tool.isCorferenceLayer(), true);
                 System.out.println("CorferenceLayer exists:" + tool.getLayers().toString());
-                System.out.println(tool.getGivenDataModel().getAnnotationLayerData(0));
+                //System.out.println(tool.getGivenDataModel().getAnnotationLayerData(0));
             }
         }
 
