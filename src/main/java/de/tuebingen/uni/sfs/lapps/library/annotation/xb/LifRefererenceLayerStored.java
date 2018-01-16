@@ -69,11 +69,11 @@ public class LifRefererenceLayerStored implements LifReferenceLayer {
     }
 
     public Map<String, LifReference> getCorferenceAnnotations() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.corferenceAnnotations;
     }
 
     public Map<String, LifMarkable> getMarkableAnnotations() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.markableAnnotations;
     }
 
 }

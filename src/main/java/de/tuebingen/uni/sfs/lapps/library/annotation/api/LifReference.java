@@ -16,6 +16,6 @@ public interface LifReference {
 
     public String getRepresentative();
 
-    public Set<String> getMentions();
+    public List<String> getMentions();
 
 }

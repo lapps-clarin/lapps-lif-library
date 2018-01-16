@@ -6,6 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.library.annotation.xb;
 
 import de.tuebingen.uni.sfs.lapps.library.annotation.api.LifReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +35,8 @@ public class LifReferenceStored implements LifReference{
         return (String) this.features.get(Features.Coreference.REPRESENTATIVE);
     }
 
-    public Set<String> getMentions() {
-        return (Set<String>) this.features.get(Features.Coreference.MENTIONS);
+    public List<String> getMentions() {
+        return (List<String>) this.features.get(Features.Coreference.MENTIONS);
     }
 
     public Map<Object, Object> getFeatures() {
