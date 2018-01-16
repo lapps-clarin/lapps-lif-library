@@ -7,7 +7,7 @@ package de.tuebingen.uni.sfs.lapps.library.model;
 
 import de.tuebingen.uni.sfs.lapps.library.profile.LIFProfilerFinder;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModel;
-import de.tuebingen.uni.sfs.lapps.library.layer.xb.AnnotationLayerFinderStored;
+import de.tuebingen.uni.sfs.lapps.library.layer.xb.LifToolProducerStored;
 import de.tuebingen.uni.sfs.lapps.library.layer.xb.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.library.utils.xb.ValidityCheckerStored;
 import de.tuebingen.uni.sfs.lapps.library.layer.api.AnnotationLayerFinder;
@@ -91,7 +91,7 @@ public class DataModelLif extends DataModel {
 
         for (View view : views) {
             if (!ignoreViewsIndex.contains(index)) {
-                AnnotationLayerFinderStored lifLayer = new AnnotationLayerFinderStored(view.getMetadata());
+                LifToolProducerStored lifLayer = new LifToolProducerStored(view.getMetadata());
                 List<AnnotationInterpreter> lifCharOffsetObjectList = lifLayer.processAnnotations(view.getAnnotations());
                 if(!lifLayer.isLayerValid()){
                      throw new LifException("The annotation layer is not valid!!"); 
@@ -109,7 +109,7 @@ public class DataModelLif extends DataModel {
         Set<Integer> ignoreIndexSet = new HashSet<Integer>();
         for (Integer index = 0; index < views.size(); index++) {
             View view = views.get(index);
-            AnnotationLayerFinderStored lifLayer = new AnnotationLayerFinderStored(view.getMetadata());
+            LifToolProducerStored lifLayer = new LifToolProducerStored(view.getMetadata());
             if (annotationLayersToConsider.containsKey(lifLayer.getLayer())) {
                 Integer ignoreIndex = annotationLayersToConsider.get(lifLayer.getLayer());
                 ignoreIndexSet.add(ignoreIndex);

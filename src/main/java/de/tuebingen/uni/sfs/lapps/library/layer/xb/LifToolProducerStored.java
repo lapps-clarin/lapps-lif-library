@@ -26,7 +26,7 @@ import org.lappsgrid.vocabulary.Metadata;
  *
  * @author felahi the function
  */
-public class AnnotationLayerFinderStored implements AnnotationLayerFinder {
+public class LifToolProducerStored implements AnnotationLayerFinder {
 
     private Set<String> metadataInfoInLayers = new HashSet<String>();
     private Set<String> annotationInfoInLayers = new HashSet<String>();
@@ -37,7 +37,7 @@ public class AnnotationLayerFinderStored implements AnnotationLayerFinder {
     private String producer = null;
     private String tool = null;
 
-    public AnnotationLayerFinderStored(Map metadataMap) throws LifException {
+    public LifToolProducerStored(Map metadataMap) throws LifException {
         this.metadataMap = metadataMap;
         this.processUrls();
     }

@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.annotation.xb;
 
-import de.tuebingen.uni.sfs.lapps.library.layer.xb.AnnotationLayersStored;
+import de.tuebingen.uni.sfs.lapps.library.layer.xb.LifAnnotationLayerFinderStored;
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModelLif;
 import java.util.List;
@@ -43,37 +43,37 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of convertModel method, of class AnnotationLayersStored.
+     * Test of convertModel method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testConvertModel() throws Exception {
         System.out.println("convertModel");
         DataModelLif lifDataModel = null;
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         instance.convertModel(lifDataModel);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of findAnnotationLayers method, of class AnnotationLayersStored.
+     * Test of findAnnotationLayers method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testFindAnnotationLayers() throws Exception {
         System.out.println("findAnnotationLayers");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         instance.findAnnotationLayers();
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getLanguage method, of class AnnotationLayersStored.
+     * Test of getLanguage method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testGetLanguage() throws VocabularyMappingException {
         System.out.println("getLanguage");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         String expResult = "";
         String result = instance.getLanguage();
         assertEquals(expResult, result);
@@ -82,12 +82,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of getText method, of class AnnotationLayersStored.
+     * Test of getText method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testGetText() throws VocabularyMappingException {
         System.out.println("getText");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         String expResult = "";
         String result = instance.getText();
         assertEquals(expResult, result);
@@ -96,12 +96,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of getLayers method, of class AnnotationLayersStored.
+     * Test of getLayers method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testGetLayers() throws VocabularyMappingException {
         System.out.println("getLayers");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         List<String> expResult = null;
         List<String> result = instance.getLayers();
         assertEquals(expResult, result);
@@ -110,12 +110,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of isLanguage method, of class AnnotationLayersStored.
+     * Test of isLanguage method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testIsLanguage() throws VocabularyMappingException {
         System.out.println("isLanguage");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         boolean expResult = false;
         boolean result = instance.isLanguage();
         assertEquals(expResult, result);
@@ -124,12 +124,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of isTextLayer method, of class AnnotationLayersStored.
+     * Test of isTextLayer method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testIsTextLayer() throws VocabularyMappingException {
         System.out.println("isTextLayer");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         boolean expResult = false;
         boolean result = instance.isTextLayer();
         assertEquals(expResult, result);
@@ -138,12 +138,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of isTokenLayer method, of class AnnotationLayersStored.
+     * Test of isTokenLayer method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testIsTokenLayer() throws VocabularyMappingException {
         System.out.println("isTokenLayer");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         boolean expResult = false;
         boolean result = instance.isTokenLayer();
         assertEquals(expResult, result);
@@ -152,12 +152,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of isPosLayer method, of class AnnotationLayersStored.
+     * Test of isPosLayer method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testIsPosLayer() throws VocabularyMappingException {
         System.out.println("isPosLayer");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         boolean expResult = false;
         boolean result = instance.isPosLayer();
         assertEquals(expResult, result);
@@ -166,12 +166,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of isLemmaLayer method, of class AnnotationLayersStored.
+     * Test of isLemmaLayer method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testIsLemmaLayer() throws VocabularyMappingException {
         System.out.println("isLemmaLayer");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         boolean expResult = false;
         boolean result = instance.isLemmaLayer();
         assertEquals(expResult, result);
@@ -180,12 +180,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of isDependencyLayer method, of class AnnotationLayersStored.
+     * Test of isDependencyLayer method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testIsDependencyLayer() throws VocabularyMappingException {
         System.out.println("isDependencyLayer");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         boolean expResult = false;
         boolean result = instance.isDependencyLayer();
         assertEquals(expResult, result);
@@ -194,12 +194,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of isConstituentLayer method, of class AnnotationLayersStored.
+     * Test of isConstituentLayer method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testIsConstituentLayer() throws VocabularyMappingException {
         System.out.println("isConstituentLayer");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         boolean expResult = false;
         boolean result = instance.isConstituentLayer();
         assertEquals(expResult, result);
@@ -208,12 +208,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of isSenetenceLayer method, of class AnnotationLayersStored.
+     * Test of isSenetenceLayer method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testIsSenetenceLayer() throws VocabularyMappingException {
         System.out.println("isSenetenceLayer");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         boolean expResult = false;
         boolean result = instance.isSenetenceLayer();
         assertEquals(expResult, result);
@@ -222,12 +222,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of isTokenPosLayer method, of class AnnotationLayersStored.
+     * Test of isTokenPosLayer method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testIsTokenPosLayer() throws VocabularyMappingException {
         System.out.println("isTokenPosLayer");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         boolean expResult = false;
         boolean result = instance.isTokenPosLayer();
         assertEquals(expResult, result);
@@ -236,12 +236,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of isCorferenceLayer method, of class AnnotationLayersStored.
+     * Test of isCorferenceLayer method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testIsCorferenceLayer() throws VocabularyMappingException {
         System.out.println("isCorferenceLayer");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         boolean expResult = false;
         boolean result = instance.isCorferenceLayer();
         assertEquals(expResult, result);
@@ -250,12 +250,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of isNamedEntityLayer method, of class AnnotationLayersStored.
+     * Test of isNamedEntityLayer method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testIsNamedEntityLayer() throws VocabularyMappingException {
         System.out.println("isNamedEntityLayer");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         boolean expResult = false;
         boolean result = instance.isNamedEntityLayer();
         assertEquals(expResult, result);
@@ -264,12 +264,12 @@ public class AnnotationLayersStoredTest {
     }
 
     /**
-     * Test of isChunkLayer method, of class AnnotationLayersStored.
+     * Test of isChunkLayer method, of class LifAnnotationLayerFinderStored.
      */
     @Ignore
     public void testIsChunkLayer() throws VocabularyMappingException {
         System.out.println("isChunkLayer");
-        AnnotationLayersStored instance = new AnnotationLayersStored();
+        LifAnnotationLayerFinderStored instance = new LifAnnotationLayerFinderStored();
         boolean expResult = false;
         boolean result = instance.isChunkLayer();
         assertEquals(expResult, result);

@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.utils.xb;
 
-import de.tuebingen.uni.sfs.lapps.library.layer.xb.AnnotationLayersStored;
+import de.tuebingen.uni.sfs.lapps.library.layer.xb.LifAnnotationLayerFinderStored;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModelLif;
 import java.io.BufferedOutputStream;
@@ -27,7 +27,7 @@ public class ProcessUtils {
     private static final String TEMP_FILE_PREFIX = "ne-output-temp";
     private static final String TEMP_FILE_SUFFIX = ".xml";
 
-    public static AnnotationLayersStored fileProcessing(File inputFile) throws IOException, Exception {
+    public static LifAnnotationLayerFinderStored fileProcessing(File inputFile) throws IOException, Exception {
         FileInputStream input = null;
         OutputStream tempOutputData = null;
         File tempOutputFile = null;
@@ -61,8 +61,8 @@ public class ProcessUtils {
         }
     }
 
-    private static AnnotationLayersStored process(final InputStream input, OutputStream output) throws Exception {
-        AnnotationLayersStored tool = new AnnotationLayersStored();
+    private static LifAnnotationLayerFinderStored process(final InputStream input, OutputStream output) throws Exception {
+        LifAnnotationLayerFinderStored tool = new LifAnnotationLayerFinderStored();
         try {
             DataModelLif dataModelLif = new DataModelLif(input);
             if (dataModelLif.isValid()) {

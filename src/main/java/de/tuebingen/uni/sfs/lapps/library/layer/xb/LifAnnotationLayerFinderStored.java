@@ -10,17 +10,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lappsgrid.discriminator.Discriminators;
 
-public class AnnotationLayersStored implements AnnotationLayers {
+public class LifAnnotationLayerFinderStored implements AnnotationLayers {
 
     private DataModelLif givenDataModel = null;
     private String LANG_EN = "en";
     private String text = null;
     private List<String> layers = new ArrayList<String>();
 
-    public AnnotationLayersStored() throws VocabularyMappingException {
+    public LifAnnotationLayerFinderStored() throws VocabularyMappingException {
     }
 
-    public AnnotationLayersStored(DataModelLif lifDataModel) throws VocabularyMappingException, Exception {
+    public LifAnnotationLayerFinderStored(DataModelLif lifDataModel) throws VocabularyMappingException, Exception {
         this.convertModel(lifDataModel);
     }
 
@@ -29,9 +29,9 @@ public class AnnotationLayersStored implements AnnotationLayers {
         try {
             findAnnotationLayers();
         } catch (VocabularyMappingException conExp) {
-            Logger.getLogger(AnnotationLayersStored.class.getName()).log(Level.SEVERE, null, conExp);
+            Logger.getLogger(LifAnnotationLayerFinderStored.class.getName()).log(Level.SEVERE, null, conExp);
         } catch (Exception vocExp) {
-            Logger.getLogger(AnnotationLayersStored.class.getName()).log(Level.SEVERE, null, vocExp);
+            Logger.getLogger(LifAnnotationLayerFinderStored.class.getName()).log(Level.SEVERE, null, vocExp);
         }
     }
 
