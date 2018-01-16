@@ -1,7 +1,7 @@
-package de.tuebingen.uni.sfs.lapps.library.annotation.xb;
+package de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb;
 
-import de.tuebingen.uni.sfs.lapps.library.annotation.api.AnnotationLayers;
-import de.tuebingen.uni.sfs.lapps.library.annotation.api.AnnotationLayerFinder;
+import de.tuebingen.uni.sfs.lapps.library.annotation.layer.api.AnnotationLayers;
+import de.tuebingen.uni.sfs.lapps.library.annotation.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModelLif;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class AnnotationLayersStored implements AnnotationLayers {
         }
     }
 
-    protected void findAnnotationLayers() throws VocabularyMappingException, Exception {
+    public void findAnnotationLayers() throws VocabularyMappingException, Exception {
         for (Integer layerIndex : givenDataModel.getSortedLayer()) {
             AnnotationLayerFinder lifLayer = givenDataModel.getIndexAnnotationLayer(layerIndex);
             layers.add(lifLayer.getLayer());

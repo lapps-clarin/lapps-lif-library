@@ -6,7 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.library.annotation.api;
 
 import de.tuebingen.uni.sfs.lapps.library.annotation.api.LifToken;
-import de.tuebingen.uni.sfs.lapps.library.annotation.xb.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb.AnnotationInterpreter;
 import java.util.Map;
 
 /**

@@ -7,10 +7,10 @@ package de.tuebingen.uni.sfs.lapps.library.model;
 
 import de.tuebingen.uni.sfs.lapps.library.profile.LIFProfilerFinder;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModel;
-import de.tuebingen.uni.sfs.lapps.library.annotation.xb.AnnotationLayerFinderStored;
-import de.tuebingen.uni.sfs.lapps.library.annotation.xb.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb.AnnotationLayerFinderStored;
+import de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.library.utils.xb.ValidityCheckerStored;
-import de.tuebingen.uni.sfs.lapps.library.annotation.api.AnnotationLayerFinder;
+import de.tuebingen.uni.sfs.lapps.library.annotation.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.constants.LifVocabularies;
 import java.io.IOException;

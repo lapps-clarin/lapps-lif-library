@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.annotation.api;
+package de.tuebingen.uni.sfs.lapps.library.annotation.layer.api;
 
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
 

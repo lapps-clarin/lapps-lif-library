@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.annotation.xb;
+package de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb;
 
-import de.tuebingen.uni.sfs.lapps.library.annotation.api.AnnotationLayerFinder;
+import de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.library.annotation.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.library.utils.xb.ValidityCheckerStored;
 import de.tuebingen.uni.sfs.lapps.library.utils.xb.DuplicateChecker;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;

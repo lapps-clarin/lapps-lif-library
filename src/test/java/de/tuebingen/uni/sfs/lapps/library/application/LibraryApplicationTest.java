@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.application;
 
-import de.tuebingen.uni.sfs.lapps.library.annotation.xb.AnnotationLayersStored;
+import de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb.AnnotationLayersStored;
 import de.tuebingen.uni.sfs.lapps.library.utils.xb.ProcessUtils;
 import java.io.File;
 import org.junit.Assert;
