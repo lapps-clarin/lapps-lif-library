@@ -103,7 +103,7 @@ public class AnnotationLayersStored implements AnnotationLayers {
 
     @Override
     public boolean isDependencyLayer() {
-        if (layers.contains(Discriminators.Uri.DEPENDENCY)) {
+        if (layers.contains(Discriminators.Uri.DEPENDENCY_STRUCTURE)) {
             return true;
         }
         return false;

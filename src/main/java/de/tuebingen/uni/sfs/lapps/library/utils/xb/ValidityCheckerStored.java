@@ -7,7 +7,7 @@ package de.tuebingen.uni.sfs.lapps.library.utils.xb;
 
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.constants.LifVocabularies;
-import de.tuebingen.uni.sfs.lapps.library.profile.JsonProcessor;
+import de.tuebingen.uni.sfs.lapps.library.profile.JsonProfile;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -38,7 +38,7 @@ public class ValidityCheckerStored implements ValidityChecker {
     public static final String NO_ANNOTATION_FOUND = "LIF ERROR: The view is empty!!";
     public static final String NO_ANNOTATION_IN_METADATA = "The metadata defination is wrong!!";
 
-    private JsonProcessor jsonObject = null;
+    private JsonProfile jsonObject = null;
     private List<View> views = new ArrayList<View>();
     private Annotation annotation = null;
 
@@ -46,7 +46,7 @@ public class ValidityCheckerStored implements ValidityChecker {
 
     }
 
-    public ValidityCheckerStored(JsonProcessor jsonObject) {
+    public ValidityCheckerStored(JsonProfile jsonObject) {
         this.jsonObject = jsonObject;
     }
 

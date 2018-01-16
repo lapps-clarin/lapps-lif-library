@@ -27,7 +27,7 @@ public class LIFProfiler  {
 
     }
 
-    public LIFProfiler(String discriminator, JsonProcessor jsonObject) {
+    public LIFProfiler(String discriminator, JsonProfile jsonObject) {
         this.discriminator = discriminator;
         this.container = Serializer.parse(jsonObject.getJsonString(), Container.class);
     }

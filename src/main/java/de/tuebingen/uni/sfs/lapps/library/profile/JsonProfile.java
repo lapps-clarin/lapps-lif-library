@@ -20,19 +20,19 @@ import java.util.logging.Logger;
  *
  * @author felahi
  */
-public class JsonProcessor implements InputOutputChecker {
+public class JsonProfile implements InputOutputChecker {
 
     private String jsonString = null;
     private Map<String, Object> jsonMap = new HashMap<String, Object>();
     private boolean valid = true;
 
-    public JsonProcessor(String jsonString) {
+    public JsonProfile(String jsonString) {
         this.jsonString = jsonString;
         try {
             this.jsonMap = conversionJSONMapToString();
         } catch (Exception ex) {
             valid = false;
-            Logger.getLogger(JsonProcessor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JsonProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
