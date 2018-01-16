@@ -100,7 +100,6 @@ public class LibraryApplicationTest {
         File inputFile = new File(classLoader.getResource(DEPENDENCY_EXAMPLE).getFile());
         if (inputFile.getName().contains(FILE_LIF)) {
             AnnotationLayersStored tool = ProcessUtils.fileProcessing(inputFile);
-            System.out.println(tool.getLayers().toString());
             if (tool.isDependencyLayer()) {
                 Assert.assertEquals(tool.isDependencyLayer(), true);
                 System.out.println("DependencyLayer exists:" + tool.getLayers().toString());
@@ -109,7 +108,7 @@ public class LibraryApplicationTest {
 
     }
 
-    @Ignore
+    @Test
     public void testConstituentLayer() throws Exception {
         File inputFile = new File(classLoader.getResource(CONTSTITUENT_EXAMPLE).getFile());
         if (inputFile.getName().contains(FILE_LIF)) {

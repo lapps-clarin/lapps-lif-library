@@ -111,7 +111,7 @@ public class AnnotationLayersStored implements AnnotationLayers {
 
     @Override
     public boolean isConstituentLayer() {
-        if (layers.contains(Discriminators.Uri.CONSTITUENT)) {
+        if (layers.contains(Discriminators.Uri.PHRASE_STRUCTURE)) {
             return true;
         }
         return false;
