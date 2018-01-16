@@ -8,7 +8,7 @@ package de.tuebingen.uni.sfs.lapps.library.annotation.xb;
 import de.tuebingen.uni.sfs.lapps.library.annotation.api.LifMarkable;
 import de.tuebingen.uni.sfs.lapps.library.annotation.api.LifReference;
 import de.tuebingen.uni.sfs.lapps.library.annotation.api.LifReferenceLayer;
-import de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.library.layer.xb.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import java.util.ArrayList;
 import java.util.HashMap;

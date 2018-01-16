@@ -6,7 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.library.annotation.xb;
 
 
-import de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.library.layer.xb.AnnotationInterpreter;
 import java.util.ArrayList;
 import java.util.List;
 

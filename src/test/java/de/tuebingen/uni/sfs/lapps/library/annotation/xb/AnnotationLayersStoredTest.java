@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.annotation.xb;
 
-import de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb.AnnotationLayersStored;
+import de.tuebingen.uni.sfs.lapps.library.layer.xb.AnnotationLayersStored;
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModelLif;
 import java.util.List;

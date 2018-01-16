@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb;
+package de.tuebingen.uni.sfs.lapps.library.layer.xb;
 
-import de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb.AnnotationInterpreter;
-import de.tuebingen.uni.sfs.lapps.library.annotation.layer.api.AnnotationLayerFinder;
-import de.tuebingen.uni.sfs.lapps.library.utils.xb.ValidityCheckerStored;
-import de.tuebingen.uni.sfs.lapps.library.utils.xb.DuplicateChecker;
+import de.tuebingen.uni.sfs.lapps.library.layer.api.AnnotationLayerFinder;
+import de.tuebingen.uni.sfs.lapps.library.layer.xb.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
+import de.tuebingen.uni.sfs.lapps.library.utils.xb.DuplicateChecker;
+import de.tuebingen.uni.sfs.lapps.library.utils.xb.ValidityCheckerStored;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -26,7 +26,7 @@ import org.lappsgrid.vocabulary.Metadata;
  *
  * @author felahi the function
  */
-public class AnnotationLayerFinderStored implements AnnotationLayerFinder {
+public class LifAnnotationLayersStored implements AnnotationLayerFinder {
 
     private Set<String> metadataInfoInLayers = new HashSet<String>();
     private Set<String> annotationInfoInLayers = new HashSet<String>();
@@ -37,7 +37,7 @@ public class AnnotationLayerFinderStored implements AnnotationLayerFinder {
     private String producer = null;
     private String tool = null;
 
-    public AnnotationLayerFinderStored(Map metadataMap) throws LifException {
+    public LifAnnotationLayersStored(Map metadataMap) throws LifException {
         this.metadataMap = metadataMap;
         this.processUrls();
     }
@@ -53,9 +53,9 @@ public class AnnotationLayerFinderStored implements AnnotationLayerFinder {
             }
         }
         if (metadataInfoInLayers.size() == 1) {
-            getLayerFromSingleUrl();
+            setLayerFromSingleUrl();
         } else if (metadataInfoInLayers.size() > 1) {
-            getLayerFromMultipleUrls();
+            setLayerFromMultipleUrls();
         }
     }
 
@@ -89,35 +89,16 @@ public class AnnotationLayerFinderStored implements AnnotationLayerFinder {
         return annotationInterpreterList;
     }
 
-    /*private void getLayerFromSingleUrl() {
+    private void setLayerFromSingleUrl() {
         this.lifLayer = metadataInfoInLayers.iterator().next();
     }
 
-    private void getLayerFromMultipleUrls() {
+    private void setLayerFromMultipleUrls() {
         for (String url : metadataInfoInLayers) {
             if (url.equalsIgnoreCase(Discriminators.Uri.DEPENDENCY_STRUCTURE)) {
                 this.lifLayer = Discriminators.Uri.DEPENDENCY_STRUCTURE;
             } else if (url.equalsIgnoreCase(Discriminators.Uri.PHRASE_STRUCTURE)) {
                 this.lifLayer = Discriminators.Uri.PHRASE_STRUCTURE;
-            } else if (url.equalsIgnoreCase(Discriminators.Uri.COREF)) {
-                this.lifLayer = Discriminators.Uri.COREF;
-            }
-        }
-    }*/
-    @Override
-    public void getLayerFromSingleUrl() {
-        this.lifLayer = metadataInfoInLayers.iterator().next();
-    }
-
-    @Override
-    public void getLayerFromMultipleUrls() {
-        for (String url : metadataInfoInLayers) {
-            if (url.equalsIgnoreCase(Discriminators.Uri.DEPENDENCY_STRUCTURE)) {
-                this.lifLayer = Discriminators.Uri.DEPENDENCY_STRUCTURE;
-            } else if (url.equalsIgnoreCase(Discriminators.Uri.PHRASE_STRUCTURE)) {
-                this.lifLayer = Discriminators.Uri.PHRASE_STRUCTURE;
-            } else if (url.equalsIgnoreCase(Discriminators.Uri.COREF)) {
-                this.lifLayer = Discriminators.Uri.COREF;
             }
         }
     }
@@ -173,5 +154,13 @@ public class AnnotationLayerFinderStored implements AnnotationLayerFinder {
         } else {
             throw new VocabularyMappingException("LIF producer field is not found");
         }
+    }
+
+    public void getLayerFromSingleUrl() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void getLayerFromMultipleUrls() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

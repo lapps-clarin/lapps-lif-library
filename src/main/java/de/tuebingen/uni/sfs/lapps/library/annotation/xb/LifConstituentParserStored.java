@@ -7,7 +7,7 @@ package de.tuebingen.uni.sfs.lapps.library.annotation.xb;
 
 import de.tuebingen.uni.sfs.lapps.library.annotation.api.LifConstituentParser;
 import de.tuebingen.uni.sfs.lapps.library.annotation.api.LifParseAnnotationProcessing;
-import de.tuebingen.uni.sfs.lapps.library.annotation.layer.xb.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.library.layer.xb.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.library.annotation.xb.LifConstituent;
 import de.tuebingen.uni.sfs.lapps.library.annotation.xb.LifConstituentStructure;
 import de.tuebingen.uni.sfs.lapps.library.constants.LifVocabularies;
