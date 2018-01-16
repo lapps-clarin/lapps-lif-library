@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.annotation.lif.api;
+package de.tuebingen.uni.sfs.lapps.library.annotation.api;
 
 import de.tuebingen.uni.sfs.lapps.library.annotation.xb.AnnotationInterpreter;
 import java.util.List;
