@@ -5,6 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.annotation.api;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -12,6 +13,6 @@ import java.util.Set;
  * @author Mohammad Fazleh Elahi
  */
 public interface LifMarkable {
-    public Set<String> getTargets();
+    public List<String> getTargets();
     
 }

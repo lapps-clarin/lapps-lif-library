@@ -30,8 +30,8 @@ public class LifMarkableStored implements LifMarkable {
         this.features = features;
     }
 
-    public Set<String> getTargets() {
-        return (Set<String>) this.features.get(Features.Markable.TARGETS);
+    public List<String> getTargets() {
+        return (List<String>) this.features.get(Features.Markable.TARGETS);
     }
 
 }
