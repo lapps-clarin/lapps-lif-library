@@ -9,7 +9,6 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.tuebingen.uni.sfs.lapps.library.utils.api.InputOutputChecker;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,7 +19,7 @@ import java.util.logging.Logger;
  *
  * @author felahi
  */
-public class JsonProfile implements InputOutputChecker {
+public class JsonProfile {
 
     private String jsonString = null;
     private Map<String, Object> jsonMap = new HashMap<String, Object>();
