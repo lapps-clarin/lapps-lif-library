@@ -10,7 +10,7 @@ import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifParseAnnotationProcessi
 import de.tuebingen.uni.sfs.lapps.core.layer.impl.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.core.annotation.impl.LifConstituent;
 import de.tuebingen.uni.sfs.lapps.core.annotation.impl.LifConstituentStructure;
-import de.tuebingen.uni.sfs.lapps.constants.LifVocabularies;
+import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -123,7 +123,7 @@ public class LifConstituentParserStored implements LifConstituentParser, LifPars
         List<LifConstituent> constituentLifConstituents = this.constituentParses.get(parseIndex);
 
         for (LifConstituent lifConstituent : constituentLifConstituents) {
-            if (lifConstituent.getCatFunction().contains(LifVocabularies.LIF.TreeSets.CONSTITUENT_ROOT)) {
+            if (lifConstituent.getCatFunction().contains(LifConnstant.LIF.TreeSets.CONSTITUENT_ROOT)) {
                 flag = true;
                 return lifConstituent;
             }

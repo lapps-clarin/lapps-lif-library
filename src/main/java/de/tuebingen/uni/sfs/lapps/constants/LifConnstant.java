@@ -14,9 +14,9 @@ import org.lappsgrid.discriminator.Discriminators;
  *
  * @author felahi
  */
-public class LifVocabularies {
+public class LifConnstant {
 
-    private LifVocabularies() {
+    private LifConnstant() {
     }
 
     public static class GeneralParameters {
@@ -24,27 +24,6 @@ public class LifVocabularies {
         public static final String UNICODE = "UTF-8";
         public static final String PARAMETER_SEPERATOR_REG = "\\=";
         public static final String PARAMETER_SEPERATOR = "=";
-    }
-
-    public static class TCF {
-
-        public static class TcfTagSets {
-
-            public static final String DEPENDENCY_TAGSETS = "stts";
-            public static final String CONSTITUENT_TAGSETS = "tigertb";
-            public static final String POS_TAGSETS = "penntb";
-        }
-
-        public static class TcfTreeSets {
-
-            public static final String CONSTITUENT_ROOT = "ROOT";
-        }
-
-        public static class TcfVocabularies {
-
-            public static final String DEFAULT_LANGUAGE = "en";
-        }
-
     }
 
     public static class LIF {

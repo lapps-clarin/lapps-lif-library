@@ -12,7 +12,7 @@ import de.tuebingen.uni.sfs.lapps.core.layer.impl.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifValidityCheckerStored;
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import de.tuebingen.uni.sfs.lapps.constants.LifVocabularies;
+import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;
 import de.tuebingen.uni.sfs.lapps.exceptions.JSONValidityException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -47,7 +47,7 @@ public class LifAnnotationProcess extends Process {
 
     @Override
     public void inputDataProcessing(InputStream is) throws IOException, JSONValidityException, LifException {
-        fileString = IOUtils.toString(is, LifVocabularies.GeneralParameters.UNICODE);
+        fileString = IOUtils.toString(is, LifConnstant.GeneralParameters.UNICODE);
         LIFProfilerFinder lifContainerFinder = lifContainerFinder = new LIFProfilerFinder(fileString);
         lifContainer = lifContainerFinder.getMascDocument().getContainer();
         extractAndSortViews();

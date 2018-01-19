@@ -5,6 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.exceptions;
 
+import de.tuebingen.uni.sfs.lapps.constants.ErrorMessage;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 
 
