@@ -16,21 +16,21 @@ import org.junit.Test;
  *
  * @author felahi
  */
-public class LibraryApplicationTest {
+public class EachLayerInEachFileTest {
 
-    private String CORFERENCE_EXAMPLE = "data/lif-corferenceLayer.json";
-    private String CONTSTITUENT_EXAMPLE = "data/lif-constituentLayer.json";
-    private String DEPENDENCY_EXAMPLE = "data/lif-dependencyLayer.json";
-    private String MULTILAYER_EXAMPLE = "data/lif-multipleLayers.json";
-    private String NAMEENTITY_EXAMPLE = "data/lif-nameEntittyLayer.json";
-    private String SENTENCE_EXAMPLE = "data/lif-sentenceLayer.json";
-    private String POS_EXAMPLE = "data/lif-posLayer.json";
-    private String TEXT_EXAMPLE = "data/lif-textLayer.json";
-    private String TOKEN_EXAMPLE = "data/lif-tokenLayer.json";
+    private String CORFERENCE_EXAMPLE = "lif-corferenceLayer.json";
+    private String CONTSTITUENT_EXAMPLE = "lif-constituentLayer.json";
+    private String DEPENDENCY_EXAMPLE = "lif-dependencyLayer.json";
+    private String MULTILAYER_EXAMPLE = "lif-multipleLayers.json";
+    private String NAMEENTITY_EXAMPLE = "lif-nameEntittyLayer.json";
+    private String SENTENCE_EXAMPLE = "lif-sentenceLayer.json";
+    private String POS_EXAMPLE = "lif-posLayer.json";
+    private String TEXT_EXAMPLE = "lif-textLayer.json";
+    private String TOKEN_EXAMPLE = "lif-tokenLayer.json";
     private String FILE_LIF = "json";
     private ClassLoader classLoader = getClass().getClassLoader();
 
-    public LibraryApplicationTest() {
+    public EachLayerInEachFileTest() {
     }
 
     @Test

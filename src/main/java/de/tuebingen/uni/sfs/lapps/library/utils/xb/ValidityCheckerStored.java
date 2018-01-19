@@ -134,7 +134,7 @@ public class ValidityCheckerStored implements ValidityChecker {
         } else if (annotationInfoInLayers.contains(layer)) {
             return true;
         } else {
-            throw new LifException("The metadata informatiom is wrong!!");
+            throw new LifException("The metadata (or @type) informatiom."+ " Please look into the "+layer+" layer!!");
         }
     }
 
