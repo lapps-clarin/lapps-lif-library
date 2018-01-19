@@ -10,7 +10,6 @@ import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifValidityCheckerStored;
 import de.tuebingen.uni.sfs.lapps.utils.DuplicateChecker;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import de.tuebingen.uni.sfs.lapps.exceptions.VocabularyMappingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -135,7 +134,7 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
         return lifValidityCheck.isMetadataLayerValid(this.lifLayer, this.metadataInfoInLayers, this.annotationInfoInLayers);
     }
 
-    public boolean isToolExists(String tool) throws VocabularyMappingException {
+    public boolean isToolExists(String tool) throws LifException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -143,23 +142,23 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
         return this.lifLayer;
     }
 
-    public String getTool(String tool) throws VocabularyMappingException {
+    public String getTool(String tool) throws LifException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public String getTagSetName(String tool) throws VocabularyMappingException {
+    public String getTagSetName(String tool) throws LifException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public String getVocabularies(String tool, String key) throws VocabularyMappingException {
+    public String getVocabularies(String tool, String key) throws LifException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public String getTool() throws VocabularyMappingException {
+    public String getTool() throws LifException {
         if (tool != null) {
             return tool;
         } else {
-            throw new VocabularyMappingException("LIF tool field is not found");
+            throw new LifException("LIF tool field is not found");
         }
     }
 
@@ -167,11 +166,11 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
         return lifAnnotations;
     }
 
-    public String getProducer() throws VocabularyMappingException {
+    public String getProducer() throws LifException {
         if (producer != null) {
             return producer;
         } else {
-            throw new VocabularyMappingException("LIF producer field is not found");
+            throw new LifException("LIF producer field is not found");
         }
     }
 }

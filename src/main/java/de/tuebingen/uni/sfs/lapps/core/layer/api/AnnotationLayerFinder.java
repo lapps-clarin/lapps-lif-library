@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.layer.api;
 
-import de.tuebingen.uni.sfs.lapps.exceptions.VocabularyMappingException;
+import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 
 /**
  *
@@ -13,19 +13,19 @@ import de.tuebingen.uni.sfs.lapps.exceptions.VocabularyMappingException;
  */
 public interface AnnotationLayerFinder {
 
-    public boolean isLayerExists() throws VocabularyMappingException;
+    public boolean isLayerExists() throws LifException;
 
-    public boolean isToolExists(String tool) throws VocabularyMappingException;
+    public boolean isToolExists(String tool) throws LifException;
 
     public String getLayer();
 
-    public String getTool() throws VocabularyMappingException;
+    public String getTool() throws LifException;
 
-    public String getProducer() throws VocabularyMappingException;
+    public String getProducer() throws LifException;
 
-    public String getTagSetName(String tool) throws VocabularyMappingException;
+    public String getTagSetName(String tool) throws LifException;
 
-    public String getVocabularies(String tool, String key) throws VocabularyMappingException;
+    public String getVocabularies(String tool, String key) throws LifException;
 
     public void getLayerFromSingleUrl();
 

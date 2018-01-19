@@ -3,7 +3,6 @@ package de.tuebingen.uni.sfs.lapps.core.layer.impl;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayers;
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
-import de.tuebingen.uni.sfs.lapps.exceptions.VocabularyMappingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,25 +16,23 @@ public class LifAnnotationLayerFinderStored implements AnnotationLayers {
     private String text = null;
     private List<String> layers = new ArrayList<String>();
 
-    public LifAnnotationLayerFinderStored() throws LifException, VocabularyMappingException {
+    public LifAnnotationLayerFinderStored() throws LifException {
     }
 
-    public LifAnnotationLayerFinderStored(LifAnnotationProcess lifDataModel) throws VocabularyMappingException, Exception {
+    public LifAnnotationLayerFinderStored(LifAnnotationProcess lifDataModel) throws LifException {
         this.convertModel(lifDataModel);
     }
 
-    public void convertModel(LifAnnotationProcess lifDataModel) throws LifException, VocabularyMappingException {
+    public void convertModel(LifAnnotationProcess lifDataModel) throws LifException, LifException {
         givenDataModel = lifDataModel;
         try {
             findAnnotationLayers();
-        } catch (VocabularyMappingException conExp) {
-            Logger.getLogger(LifAnnotationLayerFinderStored.class.getName()).log(Level.SEVERE, null, conExp);
         } catch (LifException lifExp) {
             Logger.getLogger(LifAnnotationLayerFinderStored.class.getName()).log(Level.SEVERE, null, lifExp);
         }
     }
 
-    public void findAnnotationLayers() throws LifException, VocabularyMappingException {
+    public void findAnnotationLayers() throws LifException, LifException {
         for (Integer layerIndex : givenDataModel.getSortedLayer()) {
             AnnotationLayerFinder lifLayer = givenDataModel.getIndexAnnotationLayer(layerIndex);
             layers.add(lifLayer.getLayer());
