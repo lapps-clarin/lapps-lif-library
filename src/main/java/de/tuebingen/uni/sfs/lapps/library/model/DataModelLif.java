@@ -5,14 +5,16 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.model;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import de.tuebingen.uni.sfs.lapps.library.profile.LIFProfilerFinder;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModel;
 import de.tuebingen.uni.sfs.lapps.library.layer.xb.LifToolProducerStored;
 import de.tuebingen.uni.sfs.lapps.library.layer.xb.AnnotationInterpreter;
-import de.tuebingen.uni.sfs.lapps.library.utils.xb.ValidityCheckerStored;
+import de.tuebingen.uni.sfs.lapps.library.exception.LifValidityCheckerStored;
 import de.tuebingen.uni.sfs.lapps.library.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.constants.LifVocabularies;
+import de.tuebingen.uni.sfs.lapps.library.exception.JSONValidityException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -41,9 +43,9 @@ public class DataModelLif extends DataModel {
     public Container lifContainer = null;
     private String fileString = null;
     private boolean modelValidity = false;
-    private ValidityCheckerStored lifValidityCheck = new ValidityCheckerStored();
+    private LifValidityCheckerStored lifValidityCheck = new LifValidityCheckerStored();
 
-    public DataModelLif(InputStream input) throws LifException, IOException {
+    public DataModelLif(InputStream input)  {
         this.inputDataProcessing(input);
     }
 
@@ -55,18 +57,20 @@ public class DataModelLif extends DataModel {
             lifContainer = lifContainerFinder.getMascDocument().getContainer();
             extractAndSortViews();
             modelValidity = true;
-        } catch (LifException ex) {
-            modelValidity = false;
-            Logger.getLogger(DataModelLif.class.getName()).log(Level.SEVERE, null, ex);
-            return;
         } catch (IOException ex) {
             modelValidity = false;
-            Logger.getLogger(DataModelLif.class.getName()).log(Level.SEVERE, null, ex);
-            return;
-        } catch (Exception ex) {
+             ex.printStackTrace(System.out);
+            Logger.getLogger(DataModelLif.class.getName()).log(Level.SEVERE, null, "File to String failes!!");
+        }
+        catch (JSONValidityException ex) {
             modelValidity = false;
-            Logger.getLogger(DataModelLif.class.getName()).log(Level.SEVERE, null, ex);
-            return;
+             ex.printStackTrace(System.out);
+            Logger.getLogger(DataModelLif.class.getName()).log(Level.SEVERE, null,ex.getMessage());
+        }  
+        catch (LifException ex) {
+            ex.printStackTrace(System.out);
+            modelValidity = false;
+            Logger.getLogger(DataModelLif.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         }
     }
 
@@ -93,8 +97,8 @@ public class DataModelLif extends DataModel {
             if (!ignoreViewsIndex.contains(index)) {
                 LifToolProducerStored lifLayer = new LifToolProducerStored(view.getMetadata());
                 List<AnnotationInterpreter> lifCharOffsetObjectList = lifLayer.processAnnotations(view.getAnnotations());
-                if(!lifLayer.isLayerValid()){
-                     throw new LifException("The annotation layer is not valid!!"); 
+                if (!lifLayer.isLayerValid()) {
+                    throw new LifException("The annotation layer is not valid!!");
                 }
                 annotationLayerData.put(index, lifCharOffsetObjectList);
                 indexAnnotationLayer.put(index, lifLayer);
@@ -174,4 +178,3 @@ public class DataModelLif extends DataModel {
     }
 
 }
-

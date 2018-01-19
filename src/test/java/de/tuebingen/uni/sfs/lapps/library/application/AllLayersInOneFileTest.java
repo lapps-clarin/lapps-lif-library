@@ -8,7 +8,6 @@ package de.tuebingen.uni.sfs.lapps.library.application;
 import de.tuebingen.uni.sfs.lapps.library.layer.xb.LifAnnotationLayerFinderStored;
 import de.tuebingen.uni.sfs.lapps.library.utils.xb.ProcessUtils;
 import java.io.File;
-import org.junit.Assert;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;

@@ -5,34 +5,33 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.layer.api;
 
+import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
+
 /**
  *
  * @author felahi
  */
 public interface AnnotationLayers {
 
-    public boolean isLanguage();
+    public boolean isLanguage() throws LifException ;
 
-    public boolean isTextLayer();
+    public boolean isTextLayer() throws LifException ;
 
-    public boolean isTokenLayer();
+    public boolean isTokenLayer() throws LifException;
 
-    public boolean isSenetenceLayer();
+    public boolean isSenetenceLayer() throws LifException;
 
-    public boolean isPosLayer();
+    public boolean isPosLayer() throws LifException;
 
-    public boolean isLemmaLayer();
+    public boolean isLemmaLayer() throws LifException;
     
-    public boolean isNamedEntityLayer();
+    public boolean isNamedEntityLayer() throws LifException;
 
-    public boolean isDependencyLayer();
+    public boolean isDependencyLayer() throws LifException;
 
-    public boolean isConstituentLayer();
+    public boolean isConstituentLayer() throws LifException;
 
-    public boolean isTokenPosLayer();
+    public boolean isTokenPosLayer() throws LifException;
     
-    public boolean isCorferenceLayer();
-    
-     public boolean isChunkLayer();
-
+    public boolean isCorferenceLayer() throws LifException;
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.utils.xb;
+package de.tuebingen.uni.sfs.lapps.library.exception;
 
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.constants.LifVocabularies;
@@ -16,41 +16,26 @@ import java.util.Set;
 import org.lappsgrid.discriminator.Discriminators;
 import org.lappsgrid.serialization.lif.Annotation;
 import org.lappsgrid.serialization.lif.View;
-import de.tuebingen.uni.sfs.lapps.library.utils.api.ValidityChecker;
 
 /**
  *
  * @author felahi
  */
-public class ValidityCheckerStored implements ValidityChecker {
-
-    //document validity error messages...
-    public static final String MESSAGE_INVALID_JSON = "LIF ERROR: No Json key/value found!!";
-    public static final String MESSAGE_INVALID_LIF_DOCUMENT = "LIF ERROR: Either discriminator or payload is missing in LIF file!!";
-    public static final String MESSAGE_INVALID_LIF_TOPLEVEL = "LIF ERROR: the top level annotation (such as context,metadata,text,views) are missing!!";
-    public static final String MESSAGE_INVALID_LIF_TOPLEVEL_CONTEXT_MISSING = "LIF ERROR: one of the top level annotation (context) are missing!!";
-    public static final String MESSAGE_INVALID_LIF_TOPLEVEL_VIEWS_MISSING = "LIF ERROR: one of the top level annotation (view) are missing!!";
-    public static final String MESSAGE_INVALID_LIF_TOPLEVEL_METADATA_MISSING = "LIF ERROR: one of the top level annotation (metadata) are missing!!";
-    public static final String MESSAGE_INVALID_LIF_TOPLEVEL_TEXT_MISSING = "LIF ERROR: one of the top level annotation (text) are missing!!";
-    public static final String INVALID_JSON_FILE = "LIF ERROR:INVALID JSON FILE!!";
-
-    //annotation layers validity error messages...
-    public static final String NO_ANNOTATION_FOUND = "LIF ERROR: The view is empty!!";
-    public static final String NO_ANNOTATION_IN_METADATA = "The metadata defination is wrong!!";
+public class LifValidityCheckerStored implements LifValidityChecker {
 
     private JsonProfile jsonObject = null;
     private List<View> views = new ArrayList<View>();
     private Annotation annotation = null;
 
-    public ValidityCheckerStored() {
+    public LifValidityCheckerStored() {
 
     }
 
-    public ValidityCheckerStored(JsonProfile jsonObject) {
+    public LifValidityCheckerStored(JsonProfile jsonObject) {
         this.jsonObject = jsonObject;
     }
 
-    public ValidityCheckerStored(Annotation annotation) {
+    public LifValidityCheckerStored(Annotation annotation) {
         this.annotation = annotation;
     }
 
@@ -72,8 +57,14 @@ public class ValidityCheckerStored implements ValidityChecker {
         if (annotationSet.contains(LifVocabularies.LIF.Document.PAYLOAD_KEY_JSON)
                 && annotationSet.contains(LifVocabularies.LIF.Document.DISCRIMINATOR_KEY_JSON)) {
             return true;
+        } else if (!annotationSet.contains(LifVocabularies.LIF.Document.PAYLOAD_KEY_JSON)
+                && annotationSet.contains(LifVocabularies.LIF.Document.DISCRIMINATOR_KEY_JSON)) {
+            throw new LifException(MESSAGE_INVALID_LIF_PAYLOAD_DOCUMENT);
+        } else if (annotationSet.contains(LifVocabularies.LIF.Document.PAYLOAD_KEY_JSON)
+                && !annotationSet.contains(LifVocabularies.LIF.Document.DISCRIMINATOR_KEY_JSON)) {
+            throw new LifException(MESSAGE_INVALID_LIF_DISCRIMINATOR_DOCUMENT);
         } else {
-            throw new LifException(MESSAGE_INVALID_LIF_DOCUMENT);
+            throw new LifException(MESSAGE_INVALID_LIF_DISCRIMINATOR_DOCUMENT);
         }
     }
 
@@ -134,7 +125,7 @@ public class ValidityCheckerStored implements ValidityChecker {
         } else if (annotationInfoInLayers.contains(layer)) {
             return true;
         } else {
-            throw new LifException("The metadata (or @type) informatiom."+ " Please look into the "+layer+" layer!!");
+            throw new LifException("The metadata (or @type) informatiom." + " Please look into the " + layer + " layer!!");
         }
     }
 

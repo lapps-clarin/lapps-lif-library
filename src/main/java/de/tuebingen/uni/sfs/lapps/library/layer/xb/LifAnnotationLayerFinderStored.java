@@ -1,5 +1,6 @@
 package de.tuebingen.uni.sfs.lapps.library.layer.xb;
 
+import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.layer.api.AnnotationLayers;
 import de.tuebingen.uni.sfs.lapps.library.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
@@ -17,25 +18,25 @@ public class LifAnnotationLayerFinderStored implements AnnotationLayers {
     private String text = null;
     private List<String> layers = new ArrayList<String>();
 
-    public LifAnnotationLayerFinderStored() throws VocabularyMappingException {
+    public LifAnnotationLayerFinderStored() throws LifException, VocabularyMappingException {
     }
 
     public LifAnnotationLayerFinderStored(DataModelLif lifDataModel) throws VocabularyMappingException, Exception {
         this.convertModel(lifDataModel);
     }
 
-    public void convertModel(DataModelLif lifDataModel) throws Exception {
+    public void convertModel(DataModelLif lifDataModel) throws LifException, VocabularyMappingException {
         givenDataModel = lifDataModel;
         try {
             findAnnotationLayers();
         } catch (VocabularyMappingException conExp) {
             Logger.getLogger(LifAnnotationLayerFinderStored.class.getName()).log(Level.SEVERE, null, conExp);
-        } catch (Exception vocExp) {
-            Logger.getLogger(LifAnnotationLayerFinderStored.class.getName()).log(Level.SEVERE, null, vocExp);
+        } catch (LifException lifExp) {
+            Logger.getLogger(LifAnnotationLayerFinderStored.class.getName()).log(Level.SEVERE, null, lifExp);
         }
     }
 
-    public void findAnnotationLayers() throws VocabularyMappingException, Exception {
+    public void findAnnotationLayers() throws LifException, VocabularyMappingException {
         for (Integer layerIndex : givenDataModel.getSortedLayer()) {
             AnnotationLayerFinder lifLayer = givenDataModel.getIndexAnnotationLayer(layerIndex);
             layers.add(lifLayer.getLayer());
@@ -65,95 +66,131 @@ public class LifAnnotationLayerFinderStored implements AnnotationLayers {
     }
 
     @Override
-    public boolean isLanguage() {
-        return true;
+    public boolean isLanguage() throws LifException {
+        try {
+            return true;
+        } catch (Exception ex) {
+            throw new LifException("LIF file is not valid!");
+        }
     }
 
     @Override
-    public boolean isTextLayer() {
-        if (givenDataModel.getText() != null) {
-            return true;
+    public boolean isTextLayer() throws LifException {
+        try {
+            if (givenDataModel.getText() != null) {
+                return true;
+            }
+        } catch (Exception ex) {
+            throw new LifException("LIF file is not valid!");
         }
         return false;
     }
 
     @Override
-    public boolean isTokenLayer() {
-        if (layers.contains(Discriminators.Uri.TOKEN)) {
-            return true;
+    public boolean isTokenLayer() throws LifException {
+        try {
+            if (layers.contains(Discriminators.Uri.TOKEN)) {
+                return true;
+            }
+        } catch (Exception ex) {
+            throw new LifException("LIF file is not valid!");
         }
         return false;
     }
 
     @Override
-    public boolean isPosLayer() {
-        if (layers.contains(Discriminators.Uri.POS)) {
-            return true;
+    public boolean isPosLayer() throws LifException {
+        try {
+            if (layers.contains(Discriminators.Uri.POS)) {
+                return true;
+            }
+        } catch (Exception ex) {
+            throw new LifException("LIF file is not valid!");
         }
         return false;
     }
 
     @Override
-    public boolean isLemmaLayer() {
-        if (layers.contains(Discriminators.Uri.LEMMA)) {
-            return true;
+    public boolean isLemmaLayer() throws LifException {
+        try {
+            if (layers.contains(Discriminators.Uri.LEMMA)) {
+                return true;
+            }
+        } catch (Exception ex) {
+            throw new LifException("LIF file is not valid!");
         }
         return false;
     }
 
     @Override
-    public boolean isDependencyLayer() {
-        if (layers.contains(Discriminators.Uri.DEPENDENCY_STRUCTURE)) {
-            return true;
+    public boolean isDependencyLayer() throws LifException {
+        try {
+            if (layers.contains(Discriminators.Uri.DEPENDENCY_STRUCTURE)) {
+                return true;
+            }
+        } catch (Exception ex) {
+            throw new LifException("LIF file is not valid!");
         }
         return false;
     }
 
     @Override
-    public boolean isConstituentLayer() {
-        if (layers.contains(Discriminators.Uri.PHRASE_STRUCTURE)) {
-            return true;
+    public boolean isConstituentLayer() throws LifException {
+        try {
+            if (layers.contains(Discriminators.Uri.PHRASE_STRUCTURE)) {
+                return true;
+            }
+        } catch (Exception ex) {
+            throw new LifException(ex.getMessage());
         }
         return false;
     }
 
     @Override
-    public boolean isSenetenceLayer() {
-        if (layers.contains(Discriminators.Uri.SENTENCE)) {
-            return true;
+    public boolean isSenetenceLayer() throws LifException {
+        try {
+            if (layers.contains(Discriminators.Uri.SENTENCE)) {
+                return true;
+            }
+        } catch (Exception ex) {
+            throw new LifException("LIF file is not valid!");
         }
         return false;
     }
 
     @Override
-    public boolean isTokenPosLayer() {
-        if (layers.contains(Discriminators.Uri.POS)) {
-            layers.add(Discriminators.Uri.TOKEN);
-            return true;
+    public boolean isTokenPosLayer() throws LifException {
+        try {
+            if (layers.contains(Discriminators.Uri.POS)) {
+                layers.add(Discriminators.Uri.TOKEN);
+                return true;
+            }
+        } catch (Exception ex) {
+            throw new LifException("LIF file is not valid!");
         }
         return false;
     }
 
     @Override
-    public boolean isCorferenceLayer() {
-        if (layers.contains(Discriminators.Uri.COREF)) {
-            return true;
+    public boolean isCorferenceLayer() throws LifException {
+        try {
+            if (layers.contains(Discriminators.Uri.COREF)) {
+                return true;
+            }
+        } catch (Exception ex) {
+            throw new LifException("LIF file is not valid!");
         }
         return false;
     }
 
     @Override
-    public boolean isNamedEntityLayer() {
-        if (layers.contains(Discriminators.Uri.NE)) {
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean isChunkLayer() {
-        if (layers.contains(Discriminators.Uri.CHUNK)) {
-            return true;
+    public boolean isNamedEntityLayer() throws LifException {
+        try {
+            if (layers.contains(Discriminators.Uri.NE)) {
+                return true;
+            }
+        } catch (Exception ex) {
+            throw new LifException("LIF file is not valid!");
         }
         return false;
     }

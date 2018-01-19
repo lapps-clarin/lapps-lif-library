@@ -7,7 +7,7 @@ package de.tuebingen.uni.sfs.lapps.library.layer.xb;
 
 import de.tuebingen.uni.sfs.lapps.library.layer.xb.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.library.layer.api.AnnotationLayerFinder;
-import de.tuebingen.uni.sfs.lapps.library.utils.xb.ValidityCheckerStored;
+import de.tuebingen.uni.sfs.lapps.library.exception.LifValidityCheckerStored;
 import de.tuebingen.uni.sfs.lapps.library.utils.xb.DuplicateChecker;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.exception.VocabularyMappingException;
@@ -131,7 +131,7 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
     }
 
     public boolean isLayerValid() throws LifException {
-        ValidityCheckerStored lifValidityCheck = new ValidityCheckerStored();
+        LifValidityCheckerStored lifValidityCheck = new LifValidityCheckerStored();
         return lifValidityCheck.isMetadataLayerValid(this.lifLayer, this.metadataInfoInLayers, this.annotationInfoInLayers);
     }
 

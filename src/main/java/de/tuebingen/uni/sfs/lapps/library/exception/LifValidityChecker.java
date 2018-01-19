@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.library.utils.api;
+package de.tuebingen.uni.sfs.lapps.library.exception;
 
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 
@@ -12,7 +12,7 @@ import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
  *
  * @author felahi
  */
-public interface ValidityChecker {
+public interface LifValidityChecker extends ErrorMessage{
 
     public boolean isValid() throws LifException;
 
