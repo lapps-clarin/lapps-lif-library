@@ -5,8 +5,8 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.application;
 
-import de.tuebingen.uni.sfs.lapps.library.layer.xb.LifAnnotationLayerFinderStored;
-import de.tuebingen.uni.sfs.lapps.library.utils.xb.ProcessUtils;
+import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifAnnotationLayerFinderStored;
+import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifFileProcess;
 import java.io.File;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -34,7 +34,7 @@ public class AllLayersInOneFileTest {
     public void testAllLayer() throws Exception {
         File inputFile = new File(classLoader.getResource(ALL_LAYER_EXAMPLE).getFile());
         if (inputFile.getName().contains(FILE_LIF)) {
-            LifAnnotationLayerFinderStored tool = ProcessUtils.fileProcessing(inputFile);
+            LifAnnotationLayerFinderStored tool = LifFileProcess.fileProcessing(inputFile);
             assertTrue("TextLayer exists in the file", tool.isTextLayer());
             assertTrue("TokenLayer exists in the file", tool.isTokenLayer());
             assertTrue("SenetenceLayer exists in the file", tool.isSenetenceLayer());
