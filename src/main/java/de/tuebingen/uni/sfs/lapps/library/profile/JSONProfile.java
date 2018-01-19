@@ -6,7 +6,6 @@
 package de.tuebingen.uni.sfs.lapps.library.profile;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
@@ -19,19 +18,19 @@ import java.util.logging.Logger;
  *
  * @author felahi
  */
-public class JsonProfile {
+public class JSONProfile {
 
     private String jsonString = null;
     private Map<String, Object> jsonMap = new HashMap<String, Object>();
     private boolean valid = true;
 
-    public JsonProfile(String jsonString) {
+    public JSONProfile(String jsonString) {
         this.jsonString = jsonString;
         try {
             this.jsonMap = conversionJSONMapToString();
         } catch (Exception ex) {
             valid = false;
-            Logger.getLogger(JsonProfile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JSONProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

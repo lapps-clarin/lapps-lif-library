@@ -5,6 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.utils.xb;
 
+import de.tuebingen.uni.sfs.lapps.library.exception.JSONValidityException;
 import de.tuebingen.uni.sfs.lapps.library.layer.xb.LifAnnotationLayerFinderStored;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
 import de.tuebingen.uni.sfs.lapps.library.model.DataModelLif;
@@ -23,7 +24,7 @@ import java.util.logging.Logger;
  * @author felahi
  */
 public class ProcessUtils {
-    
+
     private static final String TEMP_FILE_PREFIX = "ne-output-temp";
     private static final String TEMP_FILE_SUFFIX = ".xml";
 
@@ -65,16 +66,16 @@ public class ProcessUtils {
         LifAnnotationLayerFinderStored tool = new LifAnnotationLayerFinderStored();
         try {
             DataModelLif dataModelLif = new DataModelLif(input);
-            if (dataModelLif.isValid()) {
-                tool.convertModel(dataModelLif);
-            } else {
-                throw new LifException("The lif file is in correct!!");
-            }
-
-        } catch (LifException exlIF) {
-            Logger.getLogger(ProcessUtils.class.getName()).log(Level.SEVERE, null, exlIF);
-        } catch (Exception ex) {
-            Logger.getLogger(ProcessUtils.class.getName()).log(Level.SEVERE, null, ex);
+            tool.convertModel(dataModelLif);
+        }  catch (IOException ex) {
+            ex.printStackTrace(System.out);
+            Logger.getLogger(ProcessUtils.class.getName()).log(Level.SEVERE, null, "File to String failes!!");
+        } catch (JSONValidityException ex) {
+            ex.printStackTrace(System.out);
+            Logger.getLogger(ProcessUtils.class.getName()).log(Level.SEVERE, null, ex.getMessage());
+        } catch (LifException ex) {
+            ex.printStackTrace(System.out);
+            Logger.getLogger(ProcessUtils.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         } finally {
             if (input != null) {
                 try {
@@ -93,5 +94,5 @@ public class ProcessUtils {
         }
         return tool;
     }
-    
+
 }

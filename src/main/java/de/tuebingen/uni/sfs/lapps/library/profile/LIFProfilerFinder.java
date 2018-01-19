@@ -6,7 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.library.profile;
 
 import de.tuebingen.uni.sfs.lapps.library.exception.LifValidityCheckerStored;
-import de.tuebingen.uni.sfs.lapps.library.profile.JsonProfile;
+import de.tuebingen.uni.sfs.lapps.library.profile.JSONProfile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.tuebingen.uni.sfs.lapps.library.exception.JSONValidityException;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
@@ -22,7 +22,7 @@ public class LIFProfilerFinder {
     private LIFProfiler mascDocument = new LIFProfiler();
 
     public LIFProfilerFinder(String jsonString) throws LifException, IOException, JSONValidityException {
-        JsonProfile jsonObject = new JsonProfile(jsonString);
+        JSONProfile jsonObject = new JSONProfile(jsonString);
         if (jsonObject.isInputValid()) {
             jsonToLifObjectMapping(jsonObject);
         } else {
@@ -31,7 +31,7 @@ public class LIFProfilerFinder {
 
     }
 
-    private void jsonToLifObjectMapping(JsonProfile jsonObject) throws LifException, IOException {
+    private void jsonToLifObjectMapping(JSONProfile jsonObject) throws LifException, IOException {
         LifValidityChecker lifDocumentValidityCheck = new LifValidityCheckerStored(jsonObject);
         ObjectMapper mapper = new ObjectMapper();
         if (lifDocumentValidityCheck.isValid()) {

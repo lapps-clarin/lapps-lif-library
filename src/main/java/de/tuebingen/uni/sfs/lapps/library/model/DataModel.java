@@ -5,7 +5,9 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.model;
 
+import de.tuebingen.uni.sfs.lapps.library.exception.JSONValidityException;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -15,7 +17,7 @@ import java.io.OutputStream;
  */
 public abstract class DataModel {
 
-    public abstract void inputDataProcessing(InputStream is) throws LifException;
+    public abstract void inputDataProcessing(InputStream is) throws IOException,JSONValidityException,LifException;
 
     public abstract void process(OutputStream os);
 

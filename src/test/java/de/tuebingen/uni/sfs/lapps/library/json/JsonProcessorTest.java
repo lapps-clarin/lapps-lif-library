@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.json;
 
-import de.tuebingen.uni.sfs.lapps.library.profile.JsonProfile;
+import de.tuebingen.uni.sfs.lapps.library.profile.JSONProfile;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,36 +44,36 @@ public class JsonProcessorTest {
     }
 
     /**
-     * Test of isInputValid method, of class JsonProfile.
+     * Test of isInputValid method, of class JSONProfile.
      */
     @Test
     public void testIsInputValid() throws Exception {
         System.out.println("isInputValid");
-        JsonProfile instance = new JsonProfile(jsonString);
+        JSONProfile instance = new JSONProfile(jsonString);
         boolean expResult = true;
         boolean result = instance.isInputValid();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of getJsonString method, of class JsonProfile.
+     * Test of getJsonString method, of class JSONProfile.
      */
     @Test
     public void testGetJsonString() throws IOException {
         System.out.println("getJsonString");
-        JsonProfile instance = new JsonProfile(jsonString);
+        JSONProfile instance = new JSONProfile(jsonString);
         String expResult = jsonString;
         String result = instance.getJsonString();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of getJsonMap method, of class JsonProfile.
+     * Test of getJsonMap method, of class JSONProfile.
      */
     @Test
     public void testGetJsonMap() throws IOException {
         System.out.println("getJsonMap");
-        JsonProfile instance = new JsonProfile(jsonString);
+        JSONProfile instance = new JSONProfile(jsonString);
         Map<String, Object> expResult = new HashMap<String, Object>();
         expResult.put("age", "29");
         Map<String, Object> result = instance.getJsonMap();
@@ -82,12 +82,12 @@ public class JsonProcessorTest {
     }
 
     /**
-     * Test of isOutputValid method, of class JsonProfile.
+     * Test of isOutputValid method, of class JSONProfile.
      */
     @Test
     public void testIsOutputValid() throws Exception {
         System.out.println("isOutputValid");
-         JsonProfile instance = new JsonProfile(jsonString);
+         JSONProfile instance = new JSONProfile(jsonString);
         boolean expResult = true;
         boolean result = instance.isOutputValid();
         assertEquals(expResult, result);

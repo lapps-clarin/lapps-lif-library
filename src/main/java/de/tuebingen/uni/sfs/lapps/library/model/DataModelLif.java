@@ -5,9 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.model;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import de.tuebingen.uni.sfs.lapps.library.profile.LIFProfilerFinder;
-import de.tuebingen.uni.sfs.lapps.library.model.DataModel;
 import de.tuebingen.uni.sfs.lapps.library.layer.xb.LifToolProducerStored;
 import de.tuebingen.uni.sfs.lapps.library.layer.xb.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.library.exception.LifValidityCheckerStored;
@@ -25,8 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.io.IOUtils;
 import org.lappsgrid.serialization.lif.Container;
 import org.lappsgrid.serialization.lif.View;
@@ -42,36 +38,18 @@ public class DataModelLif extends DataModel {
     private Vector<Integer> sortedLayer = new Vector<Integer>();
     public Container lifContainer = null;
     private String fileString = null;
-    private boolean modelValidity = false;
     private LifValidityCheckerStored lifValidityCheck = new LifValidityCheckerStored();
 
-    public DataModelLif(InputStream input)  {
+    public DataModelLif(InputStream input) throws IOException, JSONValidityException, LifException {
         this.inputDataProcessing(input);
     }
 
     @Override
-    public void inputDataProcessing(InputStream is) {
-        try {
-            fileString = IOUtils.toString(is, LifVocabularies.GeneralParameters.UNICODE);
-            LIFProfilerFinder lifContainerFinder = lifContainerFinder = new LIFProfilerFinder(fileString);
-            lifContainer = lifContainerFinder.getMascDocument().getContainer();
-            extractAndSortViews();
-            modelValidity = true;
-        } catch (IOException ex) {
-            modelValidity = false;
-             ex.printStackTrace(System.out);
-            Logger.getLogger(DataModelLif.class.getName()).log(Level.SEVERE, null, "File to String failes!!");
-        }
-        catch (JSONValidityException ex) {
-            modelValidity = false;
-             ex.printStackTrace(System.out);
-            Logger.getLogger(DataModelLif.class.getName()).log(Level.SEVERE, null,ex.getMessage());
-        }  
-        catch (LifException ex) {
-            ex.printStackTrace(System.out);
-            modelValidity = false;
-            Logger.getLogger(DataModelLif.class.getName()).log(Level.SEVERE, null, ex.getMessage());
-        }
+    public void inputDataProcessing(InputStream is) throws IOException, JSONValidityException, LifException {
+        fileString = IOUtils.toString(is, LifVocabularies.GeneralParameters.UNICODE);
+        LIFProfilerFinder lifContainerFinder = lifContainerFinder = new LIFProfilerFinder(fileString);
+        lifContainer = lifContainerFinder.getMascDocument().getContainer();
+        extractAndSortViews();
     }
 
     @Override
@@ -153,7 +131,7 @@ public class DataModelLif extends DataModel {
 
     @Override
     public boolean isValid() {
-        return modelValidity;
+        return true;
     }
 
     public String getLanguage() {
