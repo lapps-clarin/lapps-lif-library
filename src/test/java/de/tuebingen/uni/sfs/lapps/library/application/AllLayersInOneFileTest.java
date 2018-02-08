@@ -19,7 +19,7 @@ import org.junit.Test;
 public class AllLayersInOneFileTest {
 
     private String ALL_LAYER_EXAMPLE = "karen-all.json";
-
+    private String ALL_LAYER_OTHER_EXAMPLE = "other/karen-all.json";
     private String FILE_LIF = "json";
     AllLayersInOneFileTest instance;
     private ClassLoader classLoader = getClass().getClassLoader();
@@ -41,6 +41,25 @@ public class AllLayersInOneFileTest {
             assertTrue("PosLayer exists in the file", tool.isPosLayer());
             //no name entriy layer currently exist!
             assertFalse("NameEntity layer does not exists in the file!!!", tool.isNamedEntityLayer());
+            assertTrue("ConstituentLayer exists in the file", tool.isConstituentLayer());
+            assertTrue("DependencyLayer exists in the file", tool.isDependencyLayer());
+            assertTrue("CorferenceLayer exists in the file", tool.isCorferenceLayer());
+        } else {
+            throw new Exception("The file extension should be .json");
+        }
+    }
+    
+    @Test
+    public void testAllLayerOthers() throws Exception {
+        File inputFile = new File(classLoader.getResource(ALL_LAYER_OTHER_EXAMPLE).getFile());
+        if (inputFile.getName().contains(FILE_LIF)) {
+            LifAnnotationLayerFinderStored tool = LifFileProcess.fileProcessing(inputFile);
+            assertTrue("TextLayer exists in the file", tool.isTextLayer());
+            assertTrue("TokenLayer exists in the file", tool.isTokenLayer());
+            assertTrue("SenetenceLayer exists in the file", tool.isSenetenceLayer());
+            assertTrue("PosLayer exists in the file", tool.isPosLayer());
+            //no name entriy layer currently exist!
+            assertTrue("NameEntity layer does not exists in the file!!!", tool.isNamedEntityLayer());
             assertTrue("ConstituentLayer exists in the file", tool.isConstituentLayer());
             assertTrue("DependencyLayer exists in the file", tool.isDependencyLayer());
             assertTrue("CorferenceLayer exists in the file", tool.isCorferenceLayer());

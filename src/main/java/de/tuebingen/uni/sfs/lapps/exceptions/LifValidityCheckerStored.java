@@ -94,9 +94,11 @@ public class LifValidityCheckerStored implements LifValidityChecker {
     }
 
     private boolean topLevelAnnotationCheck(Set<String> annotationSet) throws LifException {
-        if (!annotationSet.contains(LifConnstant.LIF.Document.LifDocumentTopLevel.CONTEXT_KEY_LIF)) {
+        /*if (!annotationSet.contains(LifConnstant.LIF.Document.LifDocumentTopLevel.CONTEXT_KEY_LIF)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_CONTEXT_MISSING);
-        } else if (!annotationSet.contains(LifConnstant.LIF.Document.LifDocumentTopLevel.METADATA_KEY_LIF)) {
+        } else*/ 
+        //temporary closed...
+        if (!annotationSet.contains(LifConnstant.LIF.Document.LifDocumentTopLevel.METADATA_KEY_LIF)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_METADATA_MISSING);
         } else if (!annotationSet.contains(LifConnstant.LIF.Document.LifDocumentTopLevel.VIEWS_KEY_LIF)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_VIEWS_MISSING);
@@ -121,6 +123,8 @@ public class LifValidityCheckerStored implements LifValidityChecker {
     public boolean isMetadataLayerValid(String layer, Set<String> metadataInfoInLayers, Set<String> annotationInfoInLayers) throws LifException {
         if (layer.contains(Discriminators.Uri.NE)) {
             return isNamedEntityValid(annotationInfoInLayers);
+        }  if (layer.contains(Discriminators.Uri.POS)||layer.contains(Discriminators.Uri.LEMMA)) {
+            return isPosLayerValid(annotationInfoInLayers);
         } else if (annotationInfoInLayers.contains(layer)) {
             return true;
         } else {
@@ -152,14 +156,25 @@ public class LifValidityCheckerStored implements LifValidityChecker {
     }
 
     private boolean isNamedEntityValid(Set<String> annotationInfoInLayers) {
+        //PERSON, DATE, and ORGANIZATION will be deleted later
         for (String layer : annotationInfoInLayers) {
             if (layer.equals(Discriminators.Uri.PERSON))
                 ; else if (layer.equals(Discriminators.Uri.LOCATION)) 
                  ; else if (layer.equals(Discriminators.Uri.DATE)) 
                      ; else if (layer.equals(Discriminators.Uri.ORGANIZATION)) 
-                         ; else {
+                         ;
+                         else if (layer.equals(Discriminators.Uri.NE)) 
+                         ;else {
                 return false;
             }
+        }
+        return true;
+    }
+
+    private boolean isPosLayerValid(Set<String> annotationInfoInLayers) {
+            for (String layer : annotationInfoInLayers) {
+               if (!layer.contains(Discriminators.Uri.TOKEN))
+                 return false;
         }
         return true;
     }

@@ -77,7 +77,7 @@ public class LifAnnotationProcess extends Process {
                 LifToolProducerStored lifLayer = new LifToolProducerStored(view.getMetadata());
                 List<AnnotationInterpreter> lifCharOffsetObjectList = lifLayer.processAnnotations(view.getAnnotations());
                 if (!lifLayer.isLayerValid()) {
-                    throw new LifException("The annotation layer is not valid!!");
+                    throw new LifException("The annotation layer "+lifLayer.getLayer()+"is not valid!!");
                 }
                 annotationLayerData.put(index, lifCharOffsetObjectList);
                 indexAnnotationLayer.put(index, lifLayer);
