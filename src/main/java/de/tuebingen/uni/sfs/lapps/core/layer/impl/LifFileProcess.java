@@ -6,10 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.core.layer.impl;
 
 import de.tuebingen.uni.sfs.lapps.exceptions.JSONValidityException;
-import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifAnnotationLayerFinderStored;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifViewProcess;
-import de.tuebingen.uni.sfs.lapps.profile.LIFProfiler;
 import de.tuebingen.uni.sfs.lapps.profile.LIFProfilerImpl;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -20,6 +17,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import de.tuebingen.uni.sfs.lapps.profile.LIFProfile;
 
 /**
  *
@@ -67,7 +65,7 @@ public class LifFileProcess {
     private static LifAnnotationLayerFinderStored process(final InputStream input, OutputStream output) throws Exception {
         LifAnnotationLayerFinderStored tool = new LifAnnotationLayerFinderStored();
         try {
-            LIFProfiler profiler = new LIFProfilerImpl(input);
+            LIFProfile profiler = new LIFProfilerImpl(input);
             tool.findLayers(profiler);
         }  catch (IOException ex) {
             ex.printStackTrace(System.out);

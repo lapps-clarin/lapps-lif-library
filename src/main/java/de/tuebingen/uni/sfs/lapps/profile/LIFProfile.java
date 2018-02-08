@@ -6,6 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.profile;
 
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
+import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,15 @@ import java.util.Vector;
  *
  * @author felahi
  */
-public interface LIFViewProfile {
+public interface LIFProfile {
+    
+     public String getLanguage() throws LifException;
+
+    public String getText() throws LifException;
+
+    public String getFileString();
+
+    public boolean isValid();
 
     public Map<Integer, List<AnnotationInterpreter>> getAnnotationLayerData();
 
