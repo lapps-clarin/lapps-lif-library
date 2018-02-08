@@ -8,7 +8,9 @@ package de.tuebingen.uni.sfs.lapps.core.layer.impl;
 import de.tuebingen.uni.sfs.lapps.exceptions.JSONValidityException;
 import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifAnnotationLayerFinderStored;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifAnnotationProcess;
+import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifViewProcess;
+import de.tuebingen.uni.sfs.lapps.profile.LIFProfiler;
+import de.tuebingen.uni.sfs.lapps.profile.LIFProfilerImpl;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -65,8 +67,8 @@ public class LifFileProcess {
     private static LifAnnotationLayerFinderStored process(final InputStream input, OutputStream output) throws Exception {
         LifAnnotationLayerFinderStored tool = new LifAnnotationLayerFinderStored();
         try {
-            LifAnnotationProcess dataModelLif = new LifAnnotationProcess(input);
-            tool.convertModel(dataModelLif);
+            LIFProfiler profiler = new LIFProfilerImpl(input);
+            tool.findLayers(profiler);
         }  catch (IOException ex) {
             ex.printStackTrace(System.out);
             Logger.getLogger(LifFileProcess.class.getName()).log(Level.SEVERE, null, "File to String failes!!");

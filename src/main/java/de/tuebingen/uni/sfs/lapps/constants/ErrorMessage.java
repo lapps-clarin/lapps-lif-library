@@ -13,6 +13,7 @@ public interface ErrorMessage {
     //document validity error messages...
 
     public static final String MESSAGE_INVALID_JSON = "LIF ERROR: No Json key/value found!!";
+    public static final String MESSAGE_INVALID_LIF = "LIF ERROR: Invalid LIF container!!";
     public static final String MESSAGE_INVALID_LIF_DISCRIMINATOR_DOCUMENT = "LIF ERROR:discriminator is missing in LIF file!!";
     public static final String MESSAGE_INVALID_LIF_PAYLOAD_DOCUMENT = "LIF ERROR:payload is missing in LIF file!!";
     public static final String MESSAGE_INVALID_LIF_METADATA_ANNOTATION ="layer url between metadata and @type mismatched. Please look into ";

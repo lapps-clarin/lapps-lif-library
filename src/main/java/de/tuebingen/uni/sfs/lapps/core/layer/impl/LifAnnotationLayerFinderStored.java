@@ -3,6 +3,7 @@ package de.tuebingen.uni.sfs.lapps.core.layer.impl;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayers;
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
+import de.tuebingen.uni.sfs.lapps.profile.LIFProfiler;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -11,7 +12,7 @@ import org.lappsgrid.discriminator.Discriminators;
 
 public class LifAnnotationLayerFinderStored implements AnnotationLayers {
 
-    private LifAnnotationProcess givenDataModel = null;
+    private LIFProfiler lifProfile = null;
     private String LANG_EN = "en";
     private String text = null;
     private List<String> layers = new ArrayList<String>();
@@ -19,12 +20,12 @@ public class LifAnnotationLayerFinderStored implements AnnotationLayers {
     public LifAnnotationLayerFinderStored() throws LifException {
     }
 
-    public LifAnnotationLayerFinderStored(LifAnnotationProcess lifDataModel) throws LifException {
-        this.convertModel(lifDataModel);
+    public LifAnnotationLayerFinderStored(LIFProfiler profile) throws LifException {
+        this.findLayers(profile);
     }
 
-    public void convertModel(LifAnnotationProcess lifDataModel) throws LifException, LifException {
-        givenDataModel = lifDataModel;
+    public void findLayers(LIFProfiler profile) throws LifException, LifException {
+        this.lifProfile = profile;
         try {
             findAnnotationLayers();
         } catch (LifException lifExp) {
@@ -33,8 +34,8 @@ public class LifAnnotationLayerFinderStored implements AnnotationLayers {
     }
 
     public void findAnnotationLayers() throws LifException, LifException {
-        for (Integer layerIndex : givenDataModel.getSortedLayer()) {
-            AnnotationLayerFinder lifLayer = givenDataModel.getIndexAnnotationLayer(layerIndex);
+        for (Integer layerIndex : lifProfile.getLifViewProfile().getSortedLayer()) {
+            AnnotationLayerFinder lifLayer = lifProfile.getLifViewProfile().getIndexAnnotationLayer(layerIndex);
             layers.add(lifLayer.getLayer());
         }
         if (layers.contains(Discriminators.Uri.POS)) {
@@ -43,18 +44,18 @@ public class LifAnnotationLayerFinderStored implements AnnotationLayers {
     }
 
     public String getLanguage() {
-        /*if (givenDataModel.getLanguage() != null) {
-            return givenDataModel.getLanguage();
+        /*if (lifProfile.getLanguage() != null) {
+            return lifProfile.getLanguage();
         }*/
         return LANG_EN;
     }
 
-    public LifAnnotationProcess getGivenDataModel() {
-        return givenDataModel;
+    public LIFProfiler getGivenDataModel() {
+        return lifProfile;
     }
 
-    public String getText() {
-        return givenDataModel.getText();
+    public String getText() throws LifException {
+        return lifProfile.getText();
     }
 
     public List<String> getLayers() {
@@ -73,7 +74,7 @@ public class LifAnnotationLayerFinderStored implements AnnotationLayers {
     @Override
     public boolean isTextLayer() throws LifException {
         try {
-            if (givenDataModel.getText() != null) {
+            if (lifProfile.getText() != null) {
                 return true;
             }
         } catch (Exception ex) {

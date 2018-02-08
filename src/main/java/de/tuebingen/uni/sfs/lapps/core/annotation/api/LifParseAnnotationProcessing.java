@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.annotation.api;
 
-import de.tuebingen.uni.sfs.lapps.core.layer.impl.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.util.List;
 

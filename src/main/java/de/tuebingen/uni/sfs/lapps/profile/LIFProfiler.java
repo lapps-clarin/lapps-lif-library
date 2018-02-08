@@ -5,41 +5,30 @@
  */
 package de.tuebingen.uni.sfs.lapps.profile;
 
-import de.tuebingen.uni.sfs.lapps.profile.JSONProfile;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import de.tuebingen.uni.sfs.lapps.exceptions.JSONValidityException;
+import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import java.io.IOException;
+import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import java.util.List;
+import java.util.Vector;
+import org.lappsgrid.serialization.lif.Container;
+import org.lappsgrid.serialization.lif.View;
 
 /**
  *
- * @author felahi
+ * @author Mohammad Fazleh Elahi
  */
-public class LIFProfiler {
+public interface LIFProfiler {
 
-    private LIFContainer lifContainer = new LIFContainer();
+    public String getLanguage() throws LifException;
 
-    public LIFProfiler(String jsonString) throws LifException, IOException, JSONValidityException {
-        JSONProfile jsonObject = new JSONProfile(jsonString);
-        if (jsonObject.isInputValid()) {
-            jsonToLifObjectMapping(jsonObject);
-        } else {
-            throw new JSONValidityException(LifValidityCheckerStored.INVALID_JSON_FILE);
-        }
+    public String getText() throws LifException;
 
-    }
+    public String getFileString();
 
-    private void jsonToLifObjectMapping(JSONProfile jsonObject) throws LifException, IOException {
-        LifValidityChecker lifDocumentValidityCheck = new LifValidityCheckerStored(jsonObject);
-        ObjectMapper mapper = new ObjectMapper();
-        if (lifDocumentValidityCheck.isValid()) {
-            lifContainer = mapper.readValue(jsonObject.getJsonString(), LIFContainer.class);
-        }
+    public Container getLifContainer() throws LifException;
+    
+    public LIFViewProfile getLifViewProfile();
 
-    }
-
-    public LIFContainer getLifContainer() {
-        return lifContainer;
-    }
+    public boolean isValid();
 
 }

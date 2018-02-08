@@ -7,7 +7,7 @@ package de.tuebingen.uni.sfs.lapps.core.annotation.impl;
 
 import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifConstituentParser;
 import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifParseAnnotationProcessing;
-import de.tuebingen.uni.sfs.lapps.core.layer.impl.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.core.annotation.impl.LifConstituent;
 import de.tuebingen.uni.sfs.lapps.core.annotation.impl.LifConstituentStructure;
 import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;

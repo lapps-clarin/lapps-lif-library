@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.core.layer.impl;
+package de.tuebingen.uni.sfs.lapps.utils;
 
 import de.tuebingen.uni.sfs.lapps.core.annotation.api.TokenPosLemma;
 import java.util.HashMap;
