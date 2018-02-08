@@ -6,7 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.core.annotation.api;
 
 import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifToken;
-import de.tuebingen.uni.sfs.lapps.core.annotation.impl.DependencyEntityInfo;
+import de.tuebingen.uni.sfs.lapps.utils.DependencyEntityInfo;
 import java.util.List;
 import java.util.Vector;
 

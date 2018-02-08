@@ -8,7 +8,7 @@ package de.tuebingen.uni.sfs.lapps.core.annotation.impl;
 import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifDependencyParser;
 import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifParseAnnotationProcessing;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
-import de.tuebingen.uni.sfs.lapps.core.annotation.impl.DependencyEntityInfo;
+import de.tuebingen.uni.sfs.lapps.utils.DependencyEntityInfo;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 
 import java.util.ArrayList;

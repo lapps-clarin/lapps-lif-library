@@ -17,7 +17,7 @@ import org.lappsgrid.serialization.lif.Container;
  * @author felahi
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class LIFContainer {
+public class LifContainer {
 
     //"payload"
     private String discriminator;
@@ -25,11 +25,11 @@ public class LIFContainer {
     @JsonProperty(LifConnstant.LIF.Document.PAYLOAD_KEY_JSON)
     private Container container;
 
-    public LIFContainer() {
+    public LifContainer() {
 
     }
 
-    public LIFContainer(String discriminator, JSONProfile jsonObject) {
+    public LifContainer(String discriminator, JsonProfile jsonObject) {
         this.discriminator = discriminator;
         this.container = Serializer.parse(jsonObject.getJsonString(), Container.class);
     }

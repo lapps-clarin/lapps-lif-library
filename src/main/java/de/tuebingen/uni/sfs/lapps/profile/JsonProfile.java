@@ -18,19 +18,19 @@ import java.util.logging.Logger;
  *
  * @author felahi
  */
-public class JSONProfile {
+public class JsonProfile {
 
     private String jsonString = null;
     private Map<String, Object> jsonMap = new HashMap<String, Object>();
     private boolean valid = true;
 
-    public JSONProfile(String jsonString) {
+    public JsonProfile(String jsonString) {
         this.jsonString = jsonString;
         try {
             this.jsonMap = conversionJSONMapToString();
         } catch (Exception ex) {
             valid = false;
-            Logger.getLogger(JSONProfile.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(JsonProfile.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

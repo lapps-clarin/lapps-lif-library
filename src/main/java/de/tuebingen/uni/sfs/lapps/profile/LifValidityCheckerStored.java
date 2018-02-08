@@ -8,7 +8,7 @@ package de.tuebingen.uni.sfs.lapps.profile;
 import de.tuebingen.uni.sfs.lapps.profile.LifValidityChecker;
 import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import de.tuebingen.uni.sfs.lapps.profile.JSONProfile;
+import de.tuebingen.uni.sfs.lapps.profile.JsonProfile;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -24,7 +24,7 @@ import org.lappsgrid.serialization.lif.View;
  */
 public class LifValidityCheckerStored implements LifValidityChecker {
 
-    private JSONProfile jsonObject = null;
+    private JsonProfile jsonObject = null;
     private List<View> views = new ArrayList<View>();
     private Annotation annotation = null;
 
@@ -32,7 +32,7 @@ public class LifValidityCheckerStored implements LifValidityChecker {
 
     }
 
-    public LifValidityCheckerStored(JSONProfile jsonObject) {
+    public LifValidityCheckerStored(JsonProfile jsonObject) {
         this.jsonObject = jsonObject;
     }
 

@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lappsgrid.discriminator.Discriminators;
-import de.tuebingen.uni.sfs.lapps.profile.LIFProfile;
+import de.tuebingen.uni.sfs.lapps.profile.LifProfile;
 
 public class LifAnnotationLayerFinderStored implements AnnotationLayers {
 
-    private LIFProfile lifProfile = null;
+    private LifProfile lifProfile = null;
     private String LANG_EN = "en";
     private String text = null;
     private List<String> layers = new ArrayList<String>();
@@ -20,11 +20,11 @@ public class LifAnnotationLayerFinderStored implements AnnotationLayers {
     public LifAnnotationLayerFinderStored() throws LifException {
     }
 
-    public LifAnnotationLayerFinderStored(LIFProfile profile) throws LifException {
+    public LifAnnotationLayerFinderStored(LifProfile profile) throws LifException {
         this.findLayers(profile);
     }
 
-    public void findLayers(LIFProfile profile) throws LifException, LifException {
+    public void findLayers(LifProfile profile) throws LifException, LifException {
         this.lifProfile = profile;
         try {
             findAnnotationLayers();
@@ -50,7 +50,7 @@ public class LifAnnotationLayerFinderStored implements AnnotationLayers {
         return LANG_EN;
     }
 
-    public LIFProfile getGivenDataModel() {
+    public LifProfile getGivenDataModel() {
         return lifProfile;
     }
 

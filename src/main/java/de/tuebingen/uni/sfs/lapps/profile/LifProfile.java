@@ -16,7 +16,7 @@ import java.util.Vector;
  *
  * @author felahi
  */
-public interface LIFProfile {
+public interface LifProfile {
     
      public String getLanguage() throws LifException;
 

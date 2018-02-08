@@ -26,7 +26,7 @@ import org.lappsgrid.serialization.lif.View;
  *
  * @author felahi
  */
-public class LIFProfilerImpl extends LIFTopLevelProfiler implements LIFProfile {
+public class LifProfilerImpl extends LifTopLevelProfiler implements LifProfile {
 
     private Map<Integer, List<AnnotationInterpreter>> annotationLayerData = new HashMap<Integer, List<AnnotationInterpreter>>();
     private Map<Integer, AnnotationLayerFinder> indexAnnotationLayer = new HashMap<Integer, AnnotationLayerFinder>();
@@ -34,7 +34,7 @@ public class LIFProfilerImpl extends LIFTopLevelProfiler implements LIFProfile {
     private LifValidityCheckerStored lifValidityCheck = new LifValidityCheckerStored();
     private List<View> views=new ArrayList<View>();
 
-    public LIFProfilerImpl(InputStream is) throws LifException, IOException, JSONValidityException{
+    public LifProfilerImpl(InputStream is) throws LifException, IOException, JSONValidityException{
          super(is);
          this.views=super.getViews();
          extractAndSortViews();

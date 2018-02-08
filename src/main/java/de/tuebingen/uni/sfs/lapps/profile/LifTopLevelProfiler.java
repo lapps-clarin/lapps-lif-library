@@ -20,15 +20,15 @@ import org.lappsgrid.serialization.lif.View;
  *
  * @author felahi
  */
-public class LIFTopLevelProfiler {
+public class LifTopLevelProfiler {
 
-    private LIFContainer lifContainer = new LIFContainer();
+    private LifContainer lifContainer = new LifContainer();
     private String fileString = null;
     private List<View> views = new ArrayList<View>();
 
-    public LIFTopLevelProfiler(InputStream is) throws LifException, IOException, JSONValidityException {
+    public LifTopLevelProfiler(InputStream is) throws LifException, IOException, JSONValidityException {
         fileString = IOUtils.toString(is, LifConnstant.GeneralParameters.UNICODE);
-        JSONProfile jsonObject = new JSONProfile(fileString);
+        JsonProfile jsonObject = new JsonProfile(fileString);
         if (jsonObject.isInputValid()) {
             jsonToLifObjectMapping(jsonObject);
         } else {
@@ -43,16 +43,16 @@ public class LIFTopLevelProfiler {
 
     }
 
-    private void jsonToLifObjectMapping(JSONProfile jsonObject) throws LifException, IOException {
+    private void jsonToLifObjectMapping(JsonProfile jsonObject) throws LifException, IOException {
         LifValidityChecker lifDocumentValidityCheck = new LifValidityCheckerStored(jsonObject);
         ObjectMapper mapper = new ObjectMapper();
         if (lifDocumentValidityCheck.isValid()) {
-            lifContainer = mapper.readValue(jsonObject.getJsonString(), LIFContainer.class);
+            lifContainer = mapper.readValue(jsonObject.getJsonString(), LifContainer.class);
         }
 
     }
 
-    public LIFContainer getLifContainer() {
+    public LifContainer getLifContainer() {
         return lifContainer;
     }
 

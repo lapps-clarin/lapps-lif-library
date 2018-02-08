@@ -5,7 +5,6 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.annotation.impl;
 
-import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifConstituentParser;
 import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifParseAnnotationProcessing;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.core.annotation.impl.LifConstituent;
@@ -20,6 +19,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Vector;
 import org.lappsgrid.discriminator.Discriminators;
+import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifConstituentParser;
 
 /**
  *
