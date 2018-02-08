@@ -6,7 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.library.application;
 
 import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifAnnotationLayerFinderStored;
-import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifFileProcess;
+import de.tuebingen.uni.sfs.lapps.utils.LifFileProcess;
 import java.io.File;
 import org.junit.Assert;
 import org.junit.Ignore;

@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.json;
 
-import de.tuebingen.uni.sfs.lapps.profile.JsonProfile;
+import de.tuebingen.uni.sfs.lapps.profile.impl.JsonProfile;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;

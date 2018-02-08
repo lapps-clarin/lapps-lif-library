@@ -3,12 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.profile;
+package de.tuebingen.uni.sfs.lapps.profile.impl;
 
-import de.tuebingen.uni.sfs.lapps.profile.LifValidityChecker;
+import de.tuebingen.uni.sfs.lapps.profile.api.LifValidityChecker;
 import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import de.tuebingen.uni.sfs.lapps.profile.JsonProfile;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;

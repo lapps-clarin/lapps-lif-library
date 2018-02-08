@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.profile;
+package de.tuebingen.uni.sfs.lapps.profile.impl;
 
+import de.tuebingen.uni.sfs.lapps.profile.impl.LifTopLevelProfiler;
+import de.tuebingen.uni.sfs.lapps.profile.api.LifProfile;
+import de.tuebingen.uni.sfs.lapps.profile.impl.LifValidityCheckerStored;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifToolProducerStored;
-import de.tuebingen.uni.sfs.lapps.exceptions.JSONValidityException;
+import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,7 +37,7 @@ public class LifProfilerImpl extends LifTopLevelProfiler implements LifProfile {
     private LifValidityCheckerStored lifValidityCheck = new LifValidityCheckerStored();
     private List<View> views=new ArrayList<View>();
 
-    public LifProfilerImpl(InputStream is) throws LifException, IOException, JSONValidityException{
+    public LifProfilerImpl(InputStream is) throws LifException, IOException, JsonValidityException{
          super(is);
          this.views=super.getViews();
          extractAndSortViews();

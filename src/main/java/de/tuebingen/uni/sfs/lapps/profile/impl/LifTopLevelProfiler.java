@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.profile;
+package de.tuebingen.uni.sfs.lapps.profile.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;
-import de.tuebingen.uni.sfs.lapps.exceptions.JSONValidityException;
+import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
+import de.tuebingen.uni.sfs.lapps.profile.api.LifValidityChecker;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -26,13 +27,13 @@ public class LifTopLevelProfiler {
     private String fileString = null;
     private List<View> views = new ArrayList<View>();
 
-    public LifTopLevelProfiler(InputStream is) throws LifException, IOException, JSONValidityException {
+    public LifTopLevelProfiler(InputStream is) throws LifException, IOException, JsonValidityException {
         fileString = IOUtils.toString(is, LifConnstant.GeneralParameters.UNICODE);
         JsonProfile jsonObject = new JsonProfile(fileString);
         if (jsonObject.isInputValid()) {
             jsonToLifObjectMapping(jsonObject);
         } else {
-            throw new JSONValidityException(LifValidityCheckerStored.INVALID_JSON_FILE);
+            throw new JsonValidityException(LifValidityCheckerStored.INVALID_JSON_FILE);
         }
 
         if (lifContainer != null) {

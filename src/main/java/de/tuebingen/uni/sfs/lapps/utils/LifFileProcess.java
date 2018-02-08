@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.core.layer.impl;
+package de.tuebingen.uni.sfs.lapps.utils;
 
-import de.tuebingen.uni.sfs.lapps.exceptions.JSONValidityException;
+import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifAnnotationLayerFinderStored;
+import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import de.tuebingen.uni.sfs.lapps.profile.LifProfilerImpl;
+import de.tuebingen.uni.sfs.lapps.profile.impl.LifProfilerImpl;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,7 +18,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import de.tuebingen.uni.sfs.lapps.profile.LifProfile;
+import de.tuebingen.uni.sfs.lapps.profile.api.LifProfile;
 
 /**
  *
@@ -70,7 +71,7 @@ public class LifFileProcess {
         }  catch (IOException ex) {
             ex.printStackTrace(System.out);
             Logger.getLogger(LifFileProcess.class.getName()).log(Level.SEVERE, null, "File to String failes!!");
-        } catch (JSONValidityException ex) {
+        } catch (JsonValidityException ex) {
             ex.printStackTrace(System.out);
             Logger.getLogger(LifFileProcess.class.getName()).log(Level.SEVERE, null, ex.getMessage());
         } catch (LifException ex) {

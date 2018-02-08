@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.profile;
+package de.tuebingen.uni.sfs.lapps.profile.api;
 
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;

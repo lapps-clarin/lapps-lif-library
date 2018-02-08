@@ -9,20 +9,20 @@ package de.tuebingen.uni.sfs.lapps.exceptions;
  *
  * @author felahi
  */
-public class JSONValidityException extends Exception {
+public class JsonValidityException extends Exception {
 
-    public JSONValidityException() {
+    public JsonValidityException() {
     }
 
-    public JSONValidityException(String message) {
+    public JsonValidityException(String message) {
         super(message);
     }
 
-    public JSONValidityException(Throwable cause) {
+    public JsonValidityException(Throwable cause) {
         super(cause);
     }
 
-    public JSONValidityException(String message, Throwable cause) {
+    public JsonValidityException(String message, Throwable cause) {
         super(message, cause);
     }
 

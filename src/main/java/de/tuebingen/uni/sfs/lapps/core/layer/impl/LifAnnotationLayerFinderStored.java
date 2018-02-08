@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.lappsgrid.discriminator.Discriminators;
-import de.tuebingen.uni.sfs.lapps.profile.LifProfile;
+import de.tuebingen.uni.sfs.lapps.profile.api.LifProfile;
 
 public class LifAnnotationLayerFinderStored implements AnnotationLayers {
 
