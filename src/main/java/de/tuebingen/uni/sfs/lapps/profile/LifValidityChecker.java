@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.exceptions;
+package de.tuebingen.uni.sfs.lapps.profile;
 
 import de.tuebingen.uni.sfs.lapps.constants.ErrorMessage;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;

@@ -5,40 +5,41 @@
  */
 package de.tuebingen.uni.sfs.lapps.profile;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;
+import de.tuebingen.uni.sfs.lapps.profile.JSONProfile;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.tuebingen.uni.sfs.lapps.exceptions.JSONValidityException;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import org.lappsgrid.serialization.Serializer;
-import org.lappsgrid.serialization.lif.Container;
+import java.io.IOException;
 
 /**
  *
  * @author felahi
  */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class LIFProfiler {
 
-    //"payload"
-    private String discriminator;
+    private LIFContainer lifContainer = new LIFContainer();
 
-    @JsonProperty(LifConnstant.LIF.Document.PAYLOAD_KEY_JSON)
-    private Container container;
-
-    public LIFProfiler() {
+    public LIFProfiler(String jsonString) throws LifException, IOException, JSONValidityException {
+        JSONProfile jsonObject = new JSONProfile(jsonString);
+        if (jsonObject.isInputValid()) {
+            jsonToLifObjectMapping(jsonObject);
+        } else {
+            throw new JSONValidityException(LifValidityCheckerStored.INVALID_JSON_FILE);
+        }
 
     }
 
-    public LIFProfiler(String discriminator, JSONProfile jsonObject) {
-        this.discriminator = discriminator;
-        this.container = Serializer.parse(jsonObject.getJsonString(), Container.class);
+    private void jsonToLifObjectMapping(JSONProfile jsonObject) throws LifException, IOException {
+        LifValidityChecker lifDocumentValidityCheck = new LifValidityCheckerStored(jsonObject);
+        ObjectMapper mapper = new ObjectMapper();
+        if (lifDocumentValidityCheck.isValid()) {
+            lifContainer = mapper.readValue(jsonObject.getJsonString(), LIFContainer.class);
+        }
+
     }
 
-    public String getDiscriminator() {
-        return discriminator;
+    public LIFContainer getLifContainer() {
+        return lifContainer;
     }
 
-    public Container getContainer() throws LifException {
-        return container;
-    }
 }

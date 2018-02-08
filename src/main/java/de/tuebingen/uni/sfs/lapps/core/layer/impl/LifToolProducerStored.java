@@ -7,7 +7,7 @@ package de.tuebingen.uni.sfs.lapps.core.layer.impl;
 
 import de.tuebingen.uni.sfs.lapps.core.layer.impl.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
-import de.tuebingen.uni.sfs.lapps.exceptions.LifValidityCheckerStored;
+import de.tuebingen.uni.sfs.lapps.profile.LifValidityCheckerStored;
 import de.tuebingen.uni.sfs.lapps.utils.DuplicateChecker;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.util.ArrayList;

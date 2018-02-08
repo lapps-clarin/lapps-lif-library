@@ -5,14 +5,12 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.layer.impl;
 
-import de.tuebingen.uni.sfs.lapps.core.layer.api.Process;
-import de.tuebingen.uni.sfs.lapps.profile.LIFProfilerFinder;
-import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifToolProducerStored;
-import de.tuebingen.uni.sfs.lapps.core.layer.impl.AnnotationInterpreter;
-import de.tuebingen.uni.sfs.lapps.exceptions.LifValidityCheckerStored;
+import de.tuebingen.uni.sfs.lapps.profile.LIFProfiler;
+import de.tuebingen.uni.sfs.lapps.profile.LifValidityCheckerStored;
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;
+import de.tuebingen.uni.sfs.lapps.profile.ProfileProcessing;
 import de.tuebingen.uni.sfs.lapps.exceptions.JSONValidityException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +30,7 @@ import org.lappsgrid.serialization.lif.View;
  *
  * @author felahi
  */
-public class LifAnnotationProcess extends Process {
+public class LifAnnotationProcess  implements ProfileProcessing{
 
     private Map<Integer, List<AnnotationInterpreter>> annotationLayerData = new HashMap<Integer, List<AnnotationInterpreter>>();
     private Map<Integer, AnnotationLayerFinder> indexAnnotationLayer = new HashMap<Integer, AnnotationLayerFinder>();
@@ -40,22 +38,13 @@ public class LifAnnotationProcess extends Process {
     public Container lifContainer = null;
     private String fileString = null;
     private LifValidityCheckerStored lifValidityCheck = new LifValidityCheckerStored();
+    private LIFProfiler lifContainerFinder;
 
     public LifAnnotationProcess(InputStream input) throws IOException, JSONValidityException, LifException {
         this.inputDataProcessing(input);
     }
 
-    @Override
-    public void inputDataProcessing(InputStream is) throws IOException, JSONValidityException, LifException {
-        fileString = IOUtils.toString(is, LifConnstant.GeneralParameters.UNICODE);
-        LIFProfilerFinder lifContainerFinder = lifContainerFinder = new LIFProfilerFinder(fileString);
-        lifContainer = lifContainerFinder.getMascDocument().getContainer();
-        extractAndSortViews();
-    }
-
-    @Override
-    public void process(OutputStream os) {
-    }
+   
 
     public void extractAndSortViews() throws LifException {
         processViews();
@@ -130,11 +119,6 @@ public class LifAnnotationProcess extends Process {
         return sortedLayer;
     }
 
-    @Override
-    public boolean isValid() {
-        return true;
-    }
-
     public String getLanguage() {
         return lifContainer.getLanguage();
     }
@@ -151,6 +135,24 @@ public class LifAnnotationProcess extends Process {
         return lifContainer;
     }
 
+
+     @Override
+    public void inputDataProcessing(InputStream is) throws IOException, JSONValidityException, LifException {
+        fileString = IOUtils.toString(is, LifConnstant.GeneralParameters.UNICODE);
+        LIFProfiler lifContainerFinder = lifContainerFinder = new LIFProfiler(fileString);
+        lifContainer = lifContainerFinder.getLifContainer().getContainer();
+        extractAndSortViews();
+    }
+
+    @Override
+    public void process(OutputStream os) {
+    }
+
+    @Override
+    public boolean isValid() {
+        return true;
+    }
+    
     @Override
     public String toString() {
         return "DataModelLif{" + "indexAnnotationLayer=" + indexAnnotationLayer + ", sortedLayer=" + sortedLayer + '}';
