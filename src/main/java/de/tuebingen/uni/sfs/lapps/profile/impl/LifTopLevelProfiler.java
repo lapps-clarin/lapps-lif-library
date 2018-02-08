@@ -47,7 +47,7 @@ public class LifTopLevelProfiler {
     private void jsonToLifObjectMapping(JsonProfile jsonObject) throws LifException, IOException {
         LifValidityChecker lifDocumentValidityCheck = new LifValidityCheckerStored(jsonObject);
         ObjectMapper mapper = new ObjectMapper();
-        if (lifDocumentValidityCheck.isValid()) {
+        if (lifDocumentValidityCheck.isTopLevelValid()) {
             lifContainer = mapper.readValue(jsonObject.getJsonString(), LifContainer.class);
         }
 

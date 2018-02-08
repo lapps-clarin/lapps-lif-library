@@ -39,7 +39,7 @@ public class LifValidityCheckerStored implements LifValidityChecker {
         this.annotation = annotation;
     }
 
-    public boolean isValid() throws LifException {
+    public boolean isTopLevelValid() throws LifException {
         return (isNonEmptyDocument()
                 && isDocumentStructureValid()
                 && isToplevelAnnotationValid());
@@ -120,8 +120,9 @@ public class LifValidityCheckerStored implements LifValidityChecker {
     public boolean isAnnotationValid() throws LifException {
         throw new UnsupportedOperationException(NOT_SUPPORTED_YET); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public boolean isMetadataLayerValid(String layer, Set<String> metadataInfoInLayers, Set<String> annotationInfoInLayers) throws LifException {
+    
+    @Override
+    public boolean isMetadataVsAnnotationValid(String layer, Set<String> metadataInfoInLayers, Set<String> annotationInfoInLayers) throws LifException{
         if (layer.contains(Discriminators.Uri.NE)) {
             return isNamedEntityValid(annotationInfoInLayers);
         }  if (layer.contains(Discriminators.Uri.POS)||layer.contains(Discriminators.Uri.LEMMA)) {
@@ -132,6 +133,7 @@ public class LifValidityCheckerStored implements LifValidityChecker {
             throw new LifException(MESSAGE_INVALID_LIF_METADATA_ANNOTATION+ layer);
         }
     }
+
 
     public boolean isMetadataLayerValid(String lifLayer, Set<String> annotationTypes) throws LifException {
         if (!annotationTypes.contains(lifLayer)) {

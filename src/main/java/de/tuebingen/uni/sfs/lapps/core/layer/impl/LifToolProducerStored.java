@@ -84,7 +84,7 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
         }
 
         //temporary closed...
-        //lifValidityCheck.isMetadataLayerValid(lifLayer,annotationTypes);
+        //lifValidityCheck.isMetadataVsAnnotationValid(lifLayer,annotationTypes);
         return annotationInterpreterList;
     }
 
@@ -131,8 +131,9 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
 
     public boolean isLayerValid() throws LifException {
         LifValidityCheckerStored lifValidityCheck = new LifValidityCheckerStored();
-        return lifValidityCheck.isMetadataLayerValid(this.lifLayer, this.metadataInfoInLayers, this.annotationInfoInLayers);
+        return lifValidityCheck.isMetadataVsAnnotationValid(this.lifLayer, this.metadataInfoInLayers, this.annotationInfoInLayers);
     }
+    
 
     public boolean isToolExists(String tool) throws LifException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
