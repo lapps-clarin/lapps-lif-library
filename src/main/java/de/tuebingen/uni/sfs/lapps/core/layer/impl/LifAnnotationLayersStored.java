@@ -162,4 +162,25 @@ public class LifAnnotationLayersStored implements AnnotationLayerFinder {
     public void getLayerFromMultipleUrls() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Integer getLayerIndex() {
+      if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.TEXT))
+          return 1;
+      else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.TOKEN))
+          return 2;
+      else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.POS))
+          return 3;
+      else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.SENTENCE))
+          return 4;
+      else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.NE))
+          return 100;
+      else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.DEPENDENCY_STRUCTURE))
+          return 5;
+       else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.PHRASE_STRUCTURE))
+          return 6;
+       else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.COREF))
+          return 7;
+      return 0;
+    }
 }

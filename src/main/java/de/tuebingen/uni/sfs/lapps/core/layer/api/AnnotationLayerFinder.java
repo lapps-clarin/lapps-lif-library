@@ -18,6 +18,8 @@ public interface AnnotationLayerFinder {
     public boolean isToolExists(String tool) throws LifException;
 
     public String getLayer();
+    
+     public Integer getLayerIndex();
 
     public String getTool() throws LifException;
 

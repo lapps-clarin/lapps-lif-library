@@ -64,10 +64,11 @@ public class LifProfilerImpl extends LifTopLevelProfiler implements LifProfile {
                 if (!lifLayer.isLayerValid()) {
                     throw new LifException("The annotation layer "+lifLayer.getLayer()+"is not valid!!");
                 }
+                index =lifLayer.getLayerIndex();
                 annotationLayerData.put(index, lifCharOffsetObjectList);
                 indexAnnotationLayer.put(index, lifLayer);
             }
-            index = index + 1;
+            //index = index + 1;
         }
 
     }
