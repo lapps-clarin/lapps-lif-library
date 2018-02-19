@@ -68,7 +68,6 @@ public class LifProfilerImpl extends LifTopLevelProfiler implements LifProfile {
                 annotationLayerData.put(index, lifCharOffsetObjectList);
                 indexAnnotationLayer.put(index, lifLayer);
             }
-            //index = index + 1;
         }
 
     }

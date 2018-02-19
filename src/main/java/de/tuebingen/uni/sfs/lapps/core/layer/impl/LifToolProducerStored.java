@@ -5,6 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.layer.impl;
 
+import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.profile.impl.LifValidityCheckerStored;
@@ -17,6 +18,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.lappsgrid.discriminator.Discriminators;
 import org.lappsgrid.serialization.lif.Annotation;
 import org.lappsgrid.vocabulary.Metadata;
@@ -133,7 +136,6 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
         LifValidityCheckerStored lifValidityCheck = new LifValidityCheckerStored();
         return lifValidityCheck.isMetadataVsAnnotationValid(this.lifLayer, this.metadataInfoInLayers, this.annotationInfoInLayers);
     }
-    
 
     public boolean isToolExists(String tool) throws LifException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -177,22 +179,10 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
 
     @Override
     public Integer getLayerIndex() {
-       if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.TEXT))
-          return 1;
-      else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.TOKEN))
-          return 2;
-      else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.POS))
-          return 3;
-      else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.SENTENCE))
-          return 4;
-      else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.NE))
-          return 100;
-      else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.DEPENDENCY_STRUCTURE))
-          return 5;
-       else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.PHRASE_STRUCTURE))
-          return 6;
-       else if(this.lifLayer.equalsIgnoreCase(Discriminators.Uri.COREF))
-          return 7;
-      return 0;
+        Integer order = LifConnstant.LIF.Document.DocumentOrdering.LAYER_ORDER.get(this.lifLayer);
+        if (order != null) {
+            return order;
+        }
+        return 0;
     }
 }

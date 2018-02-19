@@ -6,7 +6,9 @@
 package de.tuebingen.uni.sfs.lapps.constants;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import org.lappsgrid.discriminator.Discriminators;
 
@@ -53,11 +55,28 @@ public class LifConnstant {
                 public static final String METADATA_KEY_LIF = "metadata";
             }
 
+            public static class DocumentOrdering {
+
+                public static final Map<String, Integer> LAYER_ORDER = new HashMap<String, Integer>();
+
+                static {
+                    LAYER_ORDER.put(Discriminators.Uri.TEXT, 1);
+                    LAYER_ORDER.put(Discriminators.Uri.TOKEN, 2);
+                    LAYER_ORDER.put(Discriminators.Uri.SENTENCE, 3);
+                    LAYER_ORDER.put(Discriminators.Uri.POS, 4);
+                    LAYER_ORDER.put(Discriminators.Uri.NE, 5);
+                    LAYER_ORDER.put(Discriminators.Uri.DEPENDENCY_STRUCTURE, 6);
+                    LAYER_ORDER.put(Discriminators.Uri.PHRASE_STRUCTURE, 7);
+                    LAYER_ORDER.put(Discriminators.Uri.COREF, 8);
+                }
+            }
+
             public static class LifDocumentDeepLevel {
+
                 Set<String> NAME_ENTITY_ANNOTATIONS = new HashSet<String>(Arrays.asList(
-                        Discriminators.Uri.PERSON, 
-                        Discriminators.Uri.LOCATION, 
-                        Discriminators.Uri.DATE, 
+                        Discriminators.Uri.PERSON,
+                        Discriminators.Uri.LOCATION,
+                        Discriminators.Uri.DATE,
                         Discriminators.Uri.ORGANIZATION));
             }
 
