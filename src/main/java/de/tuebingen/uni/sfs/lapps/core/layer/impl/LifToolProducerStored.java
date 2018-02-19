@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.layer.impl;
 
-import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;
+import de.tuebingen.uni.sfs.lapps.constants.LifDocumentConnstant;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.profile.impl.LifValidityCheckerStored;
@@ -179,7 +179,7 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
 
     @Override
     public Integer getLayerIndex() {
-        Integer order = LifConnstant.LIF.Document.DocumentOrdering.LAYER_ORDER.get(this.lifLayer);
+        Integer order = LifDocumentConnstant.Annotation.Ordering.LAYER_ORDER.get(this.lifLayer);
         if (order != null) {
             return order;
         }

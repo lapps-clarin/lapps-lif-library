@@ -6,7 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.profile.impl;
 
 import de.tuebingen.uni.sfs.lapps.profile.api.LifValidityChecker;
-import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;
+import de.tuebingen.uni.sfs.lapps.constants.LifDocumentConnstant;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -54,14 +54,14 @@ public class LifValidityCheckerStored implements LifValidityChecker {
 
     public boolean isDocumentStructureValid() throws LifException {
         Set<String> annotationSet = jsonObject.getJsonMap().keySet();
-        if (annotationSet.contains(LifConnstant.LIF.Document.PAYLOAD_KEY_JSON)
-                && annotationSet.contains(LifConnstant.LIF.Document.DISCRIMINATOR_KEY_JSON)) {
+        if (annotationSet.contains(LifDocumentConnstant.DocumentStructure.PAYLOAD_KEY_JSON)
+                && annotationSet.contains(LifDocumentConnstant.DocumentStructure.DISCRIMINATOR_KEY_JSON)) {
             return true;
-        } else if (!annotationSet.contains(LifConnstant.LIF.Document.PAYLOAD_KEY_JSON)
-                && annotationSet.contains(LifConnstant.LIF.Document.DISCRIMINATOR_KEY_JSON)) {
+        } else if (!annotationSet.contains(LifDocumentConnstant.DocumentStructure.PAYLOAD_KEY_JSON)
+                && annotationSet.contains(LifDocumentConnstant.DocumentStructure.DISCRIMINATOR_KEY_JSON)) {
             throw new LifException(MESSAGE_INVALID_LIF_PAYLOAD_DOCUMENT);
-        } else if (annotationSet.contains(LifConnstant.LIF.Document.PAYLOAD_KEY_JSON)
-                && !annotationSet.contains(LifConnstant.LIF.Document.DISCRIMINATOR_KEY_JSON)) {
+        } else if (annotationSet.contains(LifDocumentConnstant.DocumentStructure.PAYLOAD_KEY_JSON)
+                && !annotationSet.contains(LifDocumentConnstant.DocumentStructure.DISCRIMINATOR_KEY_JSON)) {
             throw new LifException(MESSAGE_INVALID_LIF_DISCRIMINATOR_DOCUMENT);
         } else {
             throw new LifException(MESSAGE_INVALID_LIF_DISCRIMINATOR_DOCUMENT);
@@ -73,7 +73,7 @@ public class LifValidityCheckerStored implements LifValidityChecker {
         LinkedHashMap linkedHashMap = null;
 
         for (String key : jsonObject.getJsonMap().keySet()) {
-            if (key.contains(LifConnstant.LIF.Document.PAYLOAD_KEY_JSON)) {
+            if (key.contains(LifDocumentConnstant.DocumentStructure.PAYLOAD_KEY_JSON)) {
                 Object payLoadContent = jsonObject.getJsonMap().get(key);
                 if (payLoadContent instanceof LinkedHashMap) {
                     linkedHashMap = (LinkedHashMap) jsonObject.getJsonMap().get(key);
@@ -95,15 +95,15 @@ public class LifValidityCheckerStored implements LifValidityChecker {
     }
 
     private boolean topLevelAnnotationCheck(Set<String> annotationSet) throws LifException {
-        /*if (!annotationSet.contains(LifConnstant.LIF.Document.LifDocumentTopLevel.CONTEXT_KEY_LIF)) {
+        /*if (!annotationSet.contains(LifDocumentConnstant.Annotation.Document.LifDocumentTopLevel.CONTEXT_KEY_LIF)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_CONTEXT_MISSING);
         } else*/ 
         //temporary closed...
-        if (!annotationSet.contains(LifConnstant.LIF.Document.LifDocumentTopLevel.METADATA_KEY_LIF)) {
+        if (!annotationSet.contains(LifDocumentConnstant.DocumentStructure.TopLevel.METADATA_KEY_LIF)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_METADATA_MISSING);
-        } else if (!annotationSet.contains(LifConnstant.LIF.Document.LifDocumentTopLevel.VIEWS_KEY_LIF)) {
+        } else if (!annotationSet.contains(LifDocumentConnstant.DocumentStructure.TopLevel.VIEWS_KEY_LIF)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_VIEWS_MISSING);
-        } else if (!annotationSet.contains(LifConnstant.LIF.Document.LifDocumentTopLevel.TEXT_KEY_LIF)) {
+        } else if (!annotationSet.contains(LifDocumentConnstant.DocumentStructure.TopLevel.TEXT_KEY_LIF)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_TEXT_MISSING);
         } else {
             return true;

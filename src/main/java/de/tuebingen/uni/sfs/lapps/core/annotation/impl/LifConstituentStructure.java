@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.annotation.impl;
 
-import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;
+import de.tuebingen.uni.sfs.lapps.constants.LifDocumentConnstant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -23,8 +23,8 @@ public class LifConstituentStructure {
 
     public LifConstituentStructure(Map<Object, Object> features) throws NullPointerException {
         this.text = (String) features.get(Discriminators.Alias.SENTENCE);
-        this.tree = (String) features.get(LifConnstant.LIF.DiscriminitorsExtended.PENN_TREE);
-        this.constituents = (List) features.get(LifConnstant.LIF.DiscriminitorsExtended.CONSTITUENTS);
+        this.tree = (String) features.get(LifDocumentConnstant.Annotation.DiscriminitorsExtended.PENN_TREE);
+        this.constituents = (List) features.get(LifDocumentConnstant.Annotation.DiscriminitorsExtended.CONSTITUENTS);
     }
 
     public String getText() {

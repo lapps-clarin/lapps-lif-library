@@ -6,7 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.profile.impl;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.tuebingen.uni.sfs.lapps.constants.LifConnstant;
+import de.tuebingen.uni.sfs.lapps.constants.LifDocumentConnstant;
 import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import de.tuebingen.uni.sfs.lapps.profile.api.LifValidityChecker;
@@ -28,7 +28,7 @@ public class LifTopLevelProfiler {
     private List<View> views = new ArrayList<View>();
 
     public LifTopLevelProfiler(InputStream is) throws LifException, IOException, JsonValidityException {
-        fileString = IOUtils.toString(is, LifConnstant.GeneralParameters.UNICODE);
+        fileString = IOUtils.toString(is, LifDocumentConnstant.GeneralParameters.UNICODE);
         JsonProfile jsonObject = new JsonProfile(fileString);
         if (jsonObject.isInputValid()) {
             jsonToLifObjectMapping(jsonObject);
