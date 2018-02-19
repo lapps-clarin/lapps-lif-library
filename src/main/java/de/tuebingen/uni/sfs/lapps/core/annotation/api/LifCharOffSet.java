@@ -9,12 +9,11 @@ package de.tuebingen.uni.sfs.lapps.core.annotation.api;
  *
  * @author Mohammad Fazleh Elahi
  */
-public interface LifTokenPosLemma extends LifCharOffSet{
+public interface LifCharOffSet {
 
-    public String getWord();
+    public String getId();
+    
+    public long getStart();
 
-    public String getPos();
-
-    public String getLemma();
-
+    public long getEnd();
 }

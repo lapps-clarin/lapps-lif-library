@@ -5,16 +5,14 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.annotation.api;
 
+import java.util.List;
+
 /**
  *
  * @author Mohammad Fazleh Elahi
  */
-public interface LifTokenPosLemma extends LifCharOffSet{
+public interface LifNameEntityLayer {
 
-    public String getWord();
-
-    public String getPos();
-
-    public String getLemma();
+    public List<LifNameEntity> getNameEntityList();
 
 }
