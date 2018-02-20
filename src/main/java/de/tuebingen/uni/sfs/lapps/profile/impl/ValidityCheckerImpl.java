@@ -5,9 +5,11 @@
  */
 package de.tuebingen.uni.sfs.lapps.profile.impl;
 
-import de.tuebingen.uni.sfs.lapps.profile.api.LifValidityChecker;
+import com.fasterxml.jackson.core.JsonParseException;
 import de.tuebingen.uni.sfs.lapps.constants.LifDocumentConnstant;
+import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -16,50 +18,57 @@ import java.util.Set;
 import org.lappsgrid.discriminator.Discriminators;
 import org.lappsgrid.serialization.lif.Annotation;
 import org.lappsgrid.serialization.lif.View;
+import de.tuebingen.uni.sfs.lapps.profile.api.ValidityChecker;
 
 /**
  *
  * @author felahi
  */
-public class LifValidityCheckerStored implements LifValidityChecker {
+public class ValidityCheckerImpl extends JsonProfiler implements ValidityChecker {
 
-    private JsonProfile jsonObject = null;
     private List<View> views = new ArrayList<View>();
     private Annotation annotation = null;
 
-    public LifValidityCheckerStored() {
-
+    public ValidityCheckerImpl(String fileString) {
+        super(fileString);
     }
 
-    public LifValidityCheckerStored(JsonProfile jsonObject) {
-        this.jsonObject = jsonObject;
+    public ValidityCheckerImpl() {
+        super(null);
+       
     }
 
-    public LifValidityCheckerStored(Annotation annotation) {
+
+    /*public ValidityCheckerImpl(Annotation annotation) {
         this.annotation = annotation;
-    }
+    }*/
     
     //Lapps given validity will be used
-    public boolean isTopLevelValid() throws LifException {
+    public boolean isValid() throws JsonParseException, IOException, JsonValidityException, LifException {
+        return (super.isValid()
+                && isSchemaValid());
+    }
+    
+    private boolean isSchemaValid() {
         return true;
     }
 
      //Internal validity check is  closed..
-   /* public boolean isTopLevelValid() throws LifException {
+   /* public boolean isJsonValid() throws LifException {
         return (isNonEmptyDocument()
                 && isDocumentStructureValid()
                 && isToplevelAnnotationValid());
     }*/
 
     public boolean isNonEmptyDocument() throws LifException {
-        if (jsonObject.getJsonMap().keySet().isEmpty()) {
+        if (super.getJsonMap().keySet().isEmpty()) {
             throw new LifException(MESSAGE_INVALID_JSON);
         }
         return true;
     }
 
     public boolean isDocumentStructureValid() throws LifException {
-        Set<String> annotationSet = jsonObject.getJsonMap().keySet();
+        Set<String> annotationSet = super.getJsonMap().keySet();
         if (annotationSet.contains(LifDocumentConnstant.DocumentStructure.PAYLOAD_KEY_JSON)
                 && annotationSet.contains(LifDocumentConnstant.DocumentStructure.DISCRIMINATOR_KEY_JSON)) {
             return true;
@@ -78,11 +87,11 @@ public class LifValidityCheckerStored implements LifValidityChecker {
         Set<String> topLevelAnnotationSet = new HashSet<String>();
         LinkedHashMap linkedHashMap = null;
 
-        for (String key : jsonObject.getJsonMap().keySet()) {
+        for (String key : super.getJsonMap().keySet()) {
             if (key.contains(LifDocumentConnstant.DocumentStructure.PAYLOAD_KEY_JSON)) {
-                Object payLoadContent = jsonObject.getJsonMap().get(key);
+                Object payLoadContent = super.getJsonMap().get(key);
                 if (payLoadContent instanceof LinkedHashMap) {
-                    linkedHashMap = (LinkedHashMap) jsonObject.getJsonMap().get(key);
+                    linkedHashMap = (LinkedHashMap) super.getJsonMap().get(key);
                     for (Object topLevelAnnoKey : linkedHashMap.keySet()) {
                         topLevelAnnotationSet.add(topLevelAnnoKey.toString());
                     }
@@ -127,7 +136,6 @@ public class LifValidityCheckerStored implements LifValidityChecker {
         throw new UnsupportedOperationException(NOT_SUPPORTED_YET); //To change body of generated methods, choose Tools | Templates.
     }
     
-    @Override
     public boolean isMetadataVsAnnotationValid(String layer, Set<String> metadataInfoInLayers, Set<String> annotationInfoInLayers) throws LifException{
         if (layer.contains(Discriminators.Uri.NE)) {
             return isNamedEntityValid(annotationInfoInLayers);

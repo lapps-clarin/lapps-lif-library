@@ -16,15 +16,13 @@ import java.util.Vector;
  *
  * @author felahi
  */
-public interface LifProfile {
+public interface LifProfile extends ValidityChecker {
     
      public String getLanguage() throws LifException;
 
     public String getText() throws LifException;
 
     public String getFileString();
-
-    public boolean isValid();
 
     public Map<Integer, List<AnnotationInterpreter>> getAnnotationLayerData();
 

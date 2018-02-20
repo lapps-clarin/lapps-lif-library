@@ -5,12 +5,15 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.layer.impl;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import de.tuebingen.uni.sfs.lapps.constants.LifDocumentConnstant;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
-import de.tuebingen.uni.sfs.lapps.profile.impl.LifValidityCheckerStored;
+import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
+import de.tuebingen.uni.sfs.lapps.profile.impl.ValidityCheckerImpl;
 import de.tuebingen.uni.sfs.lapps.utils.DuplicateChecker;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -132,8 +135,9 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
         }
     }
 
-    public boolean isLayerValid() throws LifException {
-        LifValidityCheckerStored lifValidityCheck = new LifValidityCheckerStored();
+    @Override
+    public boolean isValid() throws JsonParseException, IOException, JsonValidityException, LifException {
+        ValidityCheckerImpl lifValidityCheck = new ValidityCheckerImpl();
         return lifValidityCheck.isMetadataVsAnnotationValid(this.lifLayer, this.metadataInfoInLayers, this.annotationInfoInLayers);
     }
 
@@ -185,4 +189,6 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
         }
         return 0;
     }
+
+  
 }

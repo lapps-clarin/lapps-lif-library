@@ -5,14 +5,16 @@
  */
 package de.tuebingen.uni.sfs.lapps.profile.impl;
 
-import de.tuebingen.uni.sfs.lapps.profile.impl.LifTopLevelProfiler;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import de.tuebingen.uni.sfs.lapps.constants.LifDocumentConnstant;
 import de.tuebingen.uni.sfs.lapps.profile.api.LifProfile;
-import de.tuebingen.uni.sfs.lapps.profile.impl.LifValidityCheckerStored;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifToolProducerStored;
 import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
+import de.tuebingen.uni.sfs.lapps.profile.api.ValidityChecker;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -23,38 +25,55 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+import org.apache.commons.io.IOUtils;
 import org.lappsgrid.serialization.lif.View;
 
 /**
  *
  * @author felahi
  */
-public class LifProfilerImpl extends LifTopLevelProfiler implements LifProfile {
+public class LifProfiler implements LifProfile {
 
+    private String fileString = null;
+    private LifContainerMapper lifContainer = new LifContainerMapper();
     private Map<Integer, List<AnnotationInterpreter>> annotationLayerData = new HashMap<Integer, List<AnnotationInterpreter>>();
     private Map<Integer, AnnotationLayerFinder> indexAnnotationLayer = new HashMap<Integer, AnnotationLayerFinder>();
     private Vector<Integer> sortedLayer = new Vector<Integer>();
-    private LifValidityCheckerStored lifValidityCheck = new LifValidityCheckerStored();
-    private List<View> views=new ArrayList<View>();
+    private ValidityCheckerImpl lifValidityCheck;
+    private List<View> views = new ArrayList<View>();
 
-    public LifProfilerImpl(InputStream is) throws LifException, IOException, JsonValidityException{
-         super(is);
-         this.views=super.getViews();
-         extractAndSortViews();
+    public LifProfiler(InputStream is) throws LifException, IOException, JsonValidityException {
+        fileString = IOUtils.toString(is, LifDocumentConnstant.GeneralParameters.UNICODE);
+        isValid();
+
     }
 
-    public void extractAndSortViews() throws LifException {
-        processViews();
-        sortedLayer = new Vector(this.indexAnnotationLayer.keySet());
-        Collections.sort(sortedLayer);
+    @Override
+    public boolean isValid() throws JsonParseException, IOException, JsonValidityException, LifException {
+        lifValidityCheck = new ValidityCheckerImpl(fileString);
+        if (lifValidityCheck.isValid()) {
+            lifContainer = new ObjectMapper().readValue(fileString, LifContainerMapper.class);
+        } else {
+            throw new JsonValidityException(ValidityCheckerImpl.INVALID_JSON_FILE);
+        }
+
+        if (lifContainer != null) {
+            this.views = lifContainer.getContainer().getViews();
+        } else {
+            throw new LifException(ValidityCheckerImpl.MESSAGE_INVALID_LIF);
+        }
+
+        if (processViews()) {
+            sortedLayer = new Vector(this.indexAnnotationLayer.keySet());
+            Collections.sort(sortedLayer);
+            return true;
+        }
+
+        return false;
     }
 
-    private void processViews() throws LifException {
+    private boolean processViews() throws LifException, IOException, JsonParseException, JsonValidityException {
         Integer index = 0;
-
-        /*if (!isViewValid(views)) {
-            return;
-        }*/
         Set<Integer> ignoreViewsIndex = this.dealWithMultipleLayers(views);
 
         for (View view : views) {
@@ -62,15 +81,16 @@ public class LifProfilerImpl extends LifTopLevelProfiler implements LifProfile {
                 LifToolProducerStored lifLayer = new LifToolProducerStored(view.getMetadata());
                 List<AnnotationInterpreter> lifCharOffsetObjectList = lifLayer.processAnnotations(view.getAnnotations());
                 //Internal validity check is  closed..
-                /*if (!lifLayer.isLayerValid()) {
-                    throw new LifException("The annotation layer "+lifLayer.getLayer()+"is not valid!!");
-                }*/
-                index =lifLayer.getLayerIndex();
+                if (!lifLayer.isValid()) {
+                    throw new LifException("The annotation layer " + lifLayer.getLayer() + "is not valid!!");
+                }
+                index = lifLayer.getLayerIndex();
                 annotationLayerData.put(index, lifCharOffsetObjectList);
                 indexAnnotationLayer.put(index, lifLayer);
             }
         }
 
+        return true;
     }
 
     private Set<Integer> dealWithMultipleLayers(List<View> views) throws LifException {
@@ -112,31 +132,23 @@ public class LifProfilerImpl extends LifTopLevelProfiler implements LifProfile {
     }
 
     @Override
-    public String toString() {
-        return "DataModelLif{" + "indexAnnotationLayer=" + indexAnnotationLayer + ", sortedLayer=" + sortedLayer + '}';
-    }
-
-    @Override
     public String getLanguage() throws LifException {
-        return super.getLifContainer().getContainer().getLanguage();
+        return lifContainer.getContainer().getLanguage();
     }
 
     @Override
     public String getText() throws LifException {
-        return super.getLifContainer().getContainer().getText();
+        return lifContainer.getContainer().getText();
     }
 
     @Override
     public String getFileString() {
-       return super.getFileString();
+        return this.fileString;
     }
-
-
-    @Override
-    public boolean isValid() {
-        return true;
-    }
-
     
+     @Override
+    public String toString() {
+        return "DataModelLif{" + "indexAnnotationLayer=" + indexAnnotationLayer + ", sortedLayer=" + sortedLayer + '}';
+    }
 
 }

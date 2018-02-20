@@ -8,31 +8,29 @@ package de.tuebingen.uni.sfs.lapps.profile.impl;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
+import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
+import de.tuebingen.uni.sfs.lapps.profile.api.ValidityChecker;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author felahi
  */
-public class JsonProfile {
+public class JsonProfiler implements ValidityChecker {
 
     private String jsonString = null;
     private Map<String, Object> jsonMap = new HashMap<String, Object>();
-    private boolean valid = true;
 
-    public JsonProfile(String jsonString) {
+    public JsonProfiler(String jsonString) {
         this.jsonString = jsonString;
-        try {
-            this.jsonMap = conversionJSONMapToString();
-        } catch (Exception ex) {
-            valid = false;
-            Logger.getLogger(JsonProfile.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    }
 
+    @Override
+    public boolean isValid() throws JsonParseException, IOException, JsonValidityException, LifException {
+        this.jsonMap = conversionJSONMapToString();
+        return true;
     }
 
     private Map<String, Object> conversionJSONMapToString() throws JsonParseException, IOException {
@@ -42,22 +40,8 @@ public class JsonProfile {
         return mapper.readValue(jsonString, typeRef);
     }
 
-    public boolean isInputValid() {
-        return valid;
-    }
-
-    public String getJsonString() {
-        return jsonString;
-    }
-
     public Map<String, Object> getJsonMap() {
         return jsonMap;
     }
 
-    public boolean isOutputValid() throws IOException {
-        if (!jsonMap.isEmpty()) {
-            return true;
-        }
-        return false;
-    }
 }

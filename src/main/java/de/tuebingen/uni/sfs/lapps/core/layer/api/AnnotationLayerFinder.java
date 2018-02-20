@@ -6,12 +6,13 @@
 package de.tuebingen.uni.sfs.lapps.core.layer.api;
 
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
+import de.tuebingen.uni.sfs.lapps.profile.api.ValidityChecker;
 
 /**
  *
  * @author This interface finds the annotation layer from a file
  */
-public interface AnnotationLayerFinder {
+public interface AnnotationLayerFinder extends ValidityChecker{
 
     public boolean isLayerExists() throws LifException;
 
