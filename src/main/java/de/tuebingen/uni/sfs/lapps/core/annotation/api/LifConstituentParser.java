@@ -5,12 +5,12 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.annotation.api;
 
-import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifToken;
 import de.tuebingen.uni.sfs.lapps.core.annotation.impl.LifConstituent;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
+import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifTokenLayer;
 
 
 
@@ -18,7 +18,7 @@ import java.util.Vector;
  *
  * @author Mohammad Fazleh Elahi
  */
-public interface LifConstituentParser extends LifToken{
+public interface LifConstituentParser extends LifTokenLayer{
     
     public Vector<Long> getParseIndexs() ;
 

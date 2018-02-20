@@ -14,7 +14,7 @@ import org.lappsgrid.serialization.lif.Container;
 
 /**
  *
- * @author felahi
+ * @author Mohammad Fazleh Elahi
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class LifContainerMapper {

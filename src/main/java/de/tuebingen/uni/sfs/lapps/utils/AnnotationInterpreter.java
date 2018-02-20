@@ -24,8 +24,7 @@ public class AnnotationInterpreter implements Comparable<AnnotationInterpreter> 
     private String label = null;
     private Map<Object, Object> features = new HashMap<Object, Object>();
     public static Map<String, AnnotationInterpreter> elementIdMapper = new HashMap<String, AnnotationInterpreter>();
-    private LifTokenPosLemma lifToken = null;
-
+    
     public AnnotationInterpreter(Annotation annotation) {
         if (annotation.getStart() != null) {
             this.start = annotation.getStart();
@@ -39,7 +38,6 @@ public class AnnotationInterpreter implements Comparable<AnnotationInterpreter> 
         this.id = annotation.getId();
         this.label = annotation.getLabel();
         this.features = annotation.getFeatures();
-        //this.lifToken = new LifTokenPosLemmaStored(this.url,annotation.getFeatures());
         elementIdMapper.put(annotation.getId(), this);
     }
 
@@ -64,10 +62,6 @@ public class AnnotationInterpreter implements Comparable<AnnotationInterpreter> 
     public boolean isProcessed() {
         return false;
     }
-
-    /*public LifTokenPosLemma getLifToken() {
-        return lifToken;
-    }*/
 
     public String getUrl() {
         return url;

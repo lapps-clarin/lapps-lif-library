@@ -67,7 +67,6 @@ public class LifDocumentConnstant {
         public static class TopLevel {
 
             public static final String CONTEXT_KEY_LIF = "@context";
-            public static final String TEXT_KEY_LIF = "text";
             public static final String VIEWS_KEY_LIF = "views";
             public static final String METADATA_KEY_LIF = "metadata";
         }

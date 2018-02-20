@@ -12,6 +12,6 @@ import java.util.List;
  *
  * @author Mohammad Fazleh Elahi
  */
-public interface LifToken {
+public interface LifTokenLayer {
     public List<AnnotationInterpreter> getTokenList(); 
 }

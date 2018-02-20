@@ -118,7 +118,7 @@ public class ValidityCheckerImpl extends JsonProfiler implements ValidityChecker
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_METADATA_MISSING);
         } else if (!annotationSet.contains(LifDocumentConnstant.DocumentStructure.TopLevel.VIEWS_KEY_LIF)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_VIEWS_MISSING);
-        } else if (!annotationSet.contains(LifDocumentConnstant.DocumentStructure.TopLevel.TEXT_KEY_LIF)) {
+        } else if (!annotationSet.contains(Discriminators.Alias.TEXT)) {
             throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_TEXT_MISSING);
         } else {
             return true;

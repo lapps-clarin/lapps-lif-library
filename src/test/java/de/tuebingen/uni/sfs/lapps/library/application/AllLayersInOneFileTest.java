@@ -11,6 +11,7 @@ import java.io.File;
 import static org.junit.Assert.assertTrue;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.lappsgrid.discriminator.Discriminators;
 
 /**
  *
@@ -19,9 +20,7 @@ import org.junit.Test;
 public class AllLayersInOneFileTest {
 
     private String ALL_LAYER_EXAMPLE = "karen-all.json";
-    private String FILE_LIF = "lif";
-    private String FILE_JSON = "json";
-    AllLayersInOneFileTest instance;
+    private AllLayersInOneFileTest instance;
     private ClassLoader classLoader = getClass().getClassLoader();
 
     public AllLayersInOneFileTest() {
@@ -33,7 +32,7 @@ public class AllLayersInOneFileTest {
     @Test
     public void testAllLayer() throws Exception {
         File inputFile = new File(classLoader.getResource(ALL_LAYER_EXAMPLE).getFile());
-        if (inputFile.getName().contains(FILE_LIF)||inputFile.getName().contains(FILE_JSON)) {
+        if (inputFile.getName().contains(Discriminators.Alias.LIF)||inputFile.getName().contains(Discriminators.Alias.JSON)) {
             LifAnnotationLayerFinderStored tool = LifFileProcess.fileProcessing(inputFile);
             assertTrue("TextLayer exists in the file", tool.isTextLayer());
             assertTrue("TokenLayer exists in the file", tool.isTokenLayer());
@@ -52,7 +51,7 @@ public class AllLayersInOneFileTest {
     public void testAllLayerOthers1() throws Exception {
         String ALL_LAYER_OTHER_EXAMPLE_1 = "karen-all.json";
         File inputFile = new File(classLoader.getResource(ALL_LAYER_OTHER_EXAMPLE_1).getFile());
-        if (inputFile.getName().contains(FILE_LIF)||inputFile.getName().contains(FILE_JSON)) {
+        if (inputFile.getName().contains(Discriminators.Alias.LIF)||inputFile.getName().contains(Discriminators.Alias.JSON)) {
             LifAnnotationLayerFinderStored tool = LifFileProcess.fileProcessing(inputFile);
             assertTrue("TextLayer exists in the file", tool.isTextLayer());
             assertTrue("TokenLayer exists in the file", tool.isTokenLayer());
@@ -71,7 +70,7 @@ public class AllLayersInOneFileTest {
     public void testAllLayerOthers2() throws Exception {
         String ALL_LAYER_OTHER_EXAMPLE_2 = "other/karen-most.json";
         File inputFile = new File(classLoader.getResource(ALL_LAYER_OTHER_EXAMPLE_2).getFile());
-        if (inputFile.getName().contains(FILE_LIF)||inputFile.getName().contains(FILE_JSON)) {
+        if (inputFile.getName().contains(Discriminators.Alias.LIF)||inputFile.getName().contains(Discriminators.Alias.JSON)) {
             LifAnnotationLayerFinderStored tool = LifFileProcess.fileProcessing(inputFile);
             assertTrue("TextLayer exists in the file", tool.isTextLayer());
             assertTrue("TokenLayer exists in the file", tool.isTokenLayer());
