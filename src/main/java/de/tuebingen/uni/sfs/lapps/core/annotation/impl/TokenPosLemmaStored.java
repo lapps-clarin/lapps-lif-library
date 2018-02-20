@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.annotation.impl;
 
-import de.tuebingen.uni.sfs.lapps.core.annotation.api.TokenPosLemma;
+import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifTokenPosLemma;
 import java.util.HashMap;
 import java.util.Map;
 import static org.lappsgrid.vocabulary.Features.Token.LEMMA;
@@ -16,7 +16,7 @@ import static org.lappsgrid.vocabulary.Features.Token.WORD;
  *
  * @author felahi
  */
-public class TokenPosLemmaStored implements TokenPosLemma {
+public class TokenPosLemmaStored implements LifTokenPosLemma {
 
     private Map<Object, Object> features = new HashMap<Object, Object>();
 
@@ -28,21 +28,39 @@ public class TokenPosLemmaStored implements TokenPosLemma {
     public void setFeatures(Map<Object, Object> features) {
         this.features = features;
     }
-
+    
+    @Override
     public String getWord() {
-        return (String) this.features.get(WORD);
+         return (String) this.features.get(WORD);
     }
 
+    @Override
     public String getPos() {
-        return (String) this.features.get(POS);
+       return (String) this.features.get(POS);
     }
 
+    @Override
     public String getLemma() {
         return (String) this.features.get(LEMMA);
     }
 
     public Map<Object, Object> getFeatures() {
         return features;
+    }
+
+    @Override
+    public String getId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public long getStart() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public long getEnd() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

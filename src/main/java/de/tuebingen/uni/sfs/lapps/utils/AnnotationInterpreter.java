@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.utils;
 
-import de.tuebingen.uni.sfs.lapps.core.annotation.api.TokenPosLemma;
+import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifTokenPosLemma;
 import java.util.HashMap;
 import java.util.Map;
 import org.lappsgrid.serialization.lif.Annotation;
@@ -24,7 +24,7 @@ public class AnnotationInterpreter implements Comparable<AnnotationInterpreter> 
     private String label = null;
     private Map<Object, Object> features = new HashMap<Object, Object>();
     public static Map<String, AnnotationInterpreter> elementIdMapper = new HashMap<String, AnnotationInterpreter>();
-    private TokenPosLemma lifToken = null;
+    private LifTokenPosLemma lifToken = null;
 
     public AnnotationInterpreter(Annotation annotation) {
         if (annotation.getStart() != null) {
