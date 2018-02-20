@@ -61,9 +61,10 @@ public class LifProfilerImpl extends LifTopLevelProfiler implements LifProfile {
             if (!ignoreViewsIndex.contains(index)) {
                 LifToolProducerStored lifLayer = new LifToolProducerStored(view.getMetadata());
                 List<AnnotationInterpreter> lifCharOffsetObjectList = lifLayer.processAnnotations(view.getAnnotations());
-                if (!lifLayer.isLayerValid()) {
+                //Internal validity check is  closed..
+                /*if (!lifLayer.isLayerValid()) {
                     throw new LifException("The annotation layer "+lifLayer.getLayer()+"is not valid!!");
-                }
+                }*/
                 index =lifLayer.getLayerIndex();
                 annotationLayerData.put(index, lifCharOffsetObjectList);
                 indexAnnotationLayer.put(index, lifLayer);
@@ -85,14 +86,6 @@ public class LifProfilerImpl extends LifTopLevelProfiler implements LifProfile {
             annotationLayersToConsider.put(lifLayer.getLayer(), index);
         }
         return ignoreIndexSet;
-    }
-
-    private boolean isViewValid(List<View> views) throws LifException {
-        lifValidityCheck.setViews(views);
-        if (!lifValidityCheck.isAnnotationLayerValid()) {
-            return false;
-        }
-        return true;
     }
 
     public Map<Integer, List<AnnotationInterpreter>> getAnnotationLayerData() {

@@ -38,12 +38,18 @@ public class LifValidityCheckerStored implements LifValidityChecker {
     public LifValidityCheckerStored(Annotation annotation) {
         this.annotation = annotation;
     }
-
+    
+    //Lapps given validity will be used
     public boolean isTopLevelValid() throws LifException {
+        return true;
+    }
+
+     //Internal validity check is  closed..
+   /* public boolean isTopLevelValid() throws LifException {
         return (isNonEmptyDocument()
                 && isDocumentStructureValid()
                 && isToplevelAnnotationValid());
-    }
+    }*/
 
     public boolean isNonEmptyDocument() throws LifException {
         if (jsonObject.getJsonMap().keySet().isEmpty()) {
