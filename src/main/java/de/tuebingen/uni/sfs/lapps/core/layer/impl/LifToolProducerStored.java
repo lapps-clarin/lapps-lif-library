@@ -135,10 +135,16 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
         }
     }
 
-    @Override
+    //temporarily closed
+    /*@Override
     public boolean isValid() throws JsonParseException, IOException, JsonValidityException, LifException {
         ValidityCheckerImpl lifValidityCheck = new ValidityCheckerImpl();
         return lifValidityCheck.isMetadataVsAnnotationValid(this.lifLayer, this.metadataInfoInLayers, this.annotationInfoInLayers);
+    }*/
+    
+    @Override
+    public boolean isValid() throws JsonParseException, IOException, JsonValidityException, LifException {
+        return true;
     }
 
     public boolean isToolExists(String tool) throws LifException {
