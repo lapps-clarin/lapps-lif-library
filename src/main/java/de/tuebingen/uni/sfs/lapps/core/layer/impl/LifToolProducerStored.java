@@ -116,7 +116,6 @@ public class LifToolProducerStored implements AnnotationLayerFinder {
 
     @Override
     public void getLayerFromMultipleUrls() {
-        System.out.println(metadataInfoInLayers.toString());
         for (String url : metadataInfoInLayers) {
             if (url.equalsIgnoreCase(Discriminators.Uri.DEPENDENCY_STRUCTURE)) {
                 this.lifLayer = Discriminators.Uri.DEPENDENCY_STRUCTURE;

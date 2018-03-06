@@ -47,12 +47,12 @@ public class LifDocumentConnstant {
             static {
                 LAYER_ORDER.put(Discriminators.Uri.TEXT, 1);
                 LAYER_ORDER.put(Discriminators.Uri.TOKEN, 2);
-                LAYER_ORDER.put(Discriminators.Uri.SENTENCE, 3);
-                LAYER_ORDER.put(Discriminators.Uri.POS, 4);
-                LAYER_ORDER.put(Discriminators.Uri.NE, 5);
-                LAYER_ORDER.put(Discriminators.Uri.DEPENDENCY_STRUCTURE, 6);
-                LAYER_ORDER.put(Discriminators.Uri.PHRASE_STRUCTURE, 7);
-                LAYER_ORDER.put(Discriminators.Uri.COREF, 8);
+                LAYER_ORDER.put(Discriminators.Uri.POS, 3);
+                LAYER_ORDER.put(Discriminators.Uri.NE, 4);
+                LAYER_ORDER.put(Discriminators.Uri.COREF, 5);
+                LAYER_ORDER.put(Discriminators.Uri.SENTENCE, 6);
+                LAYER_ORDER.put(Discriminators.Uri.DEPENDENCY_STRUCTURE, 7);
+                LAYER_ORDER.put(Discriminators.Uri.PHRASE_STRUCTURE, 8);
             }
         }
 
