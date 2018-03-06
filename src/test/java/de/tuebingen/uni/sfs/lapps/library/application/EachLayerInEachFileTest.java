@@ -26,7 +26,7 @@ public class EachLayerInEachFileTest {
     private String NAMEENTITY_EXAMPLE = "lif-nameEntittyLayer.json";
     private String SENTENCE_EXAMPLE = "lif-sentenceLayer.json";
     private String POS_EXAMPLE1 = "lif-posLayer.json";
-    private String POS_EXAMPLE2 = "lif-posLayer-tcfToLifCon.json";
+    private String POS_EXAMPLE2 = "other/lif-posLayer-tcfToLifCon.json";
     private String TEXT_EXAMPLE = "lif-textLayer.json";
     private String TOKEN_EXAMPLE = "lif-tokenLayer.json";
     private ClassLoader classLoader = getClass().getClassLoader();
