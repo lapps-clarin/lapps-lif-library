@@ -7,6 +7,8 @@ package de.tuebingen.uni.sfs.lapps.core.annotation.impl;
 
 import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifNameEntity;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import org.lappsgrid.vocabulary.Features;
@@ -21,10 +23,16 @@ import static org.lappsgrid.vocabulary.Features.Token.WORD;
 public class LifNameEntityStored extends LifCharOffsetStored implements LifNameEntity {
 
     private Map<Object, Object> features = new HashMap<Object, Object>();
+    private String defaultCategory = null;
 
     public LifNameEntityStored(AnnotationInterpreter annotation) {
         super(annotation);
         this.setFeatures(annotation.getFeatures());
+        // this is a temporary code since the lapps toor produces both old and new annotations.
+        //this code works for old annotations
+        Path urlPath = Paths.get(annotation.getUrl());
+        Path lastSegment = urlPath.getName(urlPath.getNameCount() - 1);
+        this.defaultCategory = lastSegment.toString();
     }
 
     public void setFeatures(Map<Object, Object> features) {
@@ -48,7 +56,11 @@ public class LifNameEntityStored extends LifCharOffsetStored implements LifNameE
 
     @Override
     public String getCategory() {
-        return (String) this.features.get(Features.NamedEntity.CATEGORY);
+        String category = (String) this.features.get(Features.NamedEntity.CATEGORY);
+        if (category != null) {
+            return category;
+        }
+        return this.defaultCategory;
     }
 
     @Override
