@@ -6,6 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.core.annotation.impl;
 
 
+import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,11 +24,16 @@ public class LifConstituent {
     private String catFunction = null;
     private String parentId = null;
 
-    public LifConstituent(AnnotationInterpreter constAnnotationInterpreter) throws NullPointerException {
+    public LifConstituent(AnnotationInterpreter constAnnotationInterpreter) throws LifException {
+        try {
         this.constituentId = constAnnotationInterpreter.getId();
         this.catFunction = constAnnotationInterpreter.getLabel();
         this.childrenList = (List<String>) constAnnotationInterpreter.getFeatures().get(Features.Constituent.CHILDREN);
         this.parentId = (String) constAnnotationInterpreter.getFeatures().get(Features.Constituent.PARENT);
+        }
+        catch (Exception exp) {
+            throw new LifException("The Lif annotation in constituent is not correct!!");
+        }
     }
 
     public List<String> getChildrenList() {

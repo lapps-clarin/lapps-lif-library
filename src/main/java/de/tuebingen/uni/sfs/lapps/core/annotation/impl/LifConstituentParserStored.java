@@ -46,25 +46,23 @@ public class LifConstituentParserStored implements LifConstituentParser, LifPars
     }
 
     public boolean seperateUnitsofParseStruectures(List<AnnotationInterpreter> lifAnnotationList) throws LifException {
-        boolean tokenlayerFlag = false, constituentFlag = false, phraseStructureFlag = false;
+        boolean constituentFlag = false, phraseStructureFlag = false;
+
         for (AnnotationInterpreter annotationObject : lifAnnotationList) {
-            if (annotationObject.getUrl().equals(Discriminators.Uri.TOKEN)) {
-                tokenlayerFlag = true;
+            if (annotationObject.getUrl() != null && annotationObject.getUrl().equals(Discriminators.Uri.TOKEN)) {
                 this.tokenList.add(annotationObject);
                 this.tokenIdStartIdMapper.put(annotationObject.getId(), annotationObject.getStart());
             }
-            if (annotationObject.getUrl().equals(Discriminators.Uri.CONSTITUENT)) {
+            if (annotationObject.getUrl() != null && annotationObject.getUrl().equals(Discriminators.Uri.CONSTITUENT)) {
                 constituentFlag = true;
                 constituentAnnotations.put(annotationObject.getId(), annotationObject);
             }
-            if (annotationObject.getUrl().equals(Discriminators.Uri.PHRASE_STRUCTURE)) {
+            if (annotationObject.getUrl() != null && annotationObject.getUrl().equals(Discriminators.Uri.PHRASE_STRUCTURE)) {
                 phraseStructureFlag = true;
                 phraseAnnotations.put(annotationObject.getId(), annotationObject);
             }
         }
-        if (!tokenlayerFlag) {
-            throw new LifException("No token annotations found inside the view of constituent parser!!");
-        } else if (!constituentFlag) {
+        if (!constituentFlag) {
             throw new LifException("No constituent annotations found inside the view of constituent parser!!");
         } else if (!phraseStructureFlag) {
             throw new LifException("No phrase structure annotations found inside the view of constituent parser!!");
