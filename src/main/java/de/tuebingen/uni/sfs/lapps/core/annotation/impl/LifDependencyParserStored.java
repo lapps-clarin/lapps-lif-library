@@ -29,6 +29,7 @@ public class LifDependencyParserStored implements LifDependencyParser, LifParseA
 
     private Map<Long, List<DependencyEntityInfo>> dependencyParses = new TreeMap<Long, List<DependencyEntityInfo>>();
     private List<AnnotationInterpreter> tokenList = new ArrayList<AnnotationInterpreter>();
+    private List<AnnotationInterpreter> sentenceList = new ArrayList<AnnotationInterpreter>();
     private List<DependencyEntityInfo> dependencyEntities = new ArrayList<DependencyEntityInfo>();
 
     public LifDependencyParserStored(List<AnnotationInterpreter> lifAnnotationList) throws LifException {
@@ -47,6 +48,7 @@ public class LifDependencyParserStored implements LifDependencyParser, LifParseA
                 parseIndex = parseIndex + 1;
                 try {
                     this.seperateStructures(annotationObject);
+                    this.sentenceList.add(annotationObject);
                     this.dependencyParses.put(parseIndex, dependencyEntities);
                 } catch (Exception ex) {
                     Logger.getLogger(LifDependencyParserStored.class.getName()).log(Level.SEVERE, null, ex);
@@ -124,6 +126,11 @@ public class LifDependencyParserStored implements LifDependencyParser, LifParseA
         Vector<Long> parseIndexsSort = new Vector<Long>(this.dependencyParses.keySet());
         Collections.sort(parseIndexsSort);
         return parseIndexsSort;
+    }
+
+    @Override
+    public List<AnnotationInterpreter> getSentenceList() {
+        return sentenceList;
     }
 
 }

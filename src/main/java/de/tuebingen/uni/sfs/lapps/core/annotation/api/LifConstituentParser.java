@@ -10,21 +10,19 @@ import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
-import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifTokenLayer;
-
-
+import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 
 /**
  *
  * @author Mohammad Fazleh Elahi
  */
-public interface LifConstituentParser extends LifTokenLayer{
-    
-    public Vector<Long> getParseIndexs() ;
+public interface LifConstituentParser extends LifSentenceLayer {
+
+    public Vector<Long> getParseIndexs();
 
     public LifConstituent getRoot(Long parseIndex) throws LifException;
 
-    public  List<LifConstituent> getConstituentEntities(Long parseIndex) throws LifException;
+    public List<LifConstituent> getConstituentEntities(Long parseIndex) throws LifException;
 
     public Map<String, Long> getTokenIdStartIdMapper();
 

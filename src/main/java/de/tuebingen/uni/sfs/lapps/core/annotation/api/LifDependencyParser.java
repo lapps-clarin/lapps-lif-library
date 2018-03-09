@@ -15,7 +15,7 @@ import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifTokenLayer;
  *
  * @author Mohammad Fazleh Elahi
  */
-public interface LifDependencyParser extends LifTokenLayer{
+public interface LifDependencyParser extends LifSentenceLayer{
     
     public Vector<Long> getParseIndexs() throws Exception;
     

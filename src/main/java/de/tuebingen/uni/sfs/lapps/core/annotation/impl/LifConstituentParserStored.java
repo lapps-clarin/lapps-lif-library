@@ -7,8 +7,6 @@ package de.tuebingen.uni.sfs.lapps.core.annotation.impl;
 
 import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifParseAnnotationProcessing;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
-import de.tuebingen.uni.sfs.lapps.core.annotation.impl.LifConstituent;
-import de.tuebingen.uni.sfs.lapps.core.annotation.impl.LifConstituentStructure;
 import de.tuebingen.uni.sfs.lapps.constants.LifDocumentConnstant;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.util.ArrayList;
@@ -29,6 +27,7 @@ public class LifConstituentParserStored implements LifConstituentParser, LifPars
 
     private Map<Long, List<LifConstituent>> constituentParses = new TreeMap<Long, List<LifConstituent>>();
     private List<AnnotationInterpreter> tokenList = new ArrayList<AnnotationInterpreter>();
+    private List<AnnotationInterpreter> sentenceList = new ArrayList<AnnotationInterpreter>();
     private Map<String, Long> tokenIdStartIdMapper = new HashMap<String, Long>();
     private List<LifConstituent> constituents = new ArrayList<LifConstituent>();
     private Map<String, AnnotationInterpreter> constituentAnnotations = new HashMap<String, AnnotationInterpreter>();
@@ -59,6 +58,7 @@ public class LifConstituentParserStored implements LifConstituentParser, LifPars
             }
             if (annotationObject.getUrl() != null && annotationObject.getUrl().equals(Discriminators.Uri.PHRASE_STRUCTURE)) {
                 phraseStructureFlag = true;
+                sentenceList.add(annotationObject);
                 phraseAnnotations.put(annotationObject.getId(), annotationObject);
             }
         }
@@ -147,6 +147,10 @@ public class LifConstituentParserStored implements LifConstituentParser, LifPars
 
     public Map<String, Long> getTokenIdStartIdMapper() {
         return tokenIdStartIdMapper;
+    }
+
+    public List<AnnotationInterpreter> getSentenceList() {
+        return sentenceList;
     }
 
     public void extractParses(List<AnnotationInterpreter> lifAnnotationList) throws LifException {

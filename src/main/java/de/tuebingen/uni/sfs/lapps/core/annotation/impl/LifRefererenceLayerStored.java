@@ -56,11 +56,14 @@ public class LifRefererenceLayerStored implements LifReferenceLayer {
         }
         if (tokenList.isEmpty()) {
             throw new LifException("No token annotations found inside the view of reference layer!!");
-        } else if (corferenceAnnotations.isEmpty()) {
+        } 
+        // dirty implementation. This codes are stopped to valid an invalid lif file. When lapps will correct the error the
+        // put back the codes
+        /*else if (corferenceAnnotations.isEmpty()) {
             throw new LifException("No corference annotations found inside the view of reference parser!!");
         } else if (markableAnnotations.isEmpty()) {
             throw new LifException("No markable annotations found inside the view of reference parser!!");
-        }
+        }*/
         return true;
     }
 
