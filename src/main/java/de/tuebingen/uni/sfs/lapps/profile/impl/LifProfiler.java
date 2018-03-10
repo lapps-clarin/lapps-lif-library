@@ -14,7 +14,6 @@ import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
 import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifToolProducerStored;
 import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import de.tuebingen.uni.sfs.lapps.profile.api.ValidityChecker;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -44,7 +43,9 @@ public class LifProfiler implements LifProfile {
 
     public LifProfiler(InputStream is) throws LifException, IOException, JsonValidityException {
         fileString = IOUtils.toString(is, LifDocumentConnstant.GeneralParameters.UNICODE);
-        isValid();
+        if (!isValid()) {
+            throw new LifException(ValidityCheckerImpl.MESSAGE_INVALID_LIF);
+        }
 
     }
 
@@ -68,7 +69,6 @@ public class LifProfiler implements LifProfile {
             Collections.sort(sortedLayer);
             return true;
         }
-
         return false;
     }
 
@@ -145,10 +145,4 @@ public class LifProfiler implements LifProfile {
     public String getFileString() {
         return this.fileString;
     }
-    
-     @Override
-    public String toString() {
-        return "DataModelLif{" + "indexAnnotationLayer=" + indexAnnotationLayer + ", sortedLayer=" + sortedLayer + '}';
-    }
-
 }
