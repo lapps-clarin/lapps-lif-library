@@ -58,7 +58,9 @@ public class LifConstituentParserStored implements LifConstituentParser, LifPars
             }
             if (annotationObject.getUrl() != null && annotationObject.getUrl().equals(Discriminators.Uri.PHRASE_STRUCTURE)) {
                 phraseStructureFlag = true;
-                sentenceList.add(annotationObject);
+                if (annotationObject.getStart() != -1 || annotationObject.getEnd() != -1) {
+                    sentenceList.add(annotationObject);
+                }
                 phraseAnnotations.put(annotationObject.getId(), annotationObject);
             }
         }

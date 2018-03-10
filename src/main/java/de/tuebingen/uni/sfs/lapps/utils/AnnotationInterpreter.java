@@ -17,8 +17,8 @@ import org.lappsgrid.serialization.lif.Annotation;
  */
 public class AnnotationInterpreter implements Comparable<AnnotationInterpreter> {
 
-    private long start = 0;
-    private long end = 0;
+    private long start = -1;
+    private long end = -1;
     private String id = null;
     private String url = null;
     private String label = null;

@@ -48,7 +48,9 @@ public class LifDependencyParserStored implements LifDependencyParser, LifParseA
                 parseIndex = parseIndex + 1;
                 try {
                     this.seperateStructures(annotationObject);
-                    this.sentenceList.add(annotationObject);
+                    if (annotationObject.getStart() != -1 || annotationObject.getEnd() != -1) {
+                        sentenceList.add(annotationObject);
+                    }
                     this.dependencyParses.put(parseIndex, dependencyEntities);
                 } catch (Exception ex) {
                     Logger.getLogger(LifDependencyParserStored.class.getName()).log(Level.SEVERE, null, ex);
