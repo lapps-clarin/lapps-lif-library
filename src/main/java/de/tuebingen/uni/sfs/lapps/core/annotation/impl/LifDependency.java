@@ -19,7 +19,8 @@ public class LifDependency  {
     public String dependency_function = null;
 
     public LifDependency(Map<Object, Object> features, String dependency_function) {
-        if (features.get(Dependency.GOVERNOR) != null) {
+        //temporary solution of null string problem of lif file. This code will be removed when lIF become stable
+        if (features.get(Dependency.GOVERNOR) != null&& !features.get(Dependency.GOVERNOR).toString().contains("null")) {
             this.governor = (String) features.get(Dependency.GOVERNOR).toString().trim();
         }
         if (features.get(Dependency.DEPENDENT) != null) {
