@@ -18,6 +18,8 @@ import java.util.TreeMap;
 import java.util.Vector;
 import org.lappsgrid.discriminator.Discriminators;
 import de.tuebingen.uni.sfs.lapps.core.annotation.api.LifConstituentParser;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -47,6 +49,7 @@ public class LifConstituentParserStored implements LifConstituentParser, LifPars
     public boolean seperateUnitsofParseStruectures(List<AnnotationInterpreter> lifAnnotationList) throws LifException {
         boolean constituentFlag = false, phraseStructureFlag = false;
 
+        
         for (AnnotationInterpreter annotationObject : lifAnnotationList) {
             if (annotationObject.getUrl() != null && annotationObject.getUrl().equals(Discriminators.Uri.TOKEN)) {
                 this.tokenList.add(annotationObject);
@@ -61,7 +64,7 @@ public class LifConstituentParserStored implements LifConstituentParser, LifPars
                 if (annotationObject.getStart() != -1 || annotationObject.getEnd() != -1) {
                     sentenceList.add(annotationObject);
                 }
-                phraseAnnotations.put(annotationObject.getId(), annotationObject);
+                   phraseAnnotations.put(annotationObject.getId(), annotationObject);
             }
         }
         if (!constituentFlag) {
@@ -102,9 +105,11 @@ public class LifConstituentParserStored implements LifConstituentParser, LifPars
             try {
                 if (constituentAnnotations.containsKey(constituentId)) {
                     this.constituents.add(new LifConstituent(constituentAnnotations.get(constituentId)));
-                } else {
+                } 
+                //currently the constituents list of LIF contains token ids. this is a temporary solution to solve the problem
+                /*else {
                     throw new LifException("the annotation for the " + Discriminators.Uri.CONSTITUENT + "(" + constituentId + ") is not found");
-                }
+                }*/
             } catch (NullPointerException exp) {
                 throw new LifException(exp.getMessage());
             }
