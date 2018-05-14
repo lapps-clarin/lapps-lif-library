@@ -8,23 +8,24 @@ package de.tuebingen.uni.sfs.lapps.profile.impl;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.tuebingen.uni.sfs.lapps.constants.LifDocumentConnstant;
+import de.tuebingen.uni.sfs.lapps.core.annotation.impl.LifTokenPosLemmaStored;
+import de.tuebingen.uni.sfs.lapps.core.layer.impl.LIFAnnotationLayer;
+import de.tuebingen.uni.sfs.lapps.core.layer.impl.LIFAnnotationLayers;
 import de.tuebingen.uni.sfs.lapps.profile.api.LifProfile;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
-import de.tuebingen.uni.sfs.lapps.core.layer.api.AnnotationLayerFinder;
-import de.tuebingen.uni.sfs.lapps.core.layer.impl.LifToolProducerStored;
 import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 import org.apache.commons.io.IOUtils;
+import org.lappsgrid.discriminator.Discriminators;
+import org.lappsgrid.serialization.lif.Annotation;
 import org.lappsgrid.serialization.lif.View;
 
 /**
@@ -35,18 +36,18 @@ public class LifProfiler implements LifProfile {
 
     private String fileString = null;
     private LifContainerMapper lifContainer = new LifContainerMapper();
-    private Map<Integer, List<AnnotationInterpreter>> annotationLayerData = new HashMap<Integer, List<AnnotationInterpreter>>();
-    private Map<Integer, AnnotationLayerFinder> indexAnnotationLayer = new HashMap<Integer, AnnotationLayerFinder>();
-    private Vector<Integer> sortedLayer = new Vector<Integer>();
+    private Map<String, List<AnnotationInterpreter>> lifLayerAnnotationsMap = new HashMap<String, List<AnnotationInterpreter>>();
     private ValidityCheckerImpl lifValidityCheck;
     private List<View> views = new ArrayList<View>();
+    private LIFAnnotationLayers lifAnnotationLayers; ;
 
     public LifProfiler(InputStream is) throws LifException, IOException, JsonValidityException {
         fileString = IOUtils.toString(is, LifDocumentConnstant.GeneralParameters.UNICODE);
-        if (!isValid()) {
+        if (isValid()) {
+            lifAnnotationLayers=new LIFAnnotationLayers(lifLayerAnnotationsMap);
+        } else {
             throw new LifException(ValidityCheckerImpl.MESSAGE_INVALID_LIF);
         }
-
     }
 
     @Override
@@ -57,78 +58,76 @@ public class LifProfiler implements LifProfile {
         } else {
             throw new JsonValidityException(ValidityCheckerImpl.INVALID_JSON_FILE);
         }
-
         if (lifContainer != null) {
-            this.views = lifContainer.getContainer().getViews();
+            List<View> views = lifContainer.getContainer().getViews();
+            processViews(views);
+            lifAnnotationLayers=new LIFAnnotationLayers(lifLayerAnnotationsMap);
         } else {
             throw new LifException(ValidityCheckerImpl.MESSAGE_INVALID_LIF);
         }
-
-        if (processViews()) {
-            sortedLayer = new Vector(this.indexAnnotationLayer.keySet());
-            Collections.sort(sortedLayer);
-            return true;
-        }
-        return false;
-    }
-
-    private boolean processViews() throws LifException, IOException, JsonParseException, JsonValidityException {
-        Integer index = 0;
-        Set<Integer> ignoreViewsIndex = this.dealWithMultipleLayers(views);
-
-        for (View view : views) {
-            if (!ignoreViewsIndex.contains(index)) {
-                LifToolProducerStored lifLayer = new LifToolProducerStored(view.getMetadata());
-                List<AnnotationInterpreter> lifCharOffsetObjectList = lifLayer.processAnnotations(view.getAnnotations());
-                //Internal validity check is  closed..
-                if (!lifLayer.isValid()) {
-                    throw new LifException("The annotation layer " + lifLayer.getLayer() + "is not valid!!");
-                }
-                index = lifLayer.getLayerIndex();
-                annotationLayerData.put(index, lifCharOffsetObjectList);
-                indexAnnotationLayer.put(index, lifLayer);
-            }
-        }
-
         return true;
     }
 
-    private Set<Integer> dealWithMultipleLayers(List<View> views) throws LifException {
-        Map<String, Integer> annotationLayersToConsider = new HashMap<String, Integer>();
-        Set<Integer> ignoreIndexSet = new HashSet<Integer>();
-        for (Integer index = 0; index < views.size(); index++) {
-            View view = views.get(index);
-            LifToolProducerStored lifLayer = new LifToolProducerStored(view.getMetadata());
-            if (annotationLayersToConsider.containsKey(lifLayer.getLayer())) {
-                Integer ignoreIndex = annotationLayersToConsider.get(lifLayer.getLayer());
-                ignoreIndexSet.add(ignoreIndex);
-            }
-            annotationLayersToConsider.put(lifLayer.getLayer(), index);
+    private void processViews(List<View> views) throws LifException, IOException, JsonParseException, JsonValidityException {
+        for (View view : views) {
+            Set<String> layerInMetadata = findLayersFromMetadata(view.getMetadata());
+            Map<String, List<AnnotationInterpreter>> lifLayers = findLayersAndAnnotations(view.getAnnotations());
+            this.takeLast(lifLayers);
         }
-        return ignoreIndexSet;
+
+        /* for(String layer:lifLayerAnnotationsMap.keySet()){
+           System.out.println("annotation layer:......." + layer);
+            System.out.println("layer:......." + lifLayerAnnotationsMap.get(layer));
+            
+        }*/
     }
 
-    public Map<Integer, List<AnnotationInterpreter>> getAnnotationLayerData() {
-        return annotationLayerData;
+    private Set<String> findLayersFromMetadata(Map metadataMap) {
+        Set<String> layerInMetadata = new HashSet<String>();
+        for (Object key : metadataMap.keySet()) {
+            Map innerMap = (Map) metadataMap.get(key);
+            for (Object attribute : innerMap.keySet()) {
+                String url = attribute.toString();
+                layerInMetadata.add(url);
+            }
+        }
+        return layerInMetadata;
     }
 
-    public List<AnnotationInterpreter> getAnnotationLayerData(Integer index) {
-        return annotationLayerData.get(index);
+    private Map<String, List<AnnotationInterpreter>> findLayersAndAnnotations(List<Annotation> annotations) {
+        Map<String, List<AnnotationInterpreter>> lifLayers = new HashMap<String, List<AnnotationInterpreter>>();
+        AnnotationInterpreter.elementIdMapper = new HashMap<String, AnnotationInterpreter>();
+        List<AnnotationInterpreter> annotationInterpreterList = new ArrayList<AnnotationInterpreter>();
+        for (Annotation annotation : annotations) {
+            annotationInterpreterList = new ArrayList<AnnotationInterpreter>();
+            String type = this.getType(annotation);
+            AnnotationInterpreter annotationInterpreter = new AnnotationInterpreter(annotation);
+            if (lifLayers.containsKey(type)) {
+                annotationInterpreterList = lifLayers.get(type);
+            }
+            annotationInterpreterList.add(annotationInterpreter);
+            lifLayers.put(type, annotationInterpreterList);
+        }
+        return lifLayers;
     }
 
-    @Override
-    public Map<Integer, AnnotationLayerFinder> getIndexAnnotationLayer() {
-        return indexAnnotationLayer;
+    private String getType(Annotation annotation) {
+        String type = annotation.getAtType();
+        if (Discriminators.Uri.TOKEN.contains(type)) {
+            LifTokenPosLemmaStored lifToken = new LifTokenPosLemmaStored(annotation.getFeatures());
+            if (lifToken.getPos() != null) {
+                return Discriminators.Uri.POS;
+            } else if (lifToken.getLemma() != null) {
+                return Discriminators.Uri.LEMMA;
+            }
+        }
+        return type;
     }
 
-    @Override
-    public AnnotationLayerFinder getIndexAnnotationLayer(Integer index) {
-        return this.indexAnnotationLayer.get(index);
-    }
-
-    @Override
-    public Vector<Integer> getSortedLayer() {
-        return sortedLayer;
+    private void takeLast(Map<String, List<AnnotationInterpreter>> lifLayers) {
+        for (String layer : lifLayers.keySet()) {
+            this.lifLayerAnnotationsMap.put(layer, lifLayers.get(layer));
+        }
     }
 
     @Override
@@ -144,5 +143,10 @@ public class LifProfiler implements LifProfile {
     @Override
     public String getFileString() {
         return this.fileString;
+    }
+
+    @Override
+    public LIFAnnotationLayers getLifAnnotationLayers() {
+        return lifAnnotationLayers;
     }
 }

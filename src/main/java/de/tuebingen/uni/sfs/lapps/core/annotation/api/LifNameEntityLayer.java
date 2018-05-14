@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author Mohammad Fazleh Elahi
  */
-public interface LifNameEntityLayer {
+public interface LifNameEntityLayer extends LifTokenLayer {
 
     public List<LifNameEntity> getNameEntityList();
 

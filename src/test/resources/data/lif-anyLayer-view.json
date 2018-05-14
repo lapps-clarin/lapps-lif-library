@@ -1,0 +1,117 @@
+{
+    "discriminator": "http://vocab.lappsgrid.org/ns/media/jsonld#lif",
+    "payload": {
+        "@context": "http://vocab.lappsgrid.org/context-1.0.0.jsonld",
+        "metadata": {
+            
+        },
+        "text": {
+            "@value": "Karen flew to New York."
+        },
+        "views": [
+            {
+                "metadata": {
+                    "contains": {
+                        "http://vocab.lappsgrid.org/Token": {
+                            "producer": "org.lappsgrid.converter.tcf.TCFConverter",
+                            "type": "token:fromTCF"
+                        },
+                        "http://vocab.lappsgrid.org/Sentence": {
+                            "producer": "org.anc.lapps.gate.SentenceSplitter_2.3.0",
+                            "type": "gate"
+                        },
+                        "http://vocab.lappsgrid.org/Token#pos": {
+                            "producer": "org.anc.lapps.gate.Tagger_2.3.0",
+                            "type": "gate"
+                        }
+                    }
+                },
+                "annotations": [
+                    {
+                        "id": "0",
+                        "start": 0,
+                        "end": 5,
+                        "@type": "http://vocab.lappsgrid.org/Token",
+                        "label": "Token",
+                        "features": {
+                            "word": "Karen",
+                            "pos": "NNP"
+                        }
+                    },
+                    {
+                        "id": "1",
+                        "start": 6,
+                        "end": 10,
+                        "@type": "http://vocab.lappsgrid.org/Token",
+                        "label": "Token",
+                        "features": {
+                            "word": "flew",
+                            "pos": "VBD"
+                        }
+                    },
+                    {
+                        "id": "2",
+                        "start": 11,
+                        "end": 13,
+                        "@type": "http://vocab.lappsgrid.org/Token",
+                        "label": "Token",
+                        "features": {
+                            "word": "to",
+                            "pos": "TO"
+                        }
+                    },
+                    {
+                        "id": "3",
+                        "start": 14,
+                        "end": 17,
+                        "@type": "http://vocab.lappsgrid.org/Token",
+                        "label": "Token",
+                        "features": {
+                            "word": "New",
+                            "pos": "NNP"
+                        }
+                    },
+                    {
+                        "id": "4",
+                        "start": 18,
+                        "end": 22,
+                        "@type": "http://vocab.lappsgrid.org/Token",
+                        "label": "Token",
+                        "features": {
+                            "word": "York",
+                            "pos": "NNP"
+                        }
+                    },
+                    {
+                        "id": "5",
+                        "start": 22,
+                        "end": 23,
+                        "@type": "http://vocab.lappsgrid.org/Token",
+                        "label": "Token",
+                        "features": {
+                            "word": ".",
+                            "pos": "."
+                        }
+                    },
+                    {
+                        "id": "6",
+                        "start": 0,
+                        "end": 23,
+                        "@type": "http://vocab.lappsgrid.org/Sentence",
+                        "label": "Sentence"
+                    },
+                    {
+                        "id": "7",
+                        "start": 22,
+                        "end": 23,
+                        "@type": "Split",
+                        "label": "Split",
+                        "features": {
+                            "tokenType": "internal"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}

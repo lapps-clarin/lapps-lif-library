@@ -95,7 +95,7 @@
                   "id":"ne_0",
                   "start":0,
                   "end":5,
-                  "@type":"http://vocab.lappsgrid.org/Person",
+                  "@type":"http://vocab.lappsgrid.org/NamedEntity",
                   "features":{  
                      "word":"Karen"
                   }
@@ -104,7 +104,7 @@
                   "id":"ne_1",
                   "start":14,
                   "end":17,
-                  "@type":"http://vocab.lappsgrid.org/Location",
+                  "@type":"http://vocab.lappsgrid.org/NamedEntity",
                   "features":{  
                      "word":"New"
                   }
@@ -113,7 +113,7 @@
                   "id":"ne_2",
                   "start":18,
                   "end":22,
-                  "@type":"http://vocab.lappsgrid.org/Location",
+                  "@type":"http://vocab.lappsgrid.org/NamedEntity",
                   "features":{  
                      "word":"York"
                   }

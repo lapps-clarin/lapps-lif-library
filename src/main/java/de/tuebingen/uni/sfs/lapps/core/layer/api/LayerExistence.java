@@ -11,7 +11,7 @@ import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
  *
  * @author felahi
  */
-public interface AnnotationLayers {
+public interface LayerExistence {
 
     public boolean isLanguage() throws LifException ;
 
@@ -30,8 +30,6 @@ public interface AnnotationLayers {
     public boolean isDependencyLayer() throws LifException;
 
     public boolean isConstituentLayer() throws LifException;
-
-    public boolean isTokenPosLayer() throws LifException;
     
     public boolean isCorferenceLayer() throws LifException;
 }

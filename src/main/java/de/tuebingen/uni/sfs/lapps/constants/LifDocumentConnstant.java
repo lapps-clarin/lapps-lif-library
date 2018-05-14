@@ -5,11 +5,8 @@
  */
 package de.tuebingen.uni.sfs.lapps.constants;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import org.lappsgrid.discriminator.Discriminators;
 
 /**
@@ -40,19 +37,21 @@ public class LifDocumentConnstant {
 
             public static final String CONSTITUENT_ROOT = "ROOT";
         }
-         public static class Ordering {
+      
+        public static class Ordering {
 
-            public static final Map<String, Integer> LAYER_ORDER = new HashMap<String, Integer>();
+            public static final Map<String, Integer> LIF_LAYER_ORDER = new HashMap<String, Integer>();
 
             static {
-                LAYER_ORDER.put(Discriminators.Uri.TEXT, 1);
-                LAYER_ORDER.put(Discriminators.Uri.TOKEN, 2);
-                LAYER_ORDER.put(Discriminators.Uri.POS, 3);
-                LAYER_ORDER.put(Discriminators.Uri.NE, 4);
-                LAYER_ORDER.put(Discriminators.Uri.COREF, 5);
-                LAYER_ORDER.put(Discriminators.Uri.SENTENCE, 6);
-                LAYER_ORDER.put(Discriminators.Uri.DEPENDENCY_STRUCTURE, 7);
-                LAYER_ORDER.put(Discriminators.Uri.PHRASE_STRUCTURE, 8);
+                LIF_LAYER_ORDER.put(Discriminators.Uri.TEXT, 1);
+                LIF_LAYER_ORDER.put(Discriminators.Uri.TOKEN, 2);
+                LIF_LAYER_ORDER.put(Discriminators.Uri.POS, 3);
+                LIF_LAYER_ORDER.put(Discriminators.Uri.LEMMA, 4);
+                LIF_LAYER_ORDER.put(Discriminators.Uri.NE, 5);
+                LIF_LAYER_ORDER.put(Discriminators.Uri.COREF, 7);
+                LIF_LAYER_ORDER.put(Discriminators.Uri.SENTENCE, 8);
+                LIF_LAYER_ORDER.put(Discriminators.Uri.DEPENDENCY_STRUCTURE, 9);
+                LIF_LAYER_ORDER.put(Discriminators.Uri.PHRASE_STRUCTURE, 10);
             }
         }
 
