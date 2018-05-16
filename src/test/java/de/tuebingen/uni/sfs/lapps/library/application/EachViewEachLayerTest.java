@@ -5,14 +5,14 @@
  */
 package de.tuebingen.uni.sfs.lapps.library.application;
 
-import de.tuebingen.uni.sfs.lapps.core.layer.impl.LIFAnnotationLayer;
-import de.tuebingen.uni.sfs.lapps.core.layer.impl.LIFAnnotationLayers;
-import de.tuebingen.uni.sfs.lapps.profile.api.LifProfile;
-import de.tuebingen.uni.sfs.lapps.profile.impl.LifProfiler;
+import de.tuebingen.uni.sfs.lapps.core.impl.layer.LifSingleLayer;
+import de.tuebingen.uni.sfs.lapps.core.impl.layer.LifAllLayers;
+import de.tuebingen.uni.sfs.lapps.core.impl.profiler.LifFormatImpl;
 import java.io.InputStream;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.lappsgrid.discriminator.Discriminators;
+import de.tuebingen.uni.sfs.lapps.core.api.profiler.LifFormat;
 
 /**
  *
@@ -22,11 +22,11 @@ import org.lappsgrid.discriminator.Discriminators;
 public class EachViewEachLayerTest {
 
     private static final String ALL_LAYER_EXAMPLE = "/data/karen-all.json";
-    private LifProfile lifProfile;
+    private LifFormat lifProfile;
 
     public EachViewEachLayerTest() throws Exception {
         InputStream input = this.getClass().getResourceAsStream(ALL_LAYER_EXAMPLE);
-        lifProfile = new LifProfiler(input);
+        lifProfile = new LifFormatImpl(input);
     }
 
     /**
@@ -62,7 +62,7 @@ public class EachViewEachLayerTest {
     @Test
     public void testAllLayersInOneFile_TokenLayer() throws Exception {
         System.out.println("testTokenLayer");
-        LIFAnnotationLayers lifAnnotationLayers = lifProfile.getLifAnnotationLayers();
+        LifAllLayers lifAnnotationLayers = lifProfile.getLifAnnotationLayers();
         assertTrue("TokenLayer exists in the file", lifAnnotationLayers.findLayer(Discriminators.Uri.TOKEN).isValid());
     }
 
@@ -72,7 +72,7 @@ public class EachViewEachLayerTest {
     @Test
     public void testAllLayersInOneFile_PosLayer() throws Exception {
         System.out.println("testPosLayer");
-        LIFAnnotationLayer lifAnnotationLayer = lifProfile.getLifAnnotationLayers().findLayer(Discriminators.Uri.POS);
+        LifSingleLayer lifAnnotationLayer = lifProfile.getLifAnnotationLayers().findLayer(Discriminators.Uri.POS);
         assertTrue("PosLayer exists in the file", lifAnnotationLayer.isValid());
     }
 
@@ -82,7 +82,7 @@ public class EachViewEachLayerTest {
     @Test
     public void testAllLayersInOneFile_SentenceLayer() throws Exception {
         System.out.println("testSentenceLayer");
-        LIFAnnotationLayer lifAnnotationLayer = lifProfile.getLifAnnotationLayers().findLayer(Discriminators.Uri.SENTENCE);
+        LifSingleLayer lifAnnotationLayer = lifProfile.getLifAnnotationLayers().findLayer(Discriminators.Uri.SENTENCE);
         assertTrue("SenetenceLayer exists in the file", lifAnnotationLayer.isValid());
     }
 
@@ -92,7 +92,7 @@ public class EachViewEachLayerTest {
     @Test
     public void testAllLayersInOneFile_NamedEntityLayer() throws Exception {
         System.out.println("testNamedEntityLayer");
-        LIFAnnotationLayer lifAnnotationLayer = lifProfile.getLifAnnotationLayers().findLayer(Discriminators.Uri.NE);
+        LifSingleLayer lifAnnotationLayer = lifProfile.getLifAnnotationLayers().findLayer(Discriminators.Uri.NE);
         assertTrue("NameEntity layer does not exists in the file!!!", lifAnnotationLayer.isValid());
     }
 
@@ -102,7 +102,7 @@ public class EachViewEachLayerTest {
     @Test
     public void testAllLayersInOneFile_ConstituentParserLayer() throws Exception {
         System.out.println("testConstituentParserLayer");
-        LIFAnnotationLayer lifAnnotationLayer = lifProfile.getLifAnnotationLayers().findLayer(Discriminators.Uri.PHRASE_STRUCTURE);
+        LifSingleLayer lifAnnotationLayer = lifProfile.getLifAnnotationLayers().findLayer(Discriminators.Uri.PHRASE_STRUCTURE);
         assertTrue("ConstituentLayer exists in the file", lifAnnotationLayer.isValid());
     }
 
@@ -112,7 +112,7 @@ public class EachViewEachLayerTest {
     @Test
     public void testAllLayersInOneFile_DependencyLayer() throws Exception {
         System.out.println("testDependencyLayer");
-        LIFAnnotationLayer lifAnnotationLayer = lifProfile.getLifAnnotationLayers().findLayer(Discriminators.Uri.DEPENDENCY_STRUCTURE);
+        LifSingleLayer lifAnnotationLayer = lifProfile.getLifAnnotationLayers().findLayer(Discriminators.Uri.DEPENDENCY_STRUCTURE);
         assertTrue("DependencyLayer exists in the file", lifAnnotationLayer.isValid());
     }
 
@@ -122,7 +122,7 @@ public class EachViewEachLayerTest {
     @Test
     public void testAllLayersInOneFile_CorferenceLayer() throws Exception {
         System.out.println("testCorferenceLayer");
-        LIFAnnotationLayer lifAnnotationLayer = lifProfile.getLifAnnotationLayers().findLayer(Discriminators.Uri.COREF);
+        LifSingleLayer lifAnnotationLayer = lifProfile.getLifAnnotationLayers().findLayer(Discriminators.Uri.COREF);
         assertTrue("CorferenceLayer exists in the file", lifAnnotationLayer.isValid());
     }
 }
