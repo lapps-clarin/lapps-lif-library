@@ -5,8 +5,8 @@
  */
 package de.tuebingen.uni.sfs.lapps.constants;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import org.lappsgrid.discriminator.Discriminators;
 
 /**
@@ -14,6 +14,10 @@ import org.lappsgrid.discriminator.Discriminators;
  * @author felahi
  */
 public class LifConstants {
+
+    public static final String VIEW_REFERENCE_INDICATOR = ":";
+    public static final Integer VIEW_ID_INDEX = 0;
+    public static final Integer VIEW_ELEMENT_INDEX = 1;
 
     private LifConstants() {
     }
@@ -37,10 +41,10 @@ public class LifConstants {
 
             public static final String CONSTITUENT_ROOT = "ROOT";
         }
-      
+
         public static class Ordering {
 
-            public static final Map<String, Integer> LIF_LAYER_ORDER = new HashMap<String, Integer>();
+            public static final Map<String, Integer> LIF_LAYER_ORDER = new TreeMap<String, Integer>();
 
             static {
                 LIF_LAYER_ORDER.put(Discriminators.Uri.TEXT, 1);

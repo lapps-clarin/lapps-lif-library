@@ -6,7 +6,6 @@
 package de.tuebingen.uni.sfs.lapps.core.impl.annotation;
 
 import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifDependencyParser;
-import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifParseAnnotationProcessing;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.utils.DependencyEntityInfo;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
@@ -25,15 +24,13 @@ import org.lappsgrid.discriminator.Discriminators;
  *
  * @author felahi
  */
-public class LifDependencyParserStored implements LifDependencyParser, LifParseAnnotationProcessing {
+public class LifDependencyParserStored implements LifDependencyParser {
 
     private Map<Long, List<DependencyEntityInfo>> dependencyParses = new TreeMap<Long, List<DependencyEntityInfo>>();
-    private List<AnnotationInterpreter> tokenList = new ArrayList<AnnotationInterpreter>();
     private List<AnnotationInterpreter> sentenceList = new ArrayList<AnnotationInterpreter>();
     private List<DependencyEntityInfo> dependencyEntities = new ArrayList<DependencyEntityInfo>();
 
     public LifDependencyParserStored(List<AnnotationInterpreter> lifAnnotationList) throws LifException {
-        seperateUnitsofParseStruectures(lifAnnotationList);
         try {
             extractParses(lifAnnotationList);
         } catch (Exception ex) {
@@ -92,24 +89,11 @@ public class LifDependencyParserStored implements LifDependencyParser, LifParseA
 
     }
 
-    public boolean seperateUnitsofParseStruectures(List<AnnotationInterpreter> lifAnnotationList) throws LifException {
-        for (AnnotationInterpreter annotationObject : lifAnnotationList) {
-            if (annotationObject.getUrl().equals(Discriminators.Uri.TOKEN)) {
-                this.tokenList.add(annotationObject);
-            }
-        }
-        return true;
-    }
-
     public Long getTokenStartId(String lifTokenId) throws Exception {
         if (AnnotationInterpreter.elementIdMapper.containsKey(lifTokenId)) {
             return AnnotationInterpreter.elementIdMapper.get(lifTokenId).getStart();
         }
         return new Long(0);
-    }
-
-    public List<AnnotationInterpreter> getTokenList() {
-        return tokenList;
     }
 
     public Map<Long, List<DependencyEntityInfo>> getDependencyEntities() {

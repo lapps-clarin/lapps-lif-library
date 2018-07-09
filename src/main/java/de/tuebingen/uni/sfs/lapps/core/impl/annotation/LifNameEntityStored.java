@@ -64,12 +64,12 @@ public class LifNameEntityStored extends LifCharOffsetStored implements LifNameE
     }
 
     @Override
-    public long getStart() {
+    public Long getStart() {
         return super.getStart();
     }
 
     @Override
-    public long getEnd() {
+    public Long getEnd() {
         return super.getEnd();
     }
 

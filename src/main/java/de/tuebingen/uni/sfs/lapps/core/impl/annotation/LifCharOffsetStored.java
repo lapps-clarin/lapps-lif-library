@@ -14,8 +14,8 @@ import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
  */
 public class LifCharOffsetStored implements LifCharOffSet {
 
-    private long start = 0;
-    private long end = 0;
+    private Long start = null;
+    private Long end = null;
     private String id = null;
 
     public LifCharOffsetStored(AnnotationInterpreter annotation) {
@@ -25,12 +25,12 @@ public class LifCharOffsetStored implements LifCharOffSet {
     }
 
     @Override
-    public long getStart() {
+    public Long getStart() {
         return start;
     }
 
     @Override
-    public long getEnd() {
+    public Long getEnd() {
         return end;
     }
 

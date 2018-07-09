@@ -13,7 +13,7 @@ public interface LifCharOffSet {
 
     public String getId();
     
-    public long getStart();
+    public Long getStart();
 
-    public long getEnd();
+    public Long getEnd();
 }

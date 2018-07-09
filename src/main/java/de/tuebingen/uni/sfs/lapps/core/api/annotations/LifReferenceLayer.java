@@ -5,16 +5,13 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.api.annotations;
 
-import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifReference;
-import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifMarkable;
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import java.util.Map;
 
 /**
  *
  * @author Mohammad Fazleh Elahi
  */
-public interface LifReferenceLayer extends LifTokenLayer {
+public interface LifReferenceLayer{
 
     public Map<String, LifReference> getCorferenceAnnotations();
 

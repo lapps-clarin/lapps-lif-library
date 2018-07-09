@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author felahi
  */
-public interface LifSentenceLayer extends LifTokenLayer{
+public interface LifSentenceLayer {
 
     public List<AnnotationInterpreter> getSentenceList();
 

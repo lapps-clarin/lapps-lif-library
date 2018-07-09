@@ -9,7 +9,6 @@ import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifMarkable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import org.lappsgrid.vocabulary.Features;
 
 /**

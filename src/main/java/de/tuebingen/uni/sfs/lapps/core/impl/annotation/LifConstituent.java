@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.impl.annotation;
 
-
+import de.tuebingen.uni.sfs.lapps.constants.LifConstants;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import java.util.ArrayList;
@@ -23,16 +23,27 @@ public class LifConstituent {
     private String constituentId = null;
     private String catFunction = null;
     private String parentId = null;
+    private boolean root = false;
 
+    //currently there is inconsistency in constituent annotation in lif
+    // the field lable sometimes inside feature dictionary and sometime outside
+    //temporarily both are considered now
     public LifConstituent(AnnotationInterpreter constAnnotationInterpreter) throws LifException {
         try {
-        this.constituentId = constAnnotationInterpreter.getId();
-        this.catFunction = constAnnotationInterpreter.getLabel();
-        this.childrenList = (List<String>) constAnnotationInterpreter.getFeatures().get(Features.Constituent.CHILDREN);
-        this.parentId = (String) constAnnotationInterpreter.getFeatures().get(Features.Constituent.PARENT);
-        }
-        catch (Exception exp) {
-            throw new LifException("The Lif annotation in constituent is not correct!!");
+            this.constituentId = constAnnotationInterpreter.getId();
+            if(constAnnotationInterpreter.getLabel()!=null)
+            this.catFunction = constAnnotationInterpreter.getLabel();
+            else
+                this.catFunction =(String) constAnnotationInterpreter.getFeatures().get(Features.Constituent.LABEL);
+            this.childrenList = (List<String>) constAnnotationInterpreter.getFeatures().get(Features.Constituent.CHILDREN);
+            this.parentId = (String) constAnnotationInterpreter.getFeatures().get(Features.Constituent.PARENT);
+
+            if (catFunction.contains(LifConstants.Annotation.TreeSets.CONSTITUENT_ROOT)) {
+                root = true;
+            }
+        } catch (Exception exp) {
+            //throw new LifException("The Lif annotation in constituent is not correct!!");
+            System.out.println(exp.getMessage());
         }
     }
 
@@ -50,5 +61,14 @@ public class LifConstituent {
 
     public String getParentId() {
         return parentId;
+    }
+
+    public boolean isRoot() {
+        return root;
+    }
+
+    @Override
+    public String toString() {
+        return "LifConstituent{" + "childrenList=" + childrenList + ", constituentId=" + constituentId + ", catFunction=" + catFunction + ", parentId=" + parentId + ", root=" + root + '}';
     }
 }

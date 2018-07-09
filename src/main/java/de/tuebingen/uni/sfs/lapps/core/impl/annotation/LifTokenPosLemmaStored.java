@@ -6,28 +6,24 @@
 package de.tuebingen.uni.sfs.lapps.core.impl.annotation;
 
 import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifTokenPosLemma;
+import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import java.util.HashMap;
 import java.util.Map;
 import static org.lappsgrid.vocabulary.Features.Token.LEMMA;
 import static org.lappsgrid.vocabulary.Features.Token.POS;
 import static org.lappsgrid.vocabulary.Features.Token.WORD;
 
-
 /**
  *
  * @author felahi
  */
-public class LifTokenPosLemmaStored implements LifTokenPosLemma {
+public class LifTokenPosLemmaStored extends LifCharOffsetStored implements LifTokenPosLemma {
 
     private Map<Object, Object> features = new HashMap<Object, Object>();
 
-    public LifTokenPosLemmaStored(Map<Object, Object> features) {
-        if(features.containsKey(WORD)||features.containsKey(POS)||features.containsKey(LEMMA))
-         this.setFeatures(features);
-    }
-
-    public void setFeatures(Map<Object, Object> features) {
-        this.features = features;
+    public LifTokenPosLemmaStored(AnnotationInterpreter annotationInterpreter) {
+        super(annotationInterpreter);
+        this.features = annotationInterpreter.getFeatures();
     }
 
     public String getWord() {
@@ -42,23 +38,24 @@ public class LifTokenPosLemmaStored implements LifTokenPosLemma {
         return (String) this.features.get(LEMMA);
     }
 
+    @Override
     public Map<Object, Object> getFeatures() {
         return features;
     }
 
     @Override
     public String getId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return super.getId();
     }
 
     @Override
-    public long getStart() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Long getStart() {
+        return super.getStart();
     }
 
     @Override
-    public long getEnd() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Long getEnd() {
+        return super.getEnd();
     }
 
 }

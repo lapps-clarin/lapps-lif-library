@@ -5,7 +5,6 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.api.annotations;
 
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import java.util.List;
 
 /**
@@ -13,5 +12,11 @@ import java.util.List;
  * @author Mohammad Fazleh Elahi
  */
 public interface LifTokenLayer {
-    public List<AnnotationInterpreter> getTokenList(); 
+    public List<LifTokenPosLemma> getTokenList(); 
+
+    public boolean isTokenLayer();
+    
+    public boolean isPosLayer();
+    
+     public boolean isLemmaLayer();
 }

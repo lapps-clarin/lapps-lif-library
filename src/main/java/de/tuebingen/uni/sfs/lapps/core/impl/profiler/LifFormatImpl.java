@@ -5,12 +5,15 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.impl.profiler;
 
-import de.tuebingen.uni.sfs.lapps.core.impl.profiler.LifContainerMapper;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.tuebingen.uni.sfs.lapps.constants.LifConstants;
-import de.tuebingen.uni.sfs.lapps.core.impl.annotation.LifTokenPosLemmaStored;
-import de.tuebingen.uni.sfs.lapps.core.impl.layer.LifAllLayers;
+import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifConstituentParser;
+import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifDependencyParser;
+import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifNameEntityLayer;
+import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifReferenceLayer;
+import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifSentenceLayer;
+import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifTokenLayer;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
@@ -23,10 +26,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.apache.commons.io.IOUtils;
-import org.lappsgrid.discriminator.Discriminators;
 import org.lappsgrid.serialization.lif.Annotation;
 import org.lappsgrid.serialization.lif.View;
 import de.tuebingen.uni.sfs.lapps.core.api.profiler.LifFormat;
+import de.tuebingen.uni.sfs.lapps.core.impl.annotation.LifConstituentParserStored;
+import de.tuebingen.uni.sfs.lapps.core.impl.annotation.LifDependencyParserStored;
+import de.tuebingen.uni.sfs.lapps.core.impl.annotation.LifNameEntityLayerStored;
+import de.tuebingen.uni.sfs.lapps.core.impl.annotation.LifRefererenceLayerStored;
+import de.tuebingen.uni.sfs.lapps.core.impl.annotation.LifSentenceLayerStored;
+import de.tuebingen.uni.sfs.lapps.core.impl.annotation.LifTokenLayerStored;
+import org.lappsgrid.discriminator.Discriminators;
 
 /**
  *
@@ -35,16 +44,21 @@ import de.tuebingen.uni.sfs.lapps.core.api.profiler.LifFormat;
 public class LifFormatImpl implements LifFormat {
 
     private String fileString = null;
+    private String text = null;
+    private String language=null;
     private LifContainerMapper lifContainer = new LifContainerMapper();
+    private LifTokenLayer lifTokenLayer = null;
+    private LifSentenceLayer lifSentenceLayer = null;
+    private LifNameEntityLayer lifNameEntityLayer = null;
+    private LifDependencyParser lifDependencyParser = null;
+    private LifConstituentParser lifConstituentParser = null;
+    private LifReferenceLayer lifRefererenceLayer = null;
     private Map<String, List<AnnotationInterpreter>> lifLayerAnnotationsMap = new HashMap<String, List<AnnotationInterpreter>>();
-    private ValidityCheckerImpl lifValidityCheck;
-    private List<View> views = new ArrayList<View>();
-    private LifAllLayers lifAnnotationLayers; ;
 
     public LifFormatImpl(InputStream is) throws LifException, IOException, JsonValidityException {
         fileString = IOUtils.toString(is, LifConstants.GeneralParameters.UNICODE);
         if (isValid()) {
-            lifAnnotationLayers=new LifAllLayers(lifLayerAnnotationsMap);
+            layerOrderingCombining();
         } else {
             throw new LifException(ValidityCheckerImpl.MESSAGE_INVALID_LIF);
         }
@@ -52,16 +66,17 @@ public class LifFormatImpl implements LifFormat {
 
     @Override
     public boolean isValid() throws JsonParseException, IOException, JsonValidityException, LifException {
-        lifValidityCheck = new ValidityCheckerImpl(fileString);
+        LifContainerMapper lifContainer=null;
+        ValidityCheckerImpl lifValidityCheck = new ValidityCheckerImpl(fileString);
         if (lifValidityCheck.isValid()) {
             lifContainer = new ObjectMapper().readValue(fileString, LifContainerMapper.class);
+            this.text=lifContainer.getContainer().getText();
+            this.language=lifContainer.getContainer().getLanguage();
         } else {
             throw new JsonValidityException(ValidityCheckerImpl.INVALID_JSON_FILE);
         }
         if (lifContainer != null) {
-            List<View> views = lifContainer.getContainer().getViews();
-            processViews(views);
-            lifAnnotationLayers=new LifAllLayers(lifLayerAnnotationsMap);
+            processViews(lifContainer.getContainer().getViews());
         } else {
             throw new LifException(ValidityCheckerImpl.MESSAGE_INVALID_LIF);
         }
@@ -69,15 +84,16 @@ public class LifFormatImpl implements LifFormat {
     }
 
     private void processViews(List<View> views) throws LifException, IOException, JsonParseException, JsonValidityException {
+        AnnotationInterpreter.elementIdMapper = new HashMap<String, AnnotationInterpreter>();
         for (View view : views) {
             Set<String> layerInMetadata = findLayersFromMetadata(view.getMetadata());
             Map<String, List<AnnotationInterpreter>> lifLayers = findLayersAndAnnotations(view.getAnnotations());
             this.takeLast(lifLayers);
         }
 
-        /* for(String layer:lifLayerAnnotationsMap.keySet()){
-           System.out.println("annotation layer:......." + layer);
-            System.out.println("layer:......." + lifLayerAnnotationsMap.get(layer));
+        /*for(String layer:lifLayerAnnotationsMap.keySet()){
+              if(layer.contains(Discriminators.Uri.TOKEN))
+           System.out.println("annotation layer:......." + lifLayerAnnotationsMap.get(layer));
             
         }*/
     }
@@ -96,11 +112,10 @@ public class LifFormatImpl implements LifFormat {
 
     private Map<String, List<AnnotationInterpreter>> findLayersAndAnnotations(List<Annotation> annotations) {
         Map<String, List<AnnotationInterpreter>> lifLayers = new HashMap<String, List<AnnotationInterpreter>>();
-        AnnotationInterpreter.elementIdMapper = new HashMap<String, AnnotationInterpreter>();
         List<AnnotationInterpreter> annotationInterpreterList = new ArrayList<AnnotationInterpreter>();
         for (Annotation annotation : annotations) {
             annotationInterpreterList = new ArrayList<AnnotationInterpreter>();
-            String type = this.getType(annotation);
+            String type = annotation.getAtType();
             AnnotationInterpreter annotationInterpreter = new AnnotationInterpreter(annotation);
             if (lifLayers.containsKey(type)) {
                 annotationInterpreterList = lifLayers.get(type);
@@ -111,33 +126,49 @@ public class LifFormatImpl implements LifFormat {
         return lifLayers;
     }
 
-    private String getType(Annotation annotation) {
-        String type = annotation.getAtType();
-        if (Discriminators.Uri.TOKEN.contains(type)) {
-            LifTokenPosLemmaStored lifToken = new LifTokenPosLemmaStored(annotation.getFeatures());
-            if (lifToken.getPos() != null) {
-                return Discriminators.Uri.POS;
-            } else if (lifToken.getLemma() != null) {
-                return Discriminators.Uri.LEMMA;
-            }
-        }
-        return type;
-    }
-
     private void takeLast(Map<String, List<AnnotationInterpreter>> lifLayers) {
         for (String layer : lifLayers.keySet()) {
             this.lifLayerAnnotationsMap.put(layer, lifLayers.get(layer));
         }
     }
 
+    private void layerOrderingCombining() throws LifException {
+
+        for (String layer : LifConstants.Annotation.Ordering.LIF_LAYER_ORDER.keySet()) {
+            if (lifLayerAnnotationsMap.containsKey(layer)) {
+                if (layer.contains(Discriminators.Uri.TOKEN)) {
+                    lifTokenLayer = new LifTokenLayerStored(lifLayerAnnotationsMap.get(layer));
+                }
+                if (layer.contains(Discriminators.Uri.SENTENCE)) {
+                    lifSentenceLayer = new LifSentenceLayerStored(lifLayerAnnotationsMap.get(layer));
+                }
+                if (layer.contains(Discriminators.Uri.NE)) {
+                    lifNameEntityLayer = new LifNameEntityLayerStored(lifLayerAnnotationsMap.get(layer));
+                }
+                if (layer.contains(Discriminators.Uri.DEPENDENCY_STRUCTURE)) {
+                    lifDependencyParser = new LifDependencyParserStored(lifLayerAnnotationsMap.get(layer));
+                }
+                if (layer.contains(Discriminators.Uri.PHRASE_STRUCTURE)) {
+                    lifConstituentParser = new LifConstituentParserStored(lifLayerAnnotationsMap.get(layer));
+
+                }
+                if (layer.contains(Discriminators.Uri.COREF)) {
+                    lifRefererenceLayer = new LifRefererenceLayerStored(lifLayerAnnotationsMap.get(layer));
+                }
+            }
+        }
+    }
+
     @Override
     public String getLanguage() throws LifException {
-        return lifContainer.getContainer().getLanguage();
+        return  this.language;
+        //return lifContainer.getContainer().getLanguage();
     }
 
     @Override
     public String getText() throws LifException {
-        return lifContainer.getContainer().getText();
+        return this.text;
+        //return lifContainer.getContainer().getText();
     }
 
     @Override
@@ -146,7 +177,33 @@ public class LifFormatImpl implements LifFormat {
     }
 
     @Override
-    public LifAllLayers getLifAnnotationLayers() {
-        return lifAnnotationLayers;
+    public LifTokenLayer getLifTokenLayer() {
+        return lifTokenLayer;
     }
+
+    @Override
+    public LifSentenceLayer getLifSentenceLayer() {
+        return lifSentenceLayer;
+    }
+
+    @Override
+    public LifNameEntityLayer getLifNameEntityLayer() {
+        return lifNameEntityLayer;
+    }
+
+    @Override
+    public LifDependencyParser getLifDependencyParser() {
+        return lifDependencyParser;
+    }
+
+    @Override
+    public LifConstituentParser getLifConstituentParser() {
+        return lifConstituentParser;
+    }
+
+    @Override
+    public LifReferenceLayer getLifRefererenceLayer() {
+        return lifRefererenceLayer;
+    }
+
 }

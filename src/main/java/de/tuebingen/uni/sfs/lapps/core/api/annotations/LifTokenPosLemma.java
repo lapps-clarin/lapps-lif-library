@@ -5,13 +5,15 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.api.annotations;
 
-import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifCharOffSet;
+import java.util.Map;
 
 /**
  *
  * @author Mohammad Fazleh Elahi
  */
 public interface LifTokenPosLemma extends LifCharOffSet{
+    
+    public Map<Object, Object> getFeatures();
 
     public String getWord();
 
