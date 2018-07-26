@@ -11,25 +11,25 @@ package de.tuebingen.uni.sfs.lapps.utils;
  */
 public class DependencyEntityInfo {
 
-    private Long depIDs = null;
-    private Long govIDs = null;
+    private String  depIDs = null;
+    private String govIDs = null;
     private String func = null;
 
     public DependencyEntityInfo(String func) {
         this.func = func;
     }
 
-    public DependencyEntityInfo(Long depIDs, Long govIDs, String func) {
+    public DependencyEntityInfo(String depIDs, String govIDs, String func) {
         this.depIDs = depIDs;
         this.govIDs = govIDs;
         this.func = func;
     }
 
-    public Long getDepIDs() {
+    public String getDepIDs() {
         return depIDs;
     }
 
-    public Long getGovIDs() {
+    public String getGovIDs() {
         return govIDs;
     }
 
@@ -37,11 +37,11 @@ public class DependencyEntityInfo {
         return func;
     }
 
-    public void setDepIDs(Long depIDs) {
+    public void setDepIDs(String depIDs) {
         this.depIDs = depIDs;
     }
 
-    public void setGovIDs(Long govIDs) {
+    public void setGovIDs(String govIDs) {
         this.govIDs = govIDs;
     }
 

@@ -70,10 +70,10 @@ public class LifDependencyParserStored implements LifDependencyParser {
                         LifDependency lifDepFeature = new LifDependency(dependencyFeatures, depAnnotationInterpreter.getLabel());
                         DependencyEntityInfo dependencyTcfEntity = new DependencyEntityInfo(lifDepFeature.getDependency_function());
                         if (lifDepFeature.isDependantExist()) {
-                            dependencyTcfEntity.setDepIDs(getTokenStartId(lifDepFeature.getDependent()));
+                            dependencyTcfEntity.setDepIDs(lifDepFeature.getDependent());
                         }
                         if (lifDepFeature.isGovonorExist()) {
-                            dependencyTcfEntity.setGovIDs(getTokenStartId(lifDepFeature.getGovernor()));
+                            dependencyTcfEntity.setGovIDs(lifDepFeature.getGovernor());
                         }
                         dependencyEntities.add(dependencyTcfEntity);
 
@@ -87,13 +87,6 @@ public class LifDependencyParserStored implements LifDependencyParser {
             }
         }
 
-    }
-
-    public Long getTokenStartId(String lifTokenId) throws Exception {
-        if (AnnotationInterpreter.elementIdMapper.containsKey(lifTokenId)) {
-            return AnnotationInterpreter.elementIdMapper.get(lifTokenId).getStart();
-        }
-        return new Long(0);
     }
 
     public Map<Long, List<DependencyEntityInfo>> getDependencyEntities() {
