@@ -6,6 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.core.impl.annotation;
 
 import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifDependencyParser;
+import de.tuebingen.uni.sfs.lapps.core.api.annotations.LifSentenceLayer;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import de.tuebingen.uni.sfs.lapps.utils.DependencyEntityInfo;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
@@ -27,6 +28,7 @@ import org.lappsgrid.discriminator.Discriminators;
 public class LifDependencyParserStored implements LifDependencyParser {
 
     private Map<Long, List<DependencyEntityInfo>> dependencyParses = new TreeMap<Long, List<DependencyEntityInfo>>();
+    private LifSentenceLayer lifSentenceLayer = null;
     private List<AnnotationInterpreter> sentenceList = new ArrayList<AnnotationInterpreter>();
     private List<DependencyEntityInfo> dependencyEntities = new ArrayList<DependencyEntityInfo>();
 
@@ -38,7 +40,7 @@ public class LifDependencyParserStored implements LifDependencyParser {
         }
     }
 
-    public void extractParses(List<AnnotationInterpreter> lifAnnotationList) throws LifException {
+    public void extractParses(List<AnnotationInterpreter> lifAnnotationList) throws LifException {  
         Long parseIndex = new Long(0);
         for (AnnotationInterpreter annotationObject : lifAnnotationList) {
             if (annotationObject.getUrl().equals(Discriminators.Uri.DEPENDENCY_STRUCTURE)) {
@@ -54,6 +56,10 @@ public class LifDependencyParserStored implements LifDependencyParser {
                 }
             }
         }
+        if (!sentenceList.isEmpty()) {
+            lifSentenceLayer = new LifSentenceLayerStored(sentenceList);
+        }
+            
     }
 
     public void seperateStructures(AnnotationInterpreter annotationObject) throws LifException {
@@ -93,23 +99,23 @@ public class LifDependencyParserStored implements LifDependencyParser {
         return dependencyParses;
     }
 
-    public List<DependencyEntityInfo> getDependencyEntities(Long parseIndex) throws Exception {
+    public List<DependencyEntityInfo> getDependencyEntities(Long parseIndex) throws LifException {
         if (this.dependencyParses.containsKey(parseIndex)) {
             return this.dependencyParses.get(parseIndex);
         } else {
-            throw new Exception("No Dependency list found for in Parse" + parseIndex);
+            throw new LifException("No Dependency list found for in Parse" + parseIndex);
         }
     }
 
-    public Vector<Long> getParseIndexs() throws Exception {
+    public Vector<Long> getParseIndexs() {
         Vector<Long> parseIndexsSort = new Vector<Long>(this.dependencyParses.keySet());
         Collections.sort(parseIndexsSort);
         return parseIndexsSort;
     }
 
     @Override
-    public List<AnnotationInterpreter> getSentenceList() {
-        return sentenceList;
+    public LifSentenceLayer getSentenceLayer() {
+        return lifSentenceLayer;
     }
 
 }

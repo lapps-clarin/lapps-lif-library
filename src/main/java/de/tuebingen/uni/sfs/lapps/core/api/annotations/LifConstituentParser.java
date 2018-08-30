@@ -7,10 +7,9 @@ package de.tuebingen.uni.sfs.lapps.core.api.annotations;
 
 import de.tuebingen.uni.sfs.lapps.core.impl.annotation.LifConstituent;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
-import java.util.Vector;
+
 /**
  *
  * @author Mohammad Fazleh Elahi
@@ -20,6 +19,8 @@ public interface LifConstituentParser {
     public TreeSet<Long> getParseIndexs();
 
     public LifConstituent getRoot(Long parseIndex) throws LifException;
+
+    public LifSentenceLayer getSentenceLayer() throws LifException;
 
     public Map<String, LifConstituent> getConstituentEntities(Long parseIndex) throws LifException;
 }

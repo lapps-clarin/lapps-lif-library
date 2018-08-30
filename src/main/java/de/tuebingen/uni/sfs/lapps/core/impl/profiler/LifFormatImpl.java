@@ -45,7 +45,7 @@ public class LifFormatImpl implements LifFormat {
 
     private String fileString = null;
     private String text = null;
-    private String language=null;
+    private String language = null;
     private LifContainerMapper lifContainer = new LifContainerMapper();
     private LifTokenLayer lifTokenLayer = null;
     private LifSentenceLayer lifSentenceLayer = null;
@@ -66,12 +66,12 @@ public class LifFormatImpl implements LifFormat {
 
     @Override
     public boolean isValid() throws JsonParseException, IOException, JsonValidityException, LifException {
-        LifContainerMapper lifContainer=null;
+        LifContainerMapper lifContainer = null;
         ValidityCheckerImpl lifValidityCheck = new ValidityCheckerImpl(fileString);
         if (lifValidityCheck.isValid()) {
             lifContainer = new ObjectMapper().readValue(fileString, LifContainerMapper.class);
-            this.text=lifContainer.getContainer().getText();
-            this.language=lifContainer.getContainer().getLanguage();
+            this.text = lifContainer.getContainer().getText();
+            this.language = lifContainer.getContainer().getLanguage();
         } else {
             throw new JsonValidityException(ValidityCheckerImpl.INVALID_JSON_FILE);
         }
@@ -90,12 +90,6 @@ public class LifFormatImpl implements LifFormat {
             Map<String, List<AnnotationInterpreter>> lifLayers = findLayersAndAnnotations(view.getAnnotations());
             this.takeLast(lifLayers);
         }
-
-        /*for(String layer:lifLayerAnnotationsMap.keySet()){
-              if(layer.contains(Discriminators.Uri.TOKEN))
-           System.out.println("annotation layer:......." + lifLayerAnnotationsMap.get(layer));
-            
-        }*/
     }
 
     private Set<String> findLayersFromMetadata(Map metadataMap) {
@@ -133,6 +127,7 @@ public class LifFormatImpl implements LifFormat {
     }
 
     private void layerOrderingCombining() throws LifException {
+        System.out.println(lifLayerAnnotationsMap.toString());
 
         for (String layer : LifConstants.Annotation.Ordering.LIF_LAYER_ORDER.keySet()) {
             if (lifLayerAnnotationsMap.containsKey(layer)) {
@@ -161,7 +156,7 @@ public class LifFormatImpl implements LifFormat {
 
     @Override
     public String getLanguage() throws LifException {
-        return  this.language;
+        return this.language;
         //return lifContainer.getContainer().getLanguage();
     }
 

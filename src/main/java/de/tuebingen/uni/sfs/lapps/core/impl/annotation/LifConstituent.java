@@ -10,6 +10,7 @@ import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
 import java.util.ArrayList;
 import java.util.List;
+import org.lappsgrid.discriminator.Discriminators;
 
 import org.lappsgrid.vocabulary.Features;
 
@@ -31,19 +32,20 @@ public class LifConstituent {
     public LifConstituent(AnnotationInterpreter constAnnotationInterpreter) throws LifException {
         try {
             this.constituentId = constAnnotationInterpreter.getId();
-            if(constAnnotationInterpreter.getLabel()!=null)
-            this.catFunction = constAnnotationInterpreter.getLabel();
-            else
-                this.catFunction =(String) constAnnotationInterpreter.getFeatures().get(Features.Constituent.LABEL);
+            if (constAnnotationInterpreter.getLabel() != null) {
+                this.catFunction = constAnnotationInterpreter.getLabel();
+            } else {
+                this.catFunction = (String) constAnnotationInterpreter.getFeatures().get(Features.Constituent.LABEL);
+            }
             this.childrenList = (List<String>) constAnnotationInterpreter.getFeatures().get(Features.Constituent.CHILDREN);
             this.parentId = (String) constAnnotationInterpreter.getFeatures().get(Features.Constituent.PARENT);
 
             if (catFunction.contains(LifConstants.Annotation.TreeSets.CONSTITUENT_ROOT)) {
                 root = true;
             }
-        } catch (Exception exp) {
-            //throw new LifException("The Lif annotation in constituent is not correct!!");
-            System.out.println(exp.getMessage());
+        } catch (Exception ex) {
+            throw new LifException("INVALID LIF: the constitution annotation is not correct!!");
+
         }
     }
 

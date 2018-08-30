@@ -5,6 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.api.annotations;
 
+import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import de.tuebingen.uni.sfs.lapps.utils.DependencyEntityInfo;
 import java.util.List;
 import java.util.Vector;
@@ -14,11 +15,11 @@ import java.util.Vector;
  *
  * @author Mohammad Fazleh Elahi
  */
-public interface LifDependencyParser extends LifSentenceLayer{
+public interface LifDependencyParser {
     
-    public Vector<Long> getParseIndexs() throws Exception;
+    public Vector<Long> getParseIndexs();
     
-    public  List<DependencyEntityInfo> getDependencyEntities(Long parseIndex) throws Exception;
+    public LifSentenceLayer getSentenceLayer() throws LifException;  
     
-
+    public  List<DependencyEntityInfo> getDependencyEntities(Long parseIndex) throws LifException;    
 }
