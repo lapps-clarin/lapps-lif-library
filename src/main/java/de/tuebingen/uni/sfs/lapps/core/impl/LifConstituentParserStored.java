@@ -33,7 +33,7 @@ public class LifConstituentParserStored implements LifConstituentParser {
         try {
             extract(lifAnnotations);
         } catch (LifException ex) {
-            Logger.getLogger(LifDependencyParserStored.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LifConstituentParserStored.class.getName()).log(Level.SEVERE, null, ex);
             throw new LifException(ex.getMessage());
         }
     }

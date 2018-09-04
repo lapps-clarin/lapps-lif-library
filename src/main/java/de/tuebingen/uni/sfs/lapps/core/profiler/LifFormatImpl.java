@@ -127,8 +127,6 @@ public class LifFormatImpl implements LifFormat {
     }
 
     private void layerOrderingCombining() throws LifException {
-        System.out.println(lifLayerAnnotationsMap.toString());
-
         for (String layer : LifConstants.Annotation.Ordering.LIF_LAYER_ORDER.keySet()) {
             if (lifLayerAnnotationsMap.containsKey(layer)) {
                 if (layer.contains(Discriminators.Uri.TOKEN)) {
