@@ -7,7 +7,7 @@ package de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl;
 
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifDependencyParser;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifSentenceLayer;
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import de.tuebingen.uni.sfs.lapps.utils.DependencyEntityInfo;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 
@@ -29,10 +29,10 @@ public class LifDependencyParserStored implements LifDependencyParser {
 
     private Map<Long, List<DependencyEntityInfo>> dependencyParses = new TreeMap<Long, List<DependencyEntityInfo>>();
     private LifSentenceLayer lifSentenceLayer = null;
-    private List<AnnotationInterpreter> sentenceList = new ArrayList<AnnotationInterpreter>();
+    private List<LifAnnotationMapper> sentenceList = new ArrayList<LifAnnotationMapper>();
     private List<DependencyEntityInfo> dependencyEntities = new ArrayList<DependencyEntityInfo>();
 
-    public LifDependencyParserStored(List<AnnotationInterpreter> lifAnnotationList) throws LifException {
+    public LifDependencyParserStored(List<LifAnnotationMapper> lifAnnotationList) throws LifException {
         try {
             extractParses(lifAnnotationList);
         } catch (Exception ex) {
@@ -40,9 +40,9 @@ public class LifDependencyParserStored implements LifDependencyParser {
         }
     }
 
-    public void extractParses(List<AnnotationInterpreter> lifAnnotationList) throws LifException {  
+    public void extractParses(List<LifAnnotationMapper> lifAnnotationList) throws LifException {  
         Long parseIndex = new Long(0);
-        for (AnnotationInterpreter annotationObject : lifAnnotationList) {
+        for (LifAnnotationMapper annotationObject : lifAnnotationList) {
             if (annotationObject.getUrl().equals(Discriminators.Uri.DEPENDENCY_STRUCTURE)) {
                 parseIndex = parseIndex + 1;
                 try {
@@ -62,16 +62,16 @@ public class LifDependencyParserStored implements LifDependencyParser {
             
     }
 
-    public void seperateStructures(AnnotationInterpreter annotationObject) throws LifException {
+    public void seperateStructures(LifAnnotationMapper annotationObject) throws LifException {
         dependencyEntities = new ArrayList<DependencyEntityInfo>();
-        Map<Object, Object> dependencyStructureFeatures = AnnotationInterpreter.elementIdMapper.get(annotationObject.getId()).getFeatures();
+        Map<Object, Object> dependencyStructureFeatures = LifAnnotationMapper.elementIdMapper.get(annotationObject.getId()).getFeatures();
         if (!dependencyStructureFeatures.isEmpty()) {
             LifDependencyStructure lifDepStructureFeature = new LifDependencyStructure(dependencyStructureFeatures);
             List<String> dependencies = lifDepStructureFeature.getDependencies();
             for (String dependencyId : dependencies) {
                 try {
-                    if (AnnotationInterpreter.elementIdMapper.containsKey(dependencyId)) {
-                        AnnotationInterpreter depAnnotationInterpreter = AnnotationInterpreter.elementIdMapper.get(dependencyId);
+                    if (LifAnnotationMapper.elementIdMapper.containsKey(dependencyId)) {
+                        LifAnnotationMapper depAnnotationInterpreter = LifAnnotationMapper.elementIdMapper.get(dependencyId);
                         Map<Object, Object> dependencyFeatures = depAnnotationInterpreter.getFeatures();
                         LifDependency lifDepFeature = new LifDependency(dependencyFeatures, depAnnotationInterpreter.getLabel());
                         DependencyEntityInfo dependencyTcfEntity = new DependencyEntityInfo(lifDepFeature.getDependency_function());

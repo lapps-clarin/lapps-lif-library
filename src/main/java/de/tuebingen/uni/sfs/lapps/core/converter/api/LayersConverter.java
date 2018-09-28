@@ -24,7 +24,7 @@ import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
  *
  * @author Mohammad Fazleh Elahi
  */
-public interface ConvertLayer {
+public interface LayersConverter {
 
     public String toTcfText(String text) throws ConversionException;
 

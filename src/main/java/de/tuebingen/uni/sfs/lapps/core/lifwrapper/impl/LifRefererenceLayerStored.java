@@ -8,7 +8,7 @@ package de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifMarkable;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifReference;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifReferenceLayer;
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.util.HashMap;
 import java.util.List;
@@ -23,19 +23,19 @@ public class LifRefererenceLayerStored implements LifReferenceLayer {
     private Map<String, LifReference> corferenceAnnotations = new HashMap<String, LifReference>();
     private Map<String, LifMarkable> markableAnnotations = new HashMap<String, LifMarkable>();
 
-    public LifRefererenceLayerStored(List<AnnotationInterpreter> lifAnnotations) throws LifException {
+    public LifRefererenceLayerStored(List<LifAnnotationMapper> lifAnnotations) throws LifException {
         extract(lifAnnotations);
     }
 
-    private void extract(List<AnnotationInterpreter> lifAnnotations) {
-        for (AnnotationInterpreter annotationObject : lifAnnotations) {
+    private void extract(List<LifAnnotationMapper> lifAnnotations) {
+        for (LifAnnotationMapper annotationObject : lifAnnotations) {
             LifReference lifReference = new LifReferenceStored(annotationObject.getFeatures());
             corferenceAnnotations.put(annotationObject.getId(), lifReference);
-            Map<Object, Object> markable = AnnotationInterpreter.elementIdMapper.get(annotationObject.getId()).getFeatures();
+            Map<Object, Object> markable = LifAnnotationMapper.elementIdMapper.get(annotationObject.getId()).getFeatures();
             if (!markable.isEmpty()) {
                 LifReference LifReference = new LifReferenceStored(markable);
                 for (String markableId : LifReference.getMentions()) {
-                    AnnotationInterpreter annotationInterpreter = AnnotationInterpreter.elementIdMapper.get(markableId);
+                    LifAnnotationMapper annotationInterpreter = LifAnnotationMapper.elementIdMapper.get(markableId);
                     LifMarkable lifMarkable = new LifMarkableStored(annotationInterpreter.getFeatures());
                     markableAnnotations.put(markableId, lifMarkable);
                 }

@@ -7,7 +7,7 @@ package de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl;
 
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifSentenceLayer;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,9 +18,9 @@ import java.util.List;
  */
 public class LifSentenceLayerStored implements LifSentenceLayer {
 
-    private List<AnnotationInterpreter> sentenceList = new ArrayList<AnnotationInterpreter>();
+    private List<LifAnnotationMapper> sentenceList = new ArrayList<LifAnnotationMapper>();
 
-    public LifSentenceLayerStored(List<AnnotationInterpreter> lifAnnotationList) throws LifException {
+    public LifSentenceLayerStored(List<LifAnnotationMapper> lifAnnotationList) throws LifException {
         this.sentenceList = lifAnnotationList;
         if (!sentenceList.isEmpty()) {
             Collections.sort(sentenceList);
@@ -31,7 +31,7 @@ public class LifSentenceLayerStored implements LifSentenceLayer {
     }
 
     @Override
-    public List<AnnotationInterpreter> getSentenceList() {
+    public List<LifAnnotationMapper> getSentenceList() {
         return sentenceList;
     }
 

@@ -6,7 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl;
 
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifTokenPosLemma;
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import java.util.HashMap;
 import java.util.Map;
 import static org.lappsgrid.vocabulary.Features.Token.LEMMA;
@@ -21,7 +21,7 @@ public class LifTokenPosLemmaStored extends LifCharOffsetStored implements LifTo
 
     private Map<Object, Object> features = new HashMap<Object, Object>();
 
-    public LifTokenPosLemmaStored(AnnotationInterpreter annotationInterpreter) {
+    public LifTokenPosLemmaStored(LifAnnotationMapper annotationInterpreter) {
         super(annotationInterpreter);
         this.features = annotationInterpreter.getFeatures();
     }

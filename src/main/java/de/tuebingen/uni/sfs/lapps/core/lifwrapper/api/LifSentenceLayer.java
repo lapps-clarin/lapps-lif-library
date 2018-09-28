@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.lifwrapper.api;
 
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import java.util.List;
 
 /**
@@ -14,6 +14,6 @@ import java.util.List;
  */
 public interface LifSentenceLayer {
 
-    public List<AnnotationInterpreter> getSentenceList();
+    public List<LifAnnotationMapper> getSentenceList();
 
 }

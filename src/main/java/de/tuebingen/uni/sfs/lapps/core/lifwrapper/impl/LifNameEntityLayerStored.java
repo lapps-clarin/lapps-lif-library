@@ -9,7 +9,7 @@ import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifNameEntity;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifNameEntityLayer;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifReference;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +24,7 @@ public class LifNameEntityLayerStored implements LifNameEntityLayer {
 
     private List<LifNameEntity> nameEntityList = new ArrayList<LifNameEntity>();
 
-    public LifNameEntityLayerStored(List<AnnotationInterpreter> lifAnnotations) throws LifException {
+    public LifNameEntityLayerStored(List<LifAnnotationMapper> lifAnnotations) throws LifException {
         try {
             extractAnnotations(lifAnnotations);
         } catch (LifException exp) {
@@ -32,8 +32,8 @@ public class LifNameEntityLayerStored implements LifNameEntityLayer {
         }
     }
 
-    public void extractAnnotations(List<AnnotationInterpreter> lifAnnotationList) throws LifException {
-        for (AnnotationInterpreter annotationObject : lifAnnotationList) {
+    public void extractAnnotations(List<LifAnnotationMapper> lifAnnotationList) throws LifException {
+        for (LifAnnotationMapper annotationObject : lifAnnotationList) {
             if (annotationObject.getUrl().equals(Discriminators.Uri.NE)) {
                 LifNameEntityStored lifNameEntity = new LifNameEntityStored(annotationObject);
                 this.nameEntityList.add(lifNameEntity);

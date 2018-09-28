@@ -7,7 +7,7 @@ package de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl;
 
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifTokenLayer;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifTokenPosLemma;
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,13 +26,13 @@ public class LifTokenLayerStored implements LifTokenLayer {
 
     }
 
-    public LifTokenLayerStored(List<AnnotationInterpreter> annotations) {
+    public LifTokenLayerStored(List<LifAnnotationMapper> annotations) {
         this.extract(annotations);
     }
 
-    private void extract(List<AnnotationInterpreter> annotations) {
+    private void extract(List<LifAnnotationMapper> annotations) {
         boolean flag = true;
-        for (AnnotationInterpreter annotationInterpreter : annotations) {
+        for (LifAnnotationMapper annotationInterpreter : annotations) {
             LifTokenPosLemma lifTokenPosLemma = new LifTokenPosLemmaStored(annotationInterpreter);
             tokenList.add(lifTokenPosLemma);
             if (flag) {

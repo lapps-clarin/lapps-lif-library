@@ -6,7 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl;
 
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifNameEntity;
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
@@ -25,7 +25,7 @@ public class LifNameEntityStored extends LifCharOffsetStored implements LifNameE
     private Map<Object, Object> features = new HashMap<Object, Object>();
     private String defaultCategory = null;
 
-    public LifNameEntityStored(AnnotationInterpreter annotation) {
+    public LifNameEntityStored(LifAnnotationMapper annotation) {
         super(annotation);
         this.setFeatures(annotation.getFeatures());
         // this is a temporary code since the lapps toor produces both old and new annotations.

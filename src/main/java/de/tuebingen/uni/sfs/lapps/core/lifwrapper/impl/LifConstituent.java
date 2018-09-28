@@ -7,7 +7,7 @@ package de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl;
 
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifConstants;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import java.util.ArrayList;
 import java.util.List;
 import org.lappsgrid.discriminator.Discriminators;
@@ -29,7 +29,7 @@ public class LifConstituent {
     //currently there is inconsistency in constituent annotation in lif
     // the field lable sometimes inside feature dictionary and sometime outside
     //temporarily both are considered now
-    public LifConstituent(AnnotationInterpreter constAnnotationInterpreter) throws LifException {
+    public LifConstituent(LifAnnotationMapper constAnnotationInterpreter) throws LifException {
         try {
             this.constituentId = constAnnotationInterpreter.getId();
             if (constAnnotationInterpreter.getLabel() != null) {

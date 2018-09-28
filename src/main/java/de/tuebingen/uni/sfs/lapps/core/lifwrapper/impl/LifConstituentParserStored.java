@@ -5,7 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl;
 
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.util.HashMap;
 import java.util.List;
@@ -25,11 +25,11 @@ import org.lappsgrid.discriminator.Discriminators;
 public class LifConstituentParserStored implements LifConstituentParser {
 
     private Map<Long, LifConstituent> roots = new HashMap<Long, LifConstituent>();
-    private List<AnnotationInterpreter> sentenceList = new ArrayList<AnnotationInterpreter>();
+    private List<LifAnnotationMapper> sentenceList = new ArrayList<LifAnnotationMapper>();
     private LifSentenceLayer lifSentenceLayer = null;
     private Map<Long, Map<String, LifConstituent>> constituentParses = new HashMap<Long, Map<String, LifConstituent>>();
 
-    public LifConstituentParserStored(List<AnnotationInterpreter> lifAnnotations) throws LifException {
+    public LifConstituentParserStored(List<LifAnnotationMapper> lifAnnotations) throws LifException {
         try {
             extract(lifAnnotations);
         } catch (LifException ex) {
@@ -38,20 +38,20 @@ public class LifConstituentParserStored implements LifConstituentParser {
         }
     }
 
-    private void extract(List<AnnotationInterpreter> lifAnnotationList) throws LifException {
+    private void extract(List<LifAnnotationMapper> lifAnnotationList) throws LifException {
         Long parseIndex = new Long(0);
-        for (AnnotationInterpreter parseAnnotation : lifAnnotationList) {
+        for (LifAnnotationMapper parseAnnotation : lifAnnotationList) {
             if (parseAnnotation.getUrl().equals(Discriminators.Uri.PHRASE_STRUCTURE)) {
                 parseIndex = parseIndex + 1;
                 if (parseAnnotation.getStart() != -1 || parseAnnotation.getEnd() != -1) {
                     sentenceList.add(parseAnnotation);
                 }
                 Map<String, LifConstituent> idConstituents = new HashMap<String, LifConstituent>();
-                Map<Object, Object> parseFeatures = AnnotationInterpreter.elementIdMapper.get(parseAnnotation.getId()).getFeatures();
+                Map<Object, Object> parseFeatures = LifAnnotationMapper.elementIdMapper.get(parseAnnotation.getId()).getFeatures();
                 if (!parseFeatures.isEmpty()) {
                     LifConstituentStructure lifConstituentStructure = new LifConstituentStructure(parseFeatures);
                     for (String constituentId : lifConstituentStructure.getConstituents()) {
-                        AnnotationInterpreter constAnnotation = AnnotationInterpreter.elementIdMapper.get(constituentId);
+                        LifAnnotationMapper constAnnotation = LifAnnotationMapper.elementIdMapper.get(constituentId);
                         if (constAnnotation.getUrl().equals(Discriminators.Uri.CONSTITUENT)) {
                             LifConstituent lifConstituent = new LifConstituent(constAnnotation);
                             idConstituents.put(constituentId, lifConstituent);

@@ -14,7 +14,7 @@ import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifNameEntityLayer;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifReferenceLayer;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifSentenceLayer;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifTokenLayer;
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.io.IOException;
@@ -53,7 +53,7 @@ public class LifFormatImpl implements LifFormat {
     private LifDependencyParser lifDependencyParser = null;
     private LifConstituentParser lifConstituentParser = null;
     private LifReferenceLayer lifRefererenceLayer = null;
-    private Map<String, List<AnnotationInterpreter>> lifLayerAnnotationsMap = new HashMap<String, List<AnnotationInterpreter>>();
+    private Map<String, List<LifAnnotationMapper>> lifLayerAnnotationsMap = new HashMap<String, List<LifAnnotationMapper>>();
 
     public LifFormatImpl(InputStream is) throws LifException, IOException, JsonValidityException {
         fileString = IOUtils.toString(is, LifConstants.GeneralParameters.UNICODE);
@@ -84,10 +84,10 @@ public class LifFormatImpl implements LifFormat {
     }
 
     private void processViews(List<View> views) throws LifException, IOException, JsonParseException, JsonValidityException {
-        AnnotationInterpreter.elementIdMapper = new HashMap<String, AnnotationInterpreter>();
+        LifAnnotationMapper.elementIdMapper = new HashMap<String, LifAnnotationMapper>();
         for (View view : views) {
             Set<String> layerInMetadata = findLayersFromMetadata(view.getMetadata());
-            Map<String, List<AnnotationInterpreter>> lifLayers = findLayersAndAnnotations(view.getAnnotations());
+            Map<String, List<LifAnnotationMapper>> lifLayers = findLayersAndAnnotations(view.getAnnotations());
             this.takeLast(lifLayers);
         }
     }
@@ -104,13 +104,13 @@ public class LifFormatImpl implements LifFormat {
         return layerInMetadata;
     }
 
-    private Map<String, List<AnnotationInterpreter>> findLayersAndAnnotations(List<Annotation> annotations) {
-        Map<String, List<AnnotationInterpreter>> lifLayers = new HashMap<String, List<AnnotationInterpreter>>();
-        List<AnnotationInterpreter> annotationInterpreterList = new ArrayList<AnnotationInterpreter>();
+    private Map<String, List<LifAnnotationMapper>> findLayersAndAnnotations(List<Annotation> annotations) {
+        Map<String, List<LifAnnotationMapper>> lifLayers = new HashMap<String, List<LifAnnotationMapper>>();
+        List<LifAnnotationMapper> annotationInterpreterList = new ArrayList<LifAnnotationMapper>();
         for (Annotation annotation : annotations) {
-            annotationInterpreterList = new ArrayList<AnnotationInterpreter>();
+            annotationInterpreterList = new ArrayList<LifAnnotationMapper>();
             String type = annotation.getAtType();
-            AnnotationInterpreter annotationInterpreter = new AnnotationInterpreter(annotation);
+            LifAnnotationMapper annotationInterpreter = new LifAnnotationMapper(annotation);
             if (lifLayers.containsKey(type)) {
                 annotationInterpreterList = lifLayers.get(type);
             }
@@ -120,7 +120,7 @@ public class LifFormatImpl implements LifFormat {
         return lifLayers;
     }
 
-    private void takeLast(Map<String, List<AnnotationInterpreter>> lifLayers) {
+    private void takeLast(Map<String, List<LifAnnotationMapper>> lifLayers) {
         for (String layer : lifLayers.keySet()) {
             this.lifLayerAnnotationsMap.put(layer, lifLayers.get(layer));
         }

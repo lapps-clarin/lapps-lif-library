@@ -9,7 +9,7 @@ import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifDependencyParser;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifMarkable;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifReference;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifReferenceLayer;
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import de.tuebingen.uni.sfs.lapps.utils.DependencyEntityInfo;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import de.tuebingen.uni.sfs.lapps.utils.TcfConstituentsTreeBuild;
@@ -45,24 +45,23 @@ import de.tuebingen.uni.sfs.lapps.core.lifwrapper.profiler.LifFormat;
 import de.tuebingen.uni.sfs.lapps.core.converter.api.TcfConstants;
 import static de.tuebingen.uni.sfs.lapps.core.converter.api.TcfConstants.ANAPHORIC;
 import static de.tuebingen.uni.sfs.lapps.core.converter.api.TcfConstants.TCF_NAMED_ENTITIES_TYPE_OPENNLP;
-import de.tuebingen.uni.sfs.lapps.utils.JsonPrettyPrint;
 import de.tuebingen.uni.sfs.lapps.utils.DuplicateChecker;
 import eu.clarin.weblicht.wlfxb.tc.api.LemmasLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.PosTagsLayer;
 import java.util.concurrent.CopyOnWriteArrayList;
 import de.tuebingen.uni.sfs.lapps.core.converter.api.ErrorMessage;
-import de.tuebingen.uni.sfs.lapps.core.converter.api.ConvertLayer;
+import de.tuebingen.uni.sfs.lapps.core.converter.api.LayersConverter;
 
 /**
  *
  * @author felahi
  */
-public class ConvertToTcfFormat implements ConvertLayer, ErrorMessage {
+public class LayerConverterImpl implements LayersConverter, ErrorMessage {
 
     private TextCorpusStored textCorpusStored = null;
     private LifTokenToTcfTokenIdMapper lifTokenToTcfTokenIdMapper = null;
 
-    public ConvertToTcfFormat(LifFormat lappsLifFormat) throws ConversionException, LifException, VocabularyMappingException {
+    public LayerConverterImpl(LifFormat lappsLifFormat) throws ConversionException, LifException, VocabularyMappingException {
         textCorpusStored = new TextCorpusStored(toTcfLanguage(lappsLifFormat.getLanguage()));
         if (lappsLifFormat.getText() != null) {
             toTcfText(lappsLifFormat.getText());
@@ -106,7 +105,7 @@ public class ConvertToTcfFormat implements ConvertLayer, ErrorMessage {
         try {
             textCorpusStored.createTextLayer().addText(modifiedText);
         } catch (Exception ex) {
-            Logger.getLogger(ConvertToTcfFormat.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LayerConverterImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw new ConversionException(MESSAGE_TEXT_CONVERSION_FAILED);
         }
         return modifiedText;
@@ -179,7 +178,7 @@ public class ConvertToTcfFormat implements ConvertLayer, ErrorMessage {
         SentencesLayer sentencesLayer = textCorpusStored.createSentencesLayer();
 
         if (textCorpusStored.getTokensLayer() != null) {
-            for (AnnotationInterpreter lifSentence : lifSentenceLayer.getSentenceList()) {
+            for (LifAnnotationMapper lifSentence : lifSentenceLayer.getSentenceList()) {
                 List<Token> sentenceTokens = new ArrayList<Token>();
                 List<Token> tokens = lifTokenToTcfTokenIdMapper.getTcfTokens(lifSentence.getStart(), lifSentence.getEnd());
                 if (tokens.isEmpty()) {
@@ -336,7 +335,7 @@ public class ConvertToTcfFormat implements ConvertLayer, ErrorMessage {
             }
             refsLayer.addReferent(tcfReferences);
         } catch (Exception ex) {
-            Logger.getLogger(ConvertToTcfFormat.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LayerConverterImpl.class.getName()).log(Level.SEVERE, null, ex);
             throw new ConversionException(MESSAGE_COREFERENCE_CONVERSION_FAILED);
         }
         return refsLayer;

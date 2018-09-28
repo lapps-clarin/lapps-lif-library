@@ -6,7 +6,7 @@
 package de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl;
 
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifCharOffSet;
-import de.tuebingen.uni.sfs.lapps.utils.AnnotationInterpreter;
+import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 
 /**
  *
@@ -18,7 +18,7 @@ public class LifCharOffsetStored implements LifCharOffSet {
     private Long end = null;
     private String id = null;
 
-    public LifCharOffsetStored(AnnotationInterpreter annotation) {
+    public LifCharOffsetStored(LifAnnotationMapper annotation) {
         this.start = annotation.getStart();
         this.end = annotation.getEnd();
         this.id = annotation.getId();

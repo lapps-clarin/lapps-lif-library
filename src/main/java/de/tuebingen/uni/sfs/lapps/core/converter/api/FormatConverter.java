@@ -12,14 +12,19 @@ import de.tuebingen.uni.sfs.lapps.exceptions.VocabularyMappingException;
 import java.io.IOException;
 import java.io.OutputStream;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.profiler.LifFormat;
-
+import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
+import java.io.File;
 /**
  *
  * @author Mohammad Fazleh Elahi
  */
-public interface ConvertFormat {
+public interface FormatConverter {
+    
+    public File convertLifToTcf(File lifFile) throws LifException, VocabularyMappingException, ConversionException, IOException, JsonValidityException;
 
-    public ConvertLayer convertFormat(LifFormat lappsLifProfile) throws LifException, VocabularyMappingException, ConversionException, IOException, JsonValidityException;
+    public TextCorpusStored convertLifToTcf(LifFormat lifFormat) throws LifException, VocabularyMappingException, ConversionException, IOException, JsonValidityException;
+    
+    public void write(OutputStream os) throws ConversionException;
 
-    public void process(OutputStream os) throws ConversionException;
+
 }
