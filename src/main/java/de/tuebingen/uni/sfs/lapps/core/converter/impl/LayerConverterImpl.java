@@ -266,8 +266,9 @@ public class LayerConverterImpl implements LayersConverter, ErrorMessage {
         }
 
         try {
-            List<Dependency> tcfDependencyList = new ArrayList<Dependency>();
+
             for (Long parseIndex : lifDependencyParser.getParseIndexs()) {
+                List<Dependency> tcfDependencyList = new ArrayList<Dependency>();
                 for (DependencyEntityInfo dependencyEntity : lifDependencyParser.getDependencyEntities(parseIndex)) {
                     Token govonor = null, dependent = null;
                     if (dependencyEntity.getGovIDs() != null && dependencyEntity.getDepIDs() != null) {
