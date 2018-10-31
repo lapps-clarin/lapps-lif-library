@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.tuebingen.uni.sfs.lapps</groupId>
     <artifactId>lapps-lif-library</artifactId>
-    <version>1.4-SNAPSHOT</version>
+    <version>1.4</version>
     <packaging>jar</packaging>
     <url>https://weblicht.sfs.uni-tuebingen.de/</url>
     <inceptionYear>2017</inceptionYear>
@@ -12,7 +12,7 @@
         <url>https://elahi@weblicht.sfs.uni-tuebingen.de/gitlab/lapps/lapps-lif-library.git</url>
         <connection>scm:git:ssh://elahi@weblicht.sfs.uni-tuebingen.de:29418/lapps/lapps-lif-library.git</connection>
         <developerConnection>scm:git:ssh://elahi@weblicht.sfs.uni-tuebingen.de:29418/lapps/lapps-lif-library.git</developerConnection>
-        <tag>lapps-lif-library-9</tag>
+        <tag>1.4</tag>
     </scm>
      
     <distributionManagement>
