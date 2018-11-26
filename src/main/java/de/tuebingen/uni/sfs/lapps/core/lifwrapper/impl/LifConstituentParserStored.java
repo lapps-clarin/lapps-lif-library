@@ -5,6 +5,7 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl;
 
+import static de.tuebingen.uni.sfs.lapps.core.converter.api.ErrorMessage.MESSAGE_LIF_ERROR_CONSTITUENT_PARSER_MISSING_ANNOATAIONS;
 import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.util.HashMap;
@@ -32,62 +33,69 @@ public class LifConstituentParserStored implements LifConstituentParser {
     public LifConstituentParserStored(List<LifAnnotationMapper> lifAnnotations) throws LifException {
         try {
             extract(lifAnnotations);
-        } catch (LifException ex) {
-            Logger.getLogger(LifConstituentParserStored.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             throw new LifException(ex.getMessage());
         }
     }
 
     private void extract(List<LifAnnotationMapper> lifAnnotationList) throws LifException {
         Long parseIndex = new Long(0);
-        for (LifAnnotationMapper parseAnnotation : lifAnnotationList) {
-            if (parseAnnotation.getUrl().equals(Discriminators.Uri.PHRASE_STRUCTURE)) {
-                parseIndex = parseIndex + 1;
-                if (parseAnnotation.getStart() != -1 || parseAnnotation.getEnd() != -1) {
-                    sentenceList.add(parseAnnotation);
-                }
-                Map<String, LifConstituent> idConstituents = new HashMap<String, LifConstituent>();
-                Map<Object, Object> parseFeatures = LifAnnotationMapper.elementIdMapper.get(parseAnnotation.getId()).getFeatures();
-                if (!parseFeatures.isEmpty()) {
-                    LifConstituentStructure lifConstituentStructure = new LifConstituentStructure(parseFeatures);
-                    for (String constituentId : lifConstituentStructure.getConstituents()) {
-                        LifAnnotationMapper constAnnotation = LifAnnotationMapper.elementIdMapper.get(constituentId);
-                        if (constAnnotation.getUrl().equals(Discriminators.Uri.CONSTITUENT)) {
-                            LifConstituent lifConstituent = new LifConstituent(constAnnotation);
-                            idConstituents.put(constituentId, lifConstituent);
-                            if (lifConstituent.isRoot()) {
-                                roots.put(parseIndex, lifConstituent);
+
+        try {
+            for (LifAnnotationMapper parseAnnotation : lifAnnotationList) {
+                if (parseAnnotation.getUrl().equals(Discriminators.Uri.PHRASE_STRUCTURE)) {
+                    parseIndex = parseIndex + 1;
+                    if (parseAnnotation.getStart() != -1 || parseAnnotation.getEnd() != -1) {
+                        sentenceList.add(parseAnnotation);
+                    }
+                    Map<String, LifConstituent> idConstituents = new HashMap<String, LifConstituent>();
+                    Map<Object, Object> parseFeatures = LifAnnotationMapper.elementIdMapper.get(parseAnnotation.getId()).getFeatures();
+                    if (!parseFeatures.isEmpty()) {
+                        LifConstituentStructure lifConstituentStructure = new LifConstituentStructure(parseFeatures);
+                        for (String constituentId : lifConstituentStructure.getConstituents()) {
+                            LifAnnotationMapper constAnnotation = LifAnnotationMapper.elementIdMapper.get(constituentId);
+                            if (constAnnotation.getUrl().equals(Discriminators.Uri.CONSTITUENT)) {
+                                LifConstituent lifConstituent = new LifConstituent(constAnnotation);
+                                idConstituents.put(constituentId, lifConstituent);
+                                if (lifConstituent.isRoot()) {
+                                    roots.put(parseIndex, lifConstituent);
+                                }
                             }
                         }
+                        constituentParses.put(parseIndex, idConstituents);
                     }
-                    constituentParses.put(parseIndex, idConstituents);
                 }
             }
+        } catch (NullPointerException ex) {
+            throw new LifException(MESSAGE_LIF_ERROR_CONSTITUENT_PARSER_MISSING_ANNOATAIONS);
         }
         if (!sentenceList.isEmpty()) {
             lifSentenceLayer = new LifSentenceLayerStored(sentenceList);
         }
     }
 
-    public LifConstituent getRoot(Long parseIndex) throws NullPointerException {
-        return roots.get(parseIndex);
-    }
-
-    public Map<String, LifConstituent> getConstituentEntities(Long parseIndex) throws LifException {
-        if (this.constituentParses.containsKey(parseIndex)) {
-            return this.constituentParses.get(parseIndex);
-        } else {
-            throw new LifException("No Constituent list found for the tree in Parse" + parseIndex);
-        }
-    }
-
+    @Override
     public TreeSet<Long> getParseIndexs() {
         return new TreeSet<Long>(this.constituentParses.keySet());
     }
 
     @Override
-    public LifSentenceLayer getSentenceLayer() {
+    public LifConstituent getRoot(Long parseIndex) throws LifException {
+        return roots.get(parseIndex);
+    }
+
+    @Override
+    public LifSentenceLayer getSentenceLayer() throws LifException {
         return lifSentenceLayer;
+    }
+
+    @Override
+    public Map<String, LifConstituent> getConstituentEntities(Long parseIndex) throws LifException {
+        if (this.constituentParses.containsKey(parseIndex)) {
+            return this.constituentParses.get(parseIndex);
+        } else {
+            throw new LifException(MESSAGE_LIF_ERROR_CONSTITUENT_PARSER_MISSING_ANNOATAIONS);
+        }
     }
 
 }

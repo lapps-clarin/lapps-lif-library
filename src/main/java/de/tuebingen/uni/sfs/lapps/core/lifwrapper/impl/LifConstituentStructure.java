@@ -21,7 +21,7 @@ public class LifConstituentStructure {
     private String tree = null;
     private List<String> constituents = new ArrayList<String>();
 
-    public LifConstituentStructure(Map<Object, Object> features) throws NullPointerException {
+    public LifConstituentStructure(Map<Object, Object> features) {
         this.text = (String) features.get(Discriminators.Alias.SENTENCE);
         this.tree = (String) features.get(LifConstants.Annotation.DiscriminitorsExtended.PENN_TREE);
         this.constituents = (List) features.get(LifConstants.Annotation.DiscriminitorsExtended.CONSTITUENTS);

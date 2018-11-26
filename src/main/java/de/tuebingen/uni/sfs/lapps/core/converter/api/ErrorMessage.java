@@ -9,7 +9,7 @@ import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifErrorMessage;
 
 /**
  *
- * @author fazlehelahi
+ * @author Mohammad Fazleh Elahi
  */
 public interface ErrorMessage extends LifErrorMessage{
     public static final String MESSAGE_CONVERSION_FAILED = "LIF to TCF CONVERSION ERROR: LIF to TCF conversion failed!!";
@@ -24,4 +24,6 @@ public interface ErrorMessage extends LifErrorMessage{
     public static final String MESSAGE_CONSTITUENT_CONVERSION_FAILED ="LIF to TCF CONVERSION ERROR: the converion of constituent parser failed!!";
     public static final String MESSAGE_DEPENDENCY_CONVERSION_FAILED ="LIF to TCF CONVERSION ERROR: the converion of dependency parser failed!!";
     public static final String MESSAGE_COREFERENCE_CONVERSION_FAILED ="LIF to TCF CONVERSION ERROR: the converion of coreference parser failed!!";
+    public static final String MESSAGE_LIF_ERROR = "LIF ERROR:";
+    public static final String MESSAGE_LIF_ERROR_CONSTITUENT_PARSER_MISSING_ANNOATAIONS = "LIF ERROR: Missing annotation (PhraseStructure or Constituent or Tokens) in LIF!!";
 }
