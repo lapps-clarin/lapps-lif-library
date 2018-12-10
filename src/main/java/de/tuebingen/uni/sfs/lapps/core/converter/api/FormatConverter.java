@@ -11,7 +11,7 @@ import de.tuebingen.uni.sfs.lapps.exceptions.ConversionException;
 import de.tuebingen.uni.sfs.lapps.exceptions.VocabularyMappingException;
 import java.io.IOException;
 import java.io.OutputStream;
-import de.tuebingen.uni.sfs.lapps.core.lifwrapper.profiler.LifFormat;
+import de.tuebingen.uni.sfs.lapps.core.lifwrapper.profiler.api.LifFormat;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
 import java.io.File;
 /**

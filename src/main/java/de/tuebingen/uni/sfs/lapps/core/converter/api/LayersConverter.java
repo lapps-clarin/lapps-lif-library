@@ -5,12 +5,12 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.converter.api;
 
-import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifConstituentParser;
-import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifDependencyParser;
-import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifNameEntityLayer;
-import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifReferenceLayer;
-import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifSentenceLayer;
-import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifTokenLayer;
+import de.tuebingen.uni.sfs.lapps.core.lifwrapper.anno.api.LifConstituentParser;
+import de.tuebingen.uni.sfs.lapps.core.lifwrapper.anno.api.LifDependencyParser;
+import de.tuebingen.uni.sfs.lapps.core.lifwrapper.anno.api.LifNameEntityLayer;
+import de.tuebingen.uni.sfs.lapps.core.lifwrapper.anno.api.LifReferenceLayer;
+import de.tuebingen.uni.sfs.lapps.core.lifwrapper.anno.api.LifSentenceLayer;
+import de.tuebingen.uni.sfs.lapps.core.lifwrapper.anno.api.LifTokenLayer;
 import de.tuebingen.uni.sfs.lapps.exceptions.ConversionException;
 import eu.clarin.weblicht.wlfxb.tc.api.ConstituentParsingLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.DependencyParsingLayer;
