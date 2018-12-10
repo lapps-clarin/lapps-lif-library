@@ -7,6 +7,7 @@ package de.tuebingen.uni.sfs.lapps.utils;
 
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl.LifConstituent;
 import de.tuebingen.uni.sfs.lapps.core.converter.api.TcfConstants;
+import de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl.LifConstituent;
 import eu.clarin.weblicht.wlfxb.tc.api.Constituent;
 import eu.clarin.weblicht.wlfxb.tc.api.ConstituentParse;
 import eu.clarin.weblicht.wlfxb.tc.api.ConstituentParsingLayer;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 import de.tuebingen.uni.sfs.lapps.exceptions.ConversionException;
+import de.tuebingen.uni.sfs.lapps.utils.LifTokenToTcfTokenIdMapper;
 
 /**
  *

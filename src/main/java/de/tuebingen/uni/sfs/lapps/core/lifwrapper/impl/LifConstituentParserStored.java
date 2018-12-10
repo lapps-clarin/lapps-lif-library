@@ -5,7 +5,6 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl;
 
-import static de.tuebingen.uni.sfs.lapps.core.converter.api.ErrorMessage.MESSAGE_LIF_ERROR_CONSTITUENT_PARSER_MISSING_ANNOATAIONS;
 import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.util.HashMap;
@@ -15,9 +14,8 @@ import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifConstituentParser;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifSentenceLayer;
 import java.util.ArrayList;
 import java.util.TreeSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.lappsgrid.discriminator.Discriminators;
+import de.tuebingen.uni.sfs.lapps.core.converter.api.ErrorMessage;
 
 /**
  *
@@ -31,11 +29,7 @@ public class LifConstituentParserStored implements LifConstituentParser {
     private Map<Long, Map<String, LifConstituent>> constituentParses = new HashMap<Long, Map<String, LifConstituent>>();
 
     public LifConstituentParserStored(List<LifAnnotationMapper> lifAnnotations) throws LifException {
-        try {
-            extract(lifAnnotations);
-        } catch (Exception ex) {
-            throw new LifException(ex.getMessage());
-        }
+        extract(lifAnnotations);
     }
 
     private void extract(List<LifAnnotationMapper> lifAnnotationList) throws LifException {
@@ -67,7 +61,9 @@ public class LifConstituentParserStored implements LifConstituentParser {
                 }
             }
         } catch (NullPointerException ex) {
-            throw new LifException(MESSAGE_LIF_ERROR_CONSTITUENT_PARSER_MISSING_ANNOATAIONS);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_LIF_ERROR_CONSTITUENT_PARSER_MISSING_ANNOATAIONS);
+        } catch (Exception ex) {
+            throw new LifException(ErrorMessage.Lif.MESSAGE_LIF_ERROR);
         }
         if (!sentenceList.isEmpty()) {
             lifSentenceLayer = new LifSentenceLayerStored(sentenceList);
@@ -75,7 +71,7 @@ public class LifConstituentParserStored implements LifConstituentParser {
     }
 
     @Override
-    public TreeSet<Long> getParseIndexs() {
+    public TreeSet<Long> getParseIndexs() throws LifException {
         return new TreeSet<Long>(this.constituentParses.keySet());
     }
 
@@ -94,7 +90,7 @@ public class LifConstituentParserStored implements LifConstituentParser {
         if (this.constituentParses.containsKey(parseIndex)) {
             return this.constituentParses.get(parseIndex);
         } else {
-            throw new LifException(MESSAGE_LIF_ERROR_CONSTITUENT_PARSER_MISSING_ANNOATAIONS);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_LIF_ERROR_CONSTITUENT_PARSER_MISSING_ANNOATAIONS);
         }
     }
 

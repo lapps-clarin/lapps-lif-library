@@ -16,7 +16,7 @@ import java.util.TreeSet;
  */
 public interface LifConstituentParser {
 
-    public TreeSet<Long> getParseIndexs();
+    public TreeSet<Long> getParseIndexs()throws LifException;
 
     public LifConstituent getRoot(Long parseIndex) throws LifException;
 

@@ -5,7 +5,6 @@
  */
 package de.tuebingen.uni.sfs.lapps.core.lifwrapper.profiler;
 
-import de.tuebingen.uni.sfs.lapps.core.lifwrapper.profiler.JsonProfiler;
 import com.fasterxml.jackson.core.JsonParseException;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifConstants;
 import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
@@ -19,7 +18,7 @@ import java.util.Set;
 import org.lappsgrid.discriminator.Discriminators;
 import org.lappsgrid.serialization.lif.Annotation;
 import org.lappsgrid.serialization.lif.View;
-import de.tuebingen.uni.sfs.lapps.core.lifwrapper.profiler.ValidityChecker;
+import de.tuebingen.uni.sfs.lapps.core.converter.api.ErrorMessage;
 
 /**
  *
@@ -63,7 +62,7 @@ public class ValidityCheckerImpl extends JsonProfiler implements ValidityChecker
 
     public boolean isNonEmptyDocument() throws LifException {
         if (super.getJsonMap().keySet().isEmpty()) {
-            throw new LifException(MESSAGE_INVALID_JSON);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_INVALID_JSON);
         }
         return true;
     }
@@ -75,12 +74,12 @@ public class ValidityCheckerImpl extends JsonProfiler implements ValidityChecker
             return true;
         } else if (!annotationSet.contains(LifConstants.DocumentStructure.PAYLOAD_KEY_JSON)
                 && annotationSet.contains(LifConstants.DocumentStructure.DISCRIMINATOR_KEY_JSON)) {
-            throw new LifException(MESSAGE_INVALID_LIF_PAYLOAD_DOCUMENT);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_INVALID_LIF_PAYLOAD_DOCUMENT);
         } else if (annotationSet.contains(LifConstants.DocumentStructure.PAYLOAD_KEY_JSON)
                 && !annotationSet.contains(LifConstants.DocumentStructure.DISCRIMINATOR_KEY_JSON)) {
-            throw new LifException(MESSAGE_INVALID_LIF_DISCRIMINATOR_DOCUMENT);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_INVALID_LIF_DISCRIMINATOR_DOCUMENT);
         } else {
-            throw new LifException(MESSAGE_INVALID_LIF_DISCRIMINATOR_DOCUMENT);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_INVALID_LIF_DISCRIMINATOR_DOCUMENT);
         }
     }
 
@@ -98,7 +97,7 @@ public class ValidityCheckerImpl extends JsonProfiler implements ValidityChecker
                     }
                 }
                 if (payLoadContent instanceof String) {
-                    throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL);
+                    throw new LifException(ErrorMessage.Lif.MESSAGE_INVALID_LIF_TOPLEVEL);
                 }
             }
 
@@ -116,11 +115,11 @@ public class ValidityCheckerImpl extends JsonProfiler implements ValidityChecker
         } else*/ 
         //temporary closed...
         if (!annotationSet.contains(LifConstants.DocumentStructure.TopLevel.METADATA_KEY_LIF)) {
-            throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_METADATA_MISSING);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_INVALID_LIF_TOPLEVEL_METADATA_MISSING);
         } else if (!annotationSet.contains(LifConstants.DocumentStructure.TopLevel.VIEWS_KEY_LIF)) {
-            throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_VIEWS_MISSING);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_INVALID_LIF_TOPLEVEL_VIEWS_MISSING);
         } else if (!annotationSet.contains(Discriminators.Alias.TEXT)) {
-            throw new LifException(MESSAGE_INVALID_LIF_TOPLEVEL_TEXT_MISSING);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_INVALID_LIF_TOPLEVEL_TEXT_MISSING);
         } else {
             return true;
         }
@@ -128,13 +127,13 @@ public class ValidityCheckerImpl extends JsonProfiler implements ValidityChecker
 
     public boolean isAnnotationLayerValid() throws LifException {
         if (this.views.isEmpty()) {
-            throw new LifException(NO_ANNOTATION_FOUND);
+            throw new LifException(ErrorMessage.Lif.NO_ANNOTATION_FOUND);
         }
         return true;
     }
 
     public boolean isAnnotationValid() throws LifException {
-        throw new UnsupportedOperationException(NOT_SUPPORTED_YET); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException(ErrorMessage.Lif.NOT_SUPPORTED_YET); //To change body of generated methods, choose Tools | Templates.
     }
     
     public boolean isMetadataVsAnnotationValid(String layer, Set<String> metadataInfoInLayers, Set<String> annotationInfoInLayers) throws LifException{
@@ -145,14 +144,14 @@ public class ValidityCheckerImpl extends JsonProfiler implements ValidityChecker
         } else if (annotationInfoInLayers.contains(layer)) {
             return true;
         } else {
-            throw new LifException(MESSAGE_INVALID_LIF_METADATA_ANNOTATION+ layer);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_INVALID_LIF_METADATA_ANNOTATION+ layer);
         }
     }
 
 
     public boolean isMetadataLayerValid(String lifLayer, Set<String> annotationTypes) throws LifException {
         if (!annotationTypes.contains(lifLayer)) {
-            throw new LifException(NO_ANNOTATION_IN_METADATA);
+            throw new LifException(ErrorMessage.Lif.NO_ANNOTATION_IN_METADATA);
         }
         return true;
     }

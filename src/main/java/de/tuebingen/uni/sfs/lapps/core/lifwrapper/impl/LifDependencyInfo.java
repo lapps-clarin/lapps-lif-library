@@ -3,23 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package de.tuebingen.uni.sfs.lapps.utils;
+package de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl;
 
 /**
  *
  * @author felahi
  */
-public class DependencyEntityInfo {
+public class LifDependencyInfo {
 
-    private String  depIDs = null;
+    private String depIDs = null;
     private String govIDs = null;
     private String func = null;
+    private boolean root = false;
 
-    public DependencyEntityInfo(String func) {
+    public LifDependencyInfo(String func) {
         this.func = func;
     }
 
-    public DependencyEntityInfo(String depIDs, String govIDs, String func) {
+    public LifDependencyInfo(String depIDs, String govIDs, String func) {
         this.depIDs = depIDs;
         this.govIDs = govIDs;
         this.func = func;
@@ -39,6 +40,10 @@ public class DependencyEntityInfo {
 
     public void setDepIDs(String depIDs) {
         this.depIDs = depIDs;
+    }
+
+    public void setRoot(Boolean root) {
+        this.root = root;
     }
 
     public void setGovIDs(String govIDs) {

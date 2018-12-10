@@ -40,7 +40,7 @@ public class LifConstituent {
             this.childrenList = (List<String>) constAnnotationInterpreter.getFeatures().get(Features.Constituent.CHILDREN);
             this.parentId = (String) constAnnotationInterpreter.getFeatures().get(Features.Constituent.PARENT);
 
-            if (catFunction.contains(LifConstants.Annotation.TreeSets.CONSTITUENT_ROOT)) {
+            if (catFunction.contains(LifConstants.Annotation.TreeSets.ROOT)) {
                 root = true;
             }
         } catch (Exception ex) {

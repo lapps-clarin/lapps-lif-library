@@ -39,7 +39,7 @@ public class LifConstants {
 
         public static class TreeSets {
 
-            public static final String CONSTITUENT_ROOT = "ROOT";
+            public static final String ROOT = "ROOT";
         }
 
         public static class Ordering {

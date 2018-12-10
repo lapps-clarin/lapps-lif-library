@@ -28,7 +28,6 @@ import java.util.Set;
 import org.apache.commons.io.IOUtils;
 import org.lappsgrid.serialization.lif.Annotation;
 import org.lappsgrid.serialization.lif.View;
-import de.tuebingen.uni.sfs.lapps.core.lifwrapper.profiler.LifFormat;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl.LifConstituentParserStored;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl.LifDependencyParserStored;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl.LifNameEntityLayerStored;
@@ -36,6 +35,7 @@ import de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl.LifRefererenceLayerStored
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl.LifSentenceLayerStored;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl.LifTokenLayerStored;
 import org.lappsgrid.discriminator.Discriminators;
+import de.tuebingen.uni.sfs.lapps.core.converter.api.ErrorMessage;
 
 /**
  *
@@ -46,7 +46,6 @@ public class LifFormatImpl implements LifFormat {
     private String fileString = null;
     private String text = null;
     private String language = null;
-    private LifContainerMapper lifContainer = new LifContainerMapper();
     private LifTokenLayer lifTokenLayer = null;
     private LifSentenceLayer lifSentenceLayer = null;
     private LifNameEntityLayer lifNameEntityLayer = null;
@@ -55,13 +54,28 @@ public class LifFormatImpl implements LifFormat {
     private LifReferenceLayer lifRefererenceLayer = null;
     private Map<String, List<LifAnnotationMapper>> lifLayerAnnotationsMap = new HashMap<String, List<LifAnnotationMapper>>();
 
-    public LifFormatImpl(InputStream is) throws LifException, IOException, JsonValidityException {
-        fileString = IOUtils.toString(is, LifConstants.GeneralParameters.UNICODE);
-        if (isValid()) {
-            layerOrderingCombining();
-        } else {
-            throw new LifException(ValidityCheckerImpl.MESSAGE_INVALID_LIF);
+    public LifFormatImpl(InputStream is) throws LifException {
+        try {
+            fileString = IOUtils.toString(is, LifConstants.GeneralParameters.UNICODE);
+            if (isValid()) {
+                layerOrderingCombining();
+            } else {
+                throw new LifException(ErrorMessage.Lif.MESSAGE_INVALID_LIF);
+            }
+        } catch (JsonValidityException ex) {
+            ex.printStackTrace();
+            System.out.println(ex);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_JSON_ERROR);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            System.out.println(ex);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_File_ERROR);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println(ex);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_UNKNOWN_ERROR);
         }
+
     }
 
     @Override
@@ -73,12 +87,12 @@ public class LifFormatImpl implements LifFormat {
             this.text = lifContainer.getContainer().getText();
             this.language = lifContainer.getContainer().getLanguage();
         } else {
-            throw new JsonValidityException(ValidityCheckerImpl.INVALID_JSON_FILE);
+            throw new JsonValidityException(ErrorMessage.Lif.INVALID_JSON_FILE);
         }
         if (lifContainer != null) {
             processViews(lifContainer.getContainer().getViews());
         } else {
-            throw new LifException(ValidityCheckerImpl.MESSAGE_INVALID_LIF);
+            throw new LifException(ErrorMessage.Lif.MESSAGE_INVALID_LIF);
         }
         return true;
     }
@@ -155,13 +169,11 @@ public class LifFormatImpl implements LifFormat {
     @Override
     public String getLanguage() throws LifException {
         return this.language;
-        //return lifContainer.getContainer().getLanguage();
     }
 
     @Override
     public String getText() throws LifException {
         return this.text;
-        //return lifContainer.getContainer().getText();
     }
 
     @Override

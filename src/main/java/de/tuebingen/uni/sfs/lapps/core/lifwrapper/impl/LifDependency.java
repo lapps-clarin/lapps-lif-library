@@ -16,9 +16,9 @@ public class LifDependency  {
 
     public String governor = null;
     public String dependent = null;
-    public String dependency_function = null;
+    public String label = null;
 
-    public LifDependency(Map<Object, Object> features, String dependency_function) {
+    public LifDependency(Map<Object, Object> features, String label) {
         //temporary solution of null string problem of lif file. This code will be removed when lIF become stable
         if (features.get(Dependency.GOVERNOR) != null&& !features.get(Dependency.GOVERNOR).toString().contains("null")) {
             this.governor = (String) features.get(Dependency.GOVERNOR).toString().trim();
@@ -26,8 +26,8 @@ public class LifDependency  {
         if (features.get(Dependency.DEPENDENT) != null) {
             this.dependent = (String) features.get(Dependency.DEPENDENT).toString().trim();
         }
-        if (dependency_function != null) {
-            this.dependency_function = dependency_function;
+        if (label != null) {
+            this.label = label;
         }
 
     }
@@ -54,8 +54,8 @@ public class LifDependency  {
         return dependent;
     }
 
-    public String getDependency_function() {
-        return dependency_function;
+    public String getDependencyFunction() {
+        return label;
     }
 
 }

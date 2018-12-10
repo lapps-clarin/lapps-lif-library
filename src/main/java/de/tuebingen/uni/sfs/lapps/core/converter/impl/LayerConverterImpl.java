@@ -10,7 +10,7 @@ import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifMarkable;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifReference;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifReferenceLayer;
 import de.tuebingen.uni.sfs.lapps.utils.LifAnnotationMapper;
-import de.tuebingen.uni.sfs.lapps.utils.DependencyEntityInfo;
+import de.tuebingen.uni.sfs.lapps.core.lifwrapper.impl.LifDependencyInfo;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import de.tuebingen.uni.sfs.lapps.utils.TcfConstituentsTreeBuild;
 import eu.clarin.weblicht.wlfxb.tc.api.Constituent;
@@ -49,14 +49,14 @@ import de.tuebingen.uni.sfs.lapps.utils.DuplicateChecker;
 import eu.clarin.weblicht.wlfxb.tc.api.LemmasLayer;
 import eu.clarin.weblicht.wlfxb.tc.api.PosTagsLayer;
 import java.util.concurrent.CopyOnWriteArrayList;
-import de.tuebingen.uni.sfs.lapps.core.converter.api.ErrorMessage;
 import de.tuebingen.uni.sfs.lapps.core.converter.api.LayersConverter;
+import de.tuebingen.uni.sfs.lapps.core.converter.api.ErrorMessage;
 
 /**
  *
  * @author felahi
  */
-public class LayerConverterImpl implements LayersConverter, ErrorMessage {
+public class LayerConverterImpl implements LayersConverter {
 
     private TextCorpusStored textCorpusStored = null;
     private LifTokenToTcfTokenIdMapper lifTokenToTcfTokenIdMapper = null;
@@ -106,7 +106,7 @@ public class LayerConverterImpl implements LayersConverter, ErrorMessage {
             textCorpusStored.createTextLayer().addText(modifiedText);
         } catch (Exception ex) {
             Logger.getLogger(LayerConverterImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw new ConversionException(MESSAGE_TEXT_CONVERSION_FAILED);
+            throw new ConversionException(ErrorMessage.Conversion.MESSAGE_TEXT_CONVERSION_FAILED);
         }
         return modifiedText;
     }
@@ -182,7 +182,7 @@ public class LayerConverterImpl implements LayersConverter, ErrorMessage {
                 List<Token> sentenceTokens = new ArrayList<Token>();
                 List<Token> tokens = lifTokenToTcfTokenIdMapper.getTcfTokens(lifSentence.getStart(), lifSentence.getEnd());
                 if (tokens.isEmpty()) {
-                    throw new ConversionException(MESSAGE_SENTENCE_BOUNDERY_NOT_GIVEN);
+                    throw new ConversionException(ErrorMessage.Conversion.MESSAGE_SENTENCE_BOUNDERY_NOT_GIVEN);
                 } else {
                     for (Token token : tokens) {
                         sentenceTokens.add(token);
@@ -191,7 +191,7 @@ public class LayerConverterImpl implements LayersConverter, ErrorMessage {
                 }
             }
         } else {
-            throw new ConversionException(MESSAGE_TOKEN_LAYER_REQUIRED);
+            throw new ConversionException(ErrorMessage.Conversion.MESSAGE_TOKEN_LAYER_REQUIRED);
         }
 
         return sentencesLayer;
@@ -215,7 +215,7 @@ public class LayerConverterImpl implements LayersConverter, ErrorMessage {
                 }
             }
         } else {
-            throw new ConversionException(MESSAGE_TOKEN_LAYER_REQUIRED);
+            throw new ConversionException(ErrorMessage.Conversion.MESSAGE_TOKEN_LAYER_REQUIRED);
         }
         return namedEntitiesLayer;
     }
@@ -230,7 +230,7 @@ public class LayerConverterImpl implements LayersConverter, ErrorMessage {
             if (lifConstituentParser.getSentenceLayer() != null) {
                 toTcfSentences(lifConstituentParser.getSentenceLayer());
             } else {
-                throw new ConversionException(MESSAGE_SENTENCE_LAYER_REQUIRED);
+                throw new ConversionException(ErrorMessage.Conversion.MESSAGE_SENTENCE_LAYER_REQUIRED);
             }
         }
 
@@ -261,15 +261,18 @@ public class LayerConverterImpl implements LayersConverter, ErrorMessage {
             if (lifDependencyParser.getSentenceLayer() != null) {
                 toTcfSentences(lifDependencyParser.getSentenceLayer());
             } else {
-                throw new ConversionException(MESSAGE_SENTENCE_LAYER_REQUIRED);
+                throw new ConversionException(ErrorMessage.Conversion.MESSAGE_SENTENCE_LAYER_REQUIRED);
             }
         }
 
         try {
 
             for (Long parseIndex : lifDependencyParser.getParseIndexs()) {
+                if (!lifDependencyParser.getRoot(parseIndex)) {
+                    throw new LifException(ErrorMessage.Lif.MESSAGE_LIF_ERROR_DEPENDENCY_PARSER_ROOT_MISSING);
+                };
                 List<Dependency> tcfDependencyList = new ArrayList<Dependency>();
-                for (DependencyEntityInfo dependencyEntity : lifDependencyParser.getDependencyEntities(parseIndex)) {
+                for (LifDependencyInfo dependencyEntity : lifDependencyParser.getDependencyEntities(parseIndex)) {
                     Token govonor = null, dependent = null;
                     if (dependencyEntity.getGovIDs() != null && dependencyEntity.getDepIDs() != null) {
                         govonor = this.lifTokenToTcfTokenIdMapper.getTcfToken(dependencyEntity.getGovIDs());
@@ -286,7 +289,7 @@ public class LayerConverterImpl implements LayersConverter, ErrorMessage {
                 dependencyParsingLayer.addParse(tcfDependencyList);
             }
         } catch (Exception ex) {
-            throw new ConversionException(MESSAGE_DEPENDENCY_CONVERSION_FAILED);
+            throw new ConversionException(ErrorMessage.Conversion.MESSAGE_DEPENDENCY_CONVERSION_FAILED);
         }
         return dependencyParsingLayer;
     }
@@ -337,7 +340,7 @@ public class LayerConverterImpl implements LayersConverter, ErrorMessage {
             refsLayer.addReferent(tcfReferences);
         } catch (Exception ex) {
             Logger.getLogger(LayerConverterImpl.class.getName()).log(Level.SEVERE, null, ex);
-            throw new ConversionException(MESSAGE_COREFERENCE_CONVERSION_FAILED);
+            throw new ConversionException(ErrorMessage.Conversion.MESSAGE_COREFERENCE_CONVERSION_FAILED);
         }
         return refsLayer;
     }

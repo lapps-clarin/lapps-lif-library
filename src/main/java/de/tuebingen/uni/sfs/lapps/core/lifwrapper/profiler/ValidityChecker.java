@@ -9,14 +9,13 @@ import com.fasterxml.jackson.core.JsonParseException;
 import de.tuebingen.uni.sfs.lapps.exceptions.JsonValidityException;
 import de.tuebingen.uni.sfs.lapps.exceptions.LifException;
 import java.io.IOException;
-import de.tuebingen.uni.sfs.lapps.core.lifwrapper.api.LifErrorMessage;
 
 
 /**
  *
  * @author felahi
  */
-public interface ValidityChecker extends LifErrorMessage{
+public interface ValidityChecker{
     
     public boolean isValid() throws JsonParseException, IOException,JsonValidityException,LifException  ;
 
