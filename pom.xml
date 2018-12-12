@@ -107,7 +107,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-    <name>lif-to-tcf-converter</name>
+    <name>lif-to-tcf-converter-core</name>
     
        <build>
         <resources>
