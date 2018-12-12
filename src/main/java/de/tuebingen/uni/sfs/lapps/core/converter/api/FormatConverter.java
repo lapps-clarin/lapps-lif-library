@@ -14,13 +14,14 @@ import java.io.OutputStream;
 import de.tuebingen.uni.sfs.lapps.core.lifwrapper.profiler.api.LifFormat;
 import eu.clarin.weblicht.wlfxb.tc.xb.TextCorpusStored;
 import java.io.File;
+import java.io.InputStream;
 /**
  *
  * @author Mohammad Fazleh Elahi
  */
 public interface FormatConverter {
     
-    public File convertLifToTcf(File lifFile) throws LifException, VocabularyMappingException, ConversionException, IOException, JsonValidityException;
+    public File convertLifToTcf(InputStream input) throws LifException, VocabularyMappingException, ConversionException, IOException, JsonValidityException;
 
     public TextCorpusStored convertLifToTcf(LifFormat lifFormat) throws LifException, VocabularyMappingException, ConversionException, IOException, JsonValidityException;
     

@@ -32,14 +32,13 @@ public class LifToTcfFormatConverter implements FormatConverter {
     }
 
     @Override
-    public File convertLifToTcf(File lifFile) throws LifException, VocabularyMappingException, ConversionException, IOException, JsonValidityException {
-        InputStream input = FileUtils.openInputStream(lifFile);
+    public File convertLifToTcf(InputStream input) throws LifException, VocabularyMappingException, ConversionException, IOException, JsonValidityException {
         File tcfFile = File.createTempFile(TEMP_FILE_PREFIX, TEMP_FILE_SUFFIX);
         OutputStream fos = new FileOutputStream(tcfFile);
         LifFormatImpl lifFormat = new LifFormatImpl(input);
         tcfFormat = convertLifToTcf(lifFormat);
         write(fos);
-        return Rename.reNameFile(tcfFile, tcfFile);
+        return tcfFile;
     }
 
     @Override
