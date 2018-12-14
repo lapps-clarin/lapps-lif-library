@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.tuebingen.uni.sfs.lapps</groupId>
     <artifactId>lif-to-tcf-converter-core</artifactId>
-    <version>1.5-SNAPSHOT</version>
+    <version>1.5</version>
     <packaging>jar</packaging>
     <url>https://weblicht.sfs.uni-tuebingen.de/</url>
     <inceptionYear>2017</inceptionYear>
