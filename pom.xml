@@ -3,18 +3,18 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.tuebingen.uni.sfs.lapps</groupId>
     <artifactId>lif-to-tcf-converter-core</artifactId>
-    <version>1.5</version>
+    <version>1.5.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <url>https://weblicht.sfs.uni-tuebingen.de/</url>
     <inceptionYear>2017</inceptionYear>
-    
+
     <scm>
-        <url>https://elahi@weblicht.sfs.uni-tuebingen.de/gitlab/lapps/lapps-lif-library.git</url>
-        <connection>scm:git:ssh://elahi@weblicht.sfs.uni-tuebingen.de:29418/lapps/lapps-lif-library.git</connection>
-        <developerConnection>scm:git:ssh://elahi@weblicht.sfs.uni-tuebingen.de:29418/lapps/lapps-lif-library.git</developerConnection>
-        <tag>1.4</tag>
+        <url>https://weblicht.sfs.uni-tuebingen.de/gitlab/lapps/lapps-lif-library.git</url>
+        <connection>scm:git:https://weblicht.sfs.uni-tuebingen.de/gitlab/lapps/lapps-lif-library.git</connection>
+        <developerConnection>scm:git:https://weblicht.sfs.uni-tuebingen.de/gitlab/lapps/lapps-lif-library.git</developerConnection>
+        <tag>HEAD</tag>
     </scm>
-     
+
     <distributionManagement>
         <repository>
             <id>sfs-clarind-nexus</id>
@@ -27,7 +27,7 @@
             <url>http://t.weblicht.sfs.uni-tuebingen.de/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
     </distributionManagement>
-    
+
     <repositories>
         <repository>
             <id>sfs-clarind</id>
@@ -106,14 +106,14 @@
             <version>1.6</version>
         </dependency>
     </dependencies>
-    
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
     <name>lif-to-tcf-converter-core</name>
-    
+
     <build>
         <resources>
             <resource>

@@ -54,7 +54,7 @@ public class LifToTcfFormatConverter implements FormatConverter {
         try {
             WLDObjector.write(wlData, os);
         } catch (WLFormatException ex) {
-            throw new ConversionException(ex.getMessage());
+            throw new ConversionException(ex);
         }
     }
 
