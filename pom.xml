@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.tuebingen.uni.sfs.lapps</groupId>
     <artifactId>lif-to-tcf-converter-core</artifactId>
-    <version>1.5.2-SNAPSHOT</version>
+    <version>1.6.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <url>https://weblicht.sfs.uni-tuebingen.de/</url>
     <inceptionYear>2017</inceptionYear>
@@ -30,10 +30,6 @@
 
     <repositories>
         <repository>
-            <id>sfs-clarind</id>
-            <url>http://dspin.sfs.uni-tuebingen.de/maven/</url>
-        </repository>
-        <repository>
             <id>sfs-clarind-nexus</id>
             <name>Internal Releases</name>
             <url>http://t.weblicht.sfs.uni-tuebingen.de/nexus/content/repositories/releases</url>
@@ -43,11 +39,8 @@
             <name>Internal Snapshots</name>
             <url>http://t.weblicht.sfs.uni-tuebingen.de/nexus/content/repositories/snapshots</url>
         </repository>
-        <repository>
-            <id>clarin</id>
-            <url>http://catalog.clarin.eu/ds/nexus/content/repositories/Clarin/</url>
-        </repository>
     </repositories>
+
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.lappsgrid/vocabulary -->
         <dependency>
@@ -81,7 +74,7 @@
         <dependency>
             <groupId>eu.clarin.weblicht</groupId>
             <artifactId>wlfxb</artifactId>
-            <version>1.3.3</version>
+            <version>1.4.3</version>
         </dependency>
         <!--<dependency>
            <groupId>org.anc.json</groupId>
