@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>de.tuebingen.uni.sfs.lapps</groupId>
     <artifactId>lif-to-tcf-converter-core</artifactId>
-    <version>1.6.0</version>
+    <version>1.6.1-SNAPSHOT</version>
     <packaging>jar</packaging>
     <url>https://weblicht.sfs.uni-tuebingen.de/</url>
     <inceptionYear>2017</inceptionYear>
@@ -12,7 +12,7 @@
         <url>https://weblicht.sfs.uni-tuebingen.de/gitlab/lapps/lapps-lif-library.git</url>
         <connection>scm:git:https://weblicht.sfs.uni-tuebingen.de/gitlab/lapps/lapps-lif-library.git</connection>
         <developerConnection>scm:git:https://weblicht.sfs.uni-tuebingen.de/gitlab/lapps/lapps-lif-library.git</developerConnection>
-        <tag>lif-to-tcf-converter-core-1.6.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <distributionManagement>
